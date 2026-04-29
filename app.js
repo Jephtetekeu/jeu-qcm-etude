@@ -62,17 +62,16 @@ function initHome() {
     grid.appendChild(card);
   });
 
-  // Placeholder "bientôt"
-  ['Mathématiques', 'Physique', 'Histoire'].forEach(name => {
+  // Placeholder "bientôt" pour les matières à venir
+  [{ name: 'Physique', icon: '⚛️' }, { name: 'Histoire', icon: '📜' }, { name: 'Chimie', icon: '🧪' }].forEach(s => {
     const card = document.createElement('div');
     card.className = 'subject-card';
     card.style.opacity = '0.45';
     card.style.cursor = 'not-allowed';
-    const icons = { 'Mathématiques': '📐', 'Physique': '⚛️', 'Histoire': '📜' };
     card.innerHTML = `
       <div class="badge-new">Bientôt</div>
-      <div class="subject-icon">${icons[name]}</div>
-      <div class="subject-name">${name}</div>
+      <div class="subject-icon">${s.icon}</div>
+      <div class="subject-name">${s.name}</div>
       <div class="subject-count">À venir...</div>
     `;
     grid.appendChild(card);

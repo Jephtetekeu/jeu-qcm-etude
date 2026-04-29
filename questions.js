@@ -1,1576 +1,424 @@
 const SUBJECTS = {
+
+  // ══════════════════════════════════════════════════════
+  //  INFORMATIQUE GÉNÉRALE
+  // ══════════════════════════════════════════════════════
   informatique: {
     label: "Informatique",
     icon: "💻",
     color: "#4f46e5",
     categories: [
 
-      // ─────────────────────────────────────────
-      //  1. RÉSEAUX
-      // ─────────────────────────────────────────
       {
         name: "Réseaux",
         questions: [
-          {
-            question: "Quelle est la couche du modèle OSI responsable du routage des paquets ?",
-            choices: ["Couche Transport", "Couche Réseau", "Couche Liaison", "Couche Application"],
-            correct: 1,
-            explanation: "La couche 3 (Réseau) gère l'adressage logique et le routage des paquets entre réseaux différents."
-          },
-          {
-            question: "Quel protocole est utilisé pour attribuer automatiquement des adresses IP ?",
-            choices: ["DNS", "FTP", "DHCP", "HTTP"],
-            correct: 2,
-            explanation: "DHCP (Dynamic Host Configuration Protocol) attribue automatiquement des adresses IP aux machines d'un réseau."
-          },
-          {
-            question: "Quelle est la plage d'adresses IP privées de classe A ?",
-            choices: ["172.16.0.0 – 172.31.255.255", "192.168.0.0 – 192.168.255.255", "10.0.0.0 – 10.255.255.255", "127.0.0.0 – 127.255.255.255"],
-            correct: 2,
-            explanation: "La plage 10.0.0.0/8 correspond aux adresses privées de classe A définie par la RFC 1918."
-          },
-          {
-            question: "Quel port utilise le protocole HTTPS par défaut ?",
-            choices: ["80", "21", "443", "8080"],
-            correct: 2,
-            explanation: "HTTPS utilise le port 443 par défaut, tandis que HTTP utilise le port 80."
-          },
-          {
-            question: "Qu'est-ce qu'un sous-réseau (subnet) ?",
-            choices: ["Une subdivision logique d'un réseau IP", "Un protocole de communication", "Un type de câble réseau", "Un serveur de fichiers"],
-            correct: 0,
-            explanation: "Un sous-réseau est une subdivision logique d'un réseau IP qui permet d'organiser et de segmenter le trafic."
-          },
-          {
-            question: "Quel modèle réseau comporte 4 couches (Application, Transport, Internet, Accès réseau) ?",
-            choices: ["Modèle OSI", "Modèle TCP/IP", "Modèle IEEE 802", "Modèle X.25"],
-            correct: 1,
-            explanation: "Le modèle TCP/IP (DoD) comporte 4 couches, contrairement au modèle OSI qui en compte 7."
-          },
-          {
-            question: "Quelle est la différence principale entre TCP et UDP ?",
-            choices: [
-              "TCP est plus rapide qu'UDP",
-              "UDP est fiable et TCP ne l'est pas",
-              "TCP garantit la livraison des paquets, UDP ne le garantit pas",
-              "UDP est uniquement utilisé pour les emails"
-            ],
-            correct: 2,
-            explanation: "TCP est orienté connexion et garantit la livraison ordonnée des paquets. UDP est sans connexion et n'offre aucune garantie de livraison."
-          },
-          {
-            question: "Qu'est-ce que la translation d'adresse réseau (NAT) ?",
-            choices: [
-              "Un protocole de routage dynamique",
-              "Une technique qui mappe des adresses IP privées vers une adresse publique",
-              "Un type de pare-feu",
-              "Un protocole de chiffrement réseau"
-            ],
-            correct: 1,
-            explanation: "Le NAT permet à plusieurs machines d'un réseau privé de partager une ou plusieurs adresses IP publiques pour accéder à Internet."
-          },
-          {
-            question: "Quel protocole résoudre un nom de domaine en adresse IP ?",
-            choices: ["FTP", "SMTP", "DNS", "SNMP"],
-            correct: 2,
-            explanation: "Le DNS (Domain Name System) traduit les noms de domaine lisibles (ex: google.com) en adresses IP numériques."
-          },
-          {
-            question: "Qu'est-ce qu'un VPN ?",
-            choices: [
-              "Un virus de réseau privé",
-              "Un réseau privé virtuel qui sécurise et chiffre la connexion Internet",
-              "Un protocole de transfert de fichiers",
-              "Un type de commutateur réseau"
-            ],
-            correct: 1,
-            explanation: "Un VPN (Virtual Private Network) crée un tunnel chiffré entre l'utilisateur et un serveur, masquant l'adresse IP et sécurisant les données."
-          },
-          {
-            question: "Quelle technologie sans fil opère sur les fréquences 2,4 GHz et 5 GHz ?",
-            choices: ["Bluetooth", "Wi-Fi (IEEE 802.11)", "4G LTE", "Zigbee"],
-            correct: 1,
-            explanation: "Le Wi-Fi (standard IEEE 802.11) utilise les bandes de fréquences 2,4 GHz et 5 GHz (voire 6 GHz pour Wi-Fi 6E)."
-          },
-          {
-            question: "Que signifie l'acronyme ICMP ?",
-            choices: [
-              "Internet Control Message Protocol",
-              "Internal Computer Message Protocol",
-              "Integrated Circuit Management Protocol",
-              "Internet Communication Module Protocol"
-            ],
-            correct: 0,
-            explanation: "ICMP est utilisé pour envoyer des messages de diagnostic réseau, comme les requêtes ping."
-          },
-          {
-            question: "Combien de bits contient une adresse IPv6 ?",
-            choices: ["32 bits", "64 bits", "128 bits", "256 bits"],
-            correct: 2,
-            explanation: "Une adresse IPv6 est codée sur 128 bits, contre 32 bits pour IPv4, ce qui offre un espace d'adressage considérablement plus grand."
-          },
-          {
-            question: "Quel protocole est utilisé pour envoyer des emails ?",
-            choices: ["IMAP", "POP3", "SMTP", "FTP"],
-            correct: 2,
-            explanation: "SMTP (Simple Mail Transfer Protocol) est utilisé pour l'envoi d'emails. IMAP et POP3 sont utilisés pour la réception."
-          },
-          {
-            question: "Qu'est-ce que la bande passante dans un réseau ?",
-            choices: [
-              "La distance maximale d'un câble réseau",
-              "Le nombre d'appareils connectés simultanément",
-              "La quantité de données pouvant être transmises par unité de temps",
-              "La latence d'un réseau"
-            ],
-            correct: 2,
-            explanation: "La bande passante représente la capacité maximale de transmission d'un réseau, généralement exprimée en bits par seconde (bps, Mbps, Gbps)."
-          }
+          { question: "Quelle est la couche du modèle OSI responsable du routage des paquets ?", choices: ["Couche Transport", "Couche Réseau", "Couche Liaison", "Couche Application"], correct: 1, explanation: "La couche 3 (Réseau) gère l'adressage logique et le routage des paquets entre réseaux différents." },
+          { question: "Quel protocole est utilisé pour attribuer automatiquement des adresses IP ?", choices: ["DNS", "FTP", "DHCP", "HTTP"], correct: 2, explanation: "DHCP (Dynamic Host Configuration Protocol) attribue automatiquement des adresses IP aux machines d'un réseau." },
+          { question: "Quel port utilise HTTPS par défaut ?", choices: ["80", "21", "443", "8080"], correct: 2, explanation: "HTTPS utilise le port 443, HTTP utilise le port 80." },
+          { question: "Quelle est la plage d'adresses IP privées de classe A ?", choices: ["172.16.0.0 – 172.31.255.255", "192.168.0.0 – 192.168.255.255", "10.0.0.0 – 10.255.255.255", "127.0.0.0 – 127.255.255.255"], correct: 2, explanation: "La plage 10.0.0.0/8 correspond aux adresses privées de classe A (RFC 1918)." },
+          { question: "Quelle est la différence principale entre TCP et UDP ?", choices: ["TCP est plus rapide qu'UDP", "UDP est fiable et TCP ne l'est pas", "TCP garantit la livraison des paquets, UDP ne le garantit pas", "UDP est uniquement pour les emails"], correct: 2, explanation: "TCP est orienté connexion et garantit la livraison ordonnée. UDP est sans connexion et n'offre aucune garantie de livraison." },
+          { question: "Quel modèle réseau comporte 4 couches (Application, Transport, Internet, Accès réseau) ?", choices: ["Modèle OSI", "Modèle TCP/IP", "Modèle IEEE 802", "Modèle X.25"], correct: 1, explanation: "Le modèle TCP/IP comporte 4 couches, contre 7 pour le modèle OSI." },
+          { question: "Qu'est-ce que la translation d'adresse réseau (NAT) ?", choices: ["Un protocole de routage dynamique", "Une technique qui mappe des adresses IP privées vers une adresse publique", "Un type de pare-feu", "Un protocole de chiffrement réseau"], correct: 1, explanation: "Le NAT permet à plusieurs machines d'un réseau privé de partager une ou plusieurs adresses IP publiques." },
+          { question: "Quel protocole résout un nom de domaine en adresse IP ?", choices: ["FTP", "SMTP", "DNS", "SNMP"], correct: 2, explanation: "Le DNS (Domain Name System) traduit les noms de domaine en adresses IP numériques." },
+          { question: "Combien de bits contient une adresse IPv6 ?", choices: ["32 bits", "64 bits", "128 bits", "256 bits"], correct: 2, explanation: "Une adresse IPv6 est codée sur 128 bits, contre 32 bits pour IPv4." },
+          { question: "Qu'est-ce qu'un VPN ?", choices: ["Un virus de réseau privé", "Un réseau privé virtuel qui sécurise et chiffre la connexion Internet", "Un protocole de transfert de fichiers", "Un type de commutateur réseau"], correct: 1, explanation: "Un VPN crée un tunnel chiffré entre l'utilisateur et un serveur, masquant l'IP et sécurisant les données." },
+          { question: "Quelle technologie sans fil opère sur les fréquences 2,4 GHz et 5 GHz ?", choices: ["Bluetooth", "Wi-Fi (IEEE 802.11)", "4G LTE", "Zigbee"], correct: 1, explanation: "Le Wi-Fi (IEEE 802.11) utilise les bandes 2,4 GHz et 5 GHz." },
+          { question: "Que signifie l'acronyme ICMP ?", choices: ["Internet Control Message Protocol", "Internal Computer Message Protocol", "Integrated Circuit Management Protocol", "Internet Communication Module Protocol"], correct: 0, explanation: "ICMP est utilisé pour les messages de diagnostic réseau comme les requêtes ping." },
+          { question: "Quel protocole est utilisé pour envoyer des emails ?", choices: ["IMAP", "POP3", "SMTP", "FTP"], correct: 2, explanation: "SMTP (Simple Mail Transfer Protocol) est utilisé pour l'envoi d'emails. IMAP et POP3 servent à la réception." },
+          { question: "Qu'est-ce que la bande passante dans un réseau ?", choices: ["La distance maximale d'un câble réseau", "Le nombre d'appareils connectés simultanément", "La quantité de données pouvant être transmises par unité de temps", "La latence d'un réseau"], correct: 2, explanation: "La bande passante représente la capacité maximale de transmission, généralement en bits par seconde." },
+          { question: "Qu'est-ce que le protocole ARP ?", choices: ["Il traduit une adresse IP en adresse MAC sur un réseau local", "Il assigne des adresses IP dynamiquement", "Il route les paquets entre réseaux", "Il chiffre les communications réseau"], correct: 0, explanation: "ARP (Address Resolution Protocol) permet de trouver l'adresse MAC correspondant à une adresse IP sur le même réseau local." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  2. ALGORITHMES & STRUCTURES DE DONNÉES
-      // ─────────────────────────────────────────
       {
         name: "Algorithmes & Structures de données",
         questions: [
-          {
-            question: "Quelle est la complexité temporelle dans le pire cas de l'algorithme Quick Sort ?",
-            choices: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
-            correct: 2,
-            explanation: "Dans le pire cas (tableau déjà trié avec un mauvais pivot), Quick Sort atteint O(n²). Sa complexité moyenne est O(n log n)."
-          },
-          {
-            question: "Quelle structure de données fonctionne selon le principe LIFO ?",
-            choices: ["File (Queue)", "Tableau", "Pile (Stack)", "Liste chaînée"],
-            correct: 2,
-            explanation: "La pile (Stack) suit le principe LIFO : Last In, First Out — le dernier entré est le premier sorti."
-          },
-          {
-            question: "Quel algorithme de recherche nécessite que le tableau soit préalablement trié ?",
-            choices: ["Recherche linéaire", "Recherche dichotomique (binaire)", "Recherche hash", "Recherche séquentielle"],
-            correct: 1,
-            explanation: "La recherche dichotomique divise l'espace de recherche en deux à chaque étape et nécessite obligatoirement un tableau trié."
-          },
-          {
-            question: "Quelle est la complexité de la recherche dans une table de hachage en cas moyen ?",
-            choices: ["O(n)", "O(n²)", "O(log n)", "O(1)"],
-            correct: 3,
-            explanation: "En cas moyen, la recherche dans une table de hachage est O(1) — temps constant, indépendant de la taille."
-          },
-          {
-            question: "Qu'est-ce que la récursivité ?",
-            choices: ["Une boucle qui s'exécute à l'infini", "Une fonction qui s'appelle elle-même avec un cas de base", "Un tri de données", "Un algorithme de chiffrement"],
-            correct: 1,
-            explanation: "La récursivité est une technique où une fonction s'appelle elle-même. Le cas de base arrête les appels récursifs et évite la boucle infinie."
-          },
-          {
-            question: "Quelle structure de données est utilisée pour implémenter une file de priorité ?",
-            choices: ["Pile", "Tableau trié", "Tas (Heap)", "Graphe"],
-            correct: 2,
-            explanation: "Un tas (Heap) est une structure d'arbre binaire qui permet d'implémenter efficacement une file de priorité avec des opérations en O(log n)."
-          },
-          {
-            question: "Quelle est la complexité du tri par insertion dans le meilleur cas ?",
-            choices: ["O(n²)", "O(n log n)", "O(n)", "O(1)"],
-            correct: 2,
-            explanation: "Dans le meilleur cas (tableau déjà trié), le tri par insertion est O(n) car il ne fait qu'une comparaison par élément."
-          },
-          {
-            question: "Qu'est-ce qu'un graphe orienté acyclique (DAG) ?",
-            choices: [
-              "Un graphe sans sommets",
-              "Un graphe où toutes les arêtes vont dans le même sens et sans cycle",
-              "Un graphe avec uniquement des cycles",
-              "Un graphe non connecté"
-            ],
-            correct: 1,
-            explanation: "Un DAG (Directed Acyclic Graph) est un graphe orienté sans cycle. Il est utilisé notamment pour représenter des dépendances de tâches."
-          },
-          {
-            question: "Quelle est la différence entre DFS et BFS ?",
-            choices: [
-              "DFS utilise une file, BFS utilise une pile",
-              "DFS explore en profondeur d'abord, BFS explore en largeur d'abord",
-              "BFS est plus rapide que DFS dans tous les cas",
-              "DFS ne peut pas trouver le chemin le plus court"
-            ],
-            correct: 1,
-            explanation: "DFS (Depth-First Search) plonge le plus loin possible avant de revenir. BFS (Breadth-First Search) explore tous les voisins couche par couche."
-          },
-          {
-            question: "Quelle est la complexité spatiale d'un arbre binaire de recherche équilibré à n nœuds ?",
-            choices: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
-            correct: 2,
-            explanation: "Un arbre binaire de recherche stocke n nœuds, donc sa complexité spatiale est O(n)."
-          },
-          {
-            question: "Qu'est-ce que la notation Big O ?",
-            choices: [
-              "Un langage de programmation orienté objet",
-              "Une mesure de la performance d'un algorithme en fonction de la taille de l'entrée",
-              "Un algorithme de tri",
-              "Un protocole réseau"
-            ],
-            correct: 1,
-            explanation: "La notation Big O décrit la complexité (temps ou espace) d'un algorithme dans le pire cas en fonction de la taille n de l'entrée."
-          },
-          {
-            question: "Quel algorithme de tri est basé sur la division récursive du tableau en deux moitiés ?",
-            choices: ["Bubble Sort", "Insertion Sort", "Merge Sort", "Selection Sort"],
-            correct: 2,
-            explanation: "Merge Sort divise récursivement le tableau en deux moitiés, trie chacune, puis les fusionne. Sa complexité est O(n log n) dans tous les cas."
-          },
-          {
-            question: "Qu'est-ce qu'une liste doublement chaînée ?",
-            choices: [
-              "Une liste avec deux listes séparées",
-              "Une liste où chaque nœud pointe vers le suivant ET le précédent",
-              "Une liste triée en ordre croissant et décroissant",
-              "Une liste avec des doublons"
-            ],
-            correct: 1,
-            explanation: "Dans une liste doublement chaînée, chaque nœud contient une référence vers le nœud suivant et vers le nœud précédent, permettant la traversée dans les deux sens."
-          },
-          {
-            question: "Qu'est-ce que la programmation dynamique ?",
-            choices: [
-              "Un paradigme qui utilise des variables dynamiques",
-              "Une technique qui décompose un problème en sous-problèmes et mémorise les résultats déjà calculés",
-              "Une façon de programmer des animations",
-              "Un type de compilation à la volée"
-            ],
-            correct: 1,
-            explanation: "La programmation dynamique résout des problèmes en mémorisant les résultats des sous-problèmes (mémoïsation ou tabulation) pour éviter les calculs redondants."
-          },
-          {
-            question: "Dans un arbre binaire de recherche (ABR), où se trouvent les valeurs inférieures à la racine ?",
-            choices: ["À droite", "À gauche", "En haut", "Au centre"],
-            correct: 1,
-            explanation: "Dans un ABR, toutes les valeurs inférieures à la racine sont dans le sous-arbre gauche, et les supérieures dans le sous-arbre droit."
-          }
+          { question: "Quelle est la complexité temporelle dans le pire cas de Quick Sort ?", choices: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"], correct: 2, explanation: "Dans le pire cas (tableau déjà trié avec mauvais pivot), Quick Sort atteint O(n²). Sa complexité moyenne est O(n log n)." },
+          { question: "Quelle structure de données fonctionne selon le principe LIFO ?", choices: ["File (Queue)", "Tableau", "Pile (Stack)", "Liste chaînée"], correct: 2, explanation: "La pile suit le principe LIFO : Last In, First Out." },
+          { question: "Quel algorithme de recherche nécessite que le tableau soit trié ?", choices: ["Recherche linéaire", "Recherche dichotomique", "Recherche hash", "Recherche séquentielle"], correct: 1, explanation: "La recherche dichotomique divise l'espace de recherche en deux à chaque étape et nécessite un tableau trié." },
+          { question: "Quelle est la complexité de la recherche dans une table de hachage en cas moyen ?", choices: ["O(n)", "O(n²)", "O(log n)", "O(1)"], correct: 3, explanation: "En cas moyen, la recherche dans une table de hachage est O(1) — temps constant." },
+          { question: "Quelle structure de données est utilisée pour implémenter une file de priorité efficacement ?", choices: ["Pile", "Tableau trié", "Tas (Heap)", "Graphe"], correct: 2, explanation: "Un tas (Heap) est un arbre binaire qui permet des opérations de file de priorité en O(log n)." },
+          { question: "Quelle est la complexité du tri par insertion dans le meilleur cas ?", choices: ["O(n²)", "O(n log n)", "O(n)", "O(1)"], correct: 2, explanation: "Dans le meilleur cas (tableau déjà trié), le tri par insertion est O(n)." },
+          { question: "Quelle est la différence entre DFS et BFS ?", choices: ["DFS utilise une file, BFS utilise une pile", "DFS explore en profondeur d'abord, BFS explore en largeur d'abord", "BFS est toujours plus rapide", "DFS ne peut pas trouver le chemin le plus court"], correct: 1, explanation: "DFS plonge le plus profondément possible avant de revenir. BFS explore tous les voisins couche par couche." },
+          { question: "Qu'est-ce que la programmation dynamique ?", choices: ["Un paradigme qui utilise des variables dynamiques", "Une technique qui décompose un problème en sous-problèmes et mémorise les résultats", "Une façon de programmer des animations", "Un type de compilation à la volée"], correct: 1, explanation: "La programmation dynamique résout des problèmes en mémorisant les résultats des sous-problèmes pour éviter les calculs redondants." },
+          { question: "Quel algorithme de tri est basé sur la division récursive en deux moitiés et leur fusion ?", choices: ["Bubble Sort", "Insertion Sort", "Merge Sort", "Selection Sort"], correct: 2, explanation: "Merge Sort divise récursivement, trie chaque moitié, puis fusionne. Complexité O(n log n) dans tous les cas." },
+          { question: "Dans un arbre binaire de recherche (ABR), où se trouvent les valeurs inférieures à la racine ?", choices: ["À droite", "À gauche", "En haut", "Au centre"], correct: 1, explanation: "Dans un ABR, les valeurs inférieures à la racine sont dans le sous-arbre gauche, les supérieures à droite." },
+          { question: "Qu'est-ce qu'un graphe orienté acyclique (DAG) ?", choices: ["Un graphe sans sommets", "Un graphe orienté sans cycle", "Un graphe avec uniquement des cycles", "Un graphe non connecté"], correct: 1, explanation: "Un DAG (Directed Acyclic Graph) est un graphe orienté sans cycle, utilisé pour représenter des dépendances." },
+          { question: "Qu'est-ce que la notation Big O ?", choices: ["Un langage orienté objet", "Une mesure de la complexité d'un algorithme en fonction de la taille de l'entrée", "Un algorithme de tri", "Un protocole réseau"], correct: 1, explanation: "Big O décrit la complexité (temps ou espace) dans le pire cas en fonction de n, la taille de l'entrée." },
+          { question: "Qu'est-ce qu'une liste doublement chaînée ?", choices: ["Une liste avec deux listes séparées", "Une liste où chaque nœud pointe vers le suivant ET le précédent", "Une liste triée dans les deux sens", "Une liste avec des doublons"], correct: 1, explanation: "Dans une liste doublement chaînée, chaque nœud a une référence vers le nœud suivant et précédent." },
+          { question: "Quel est le principe du tri Radix Sort ?", choices: ["Il trie par comparaisons successives", "Il trie chiffre par chiffre en partant des unités vers les plus grands ordres", "Il divise le tableau en deux à chaque étape", "Il utilise un tas pour trier"], correct: 1, explanation: "Radix Sort trie les nombres en traitant les chiffres position par position, sans comparaisons directes. Complexité O(nk)." },
+          { question: "Qu'est-ce que l'algorithme de Dijkstra ?", choices: ["Un algorithme de tri", "Un algorithme qui trouve le plus court chemin entre deux nœuds dans un graphe à poids positifs", "Un algorithme de compression", "Un algorithme de chiffrement"], correct: 1, explanation: "Dijkstra calcule le chemin le plus court depuis un nœud source vers tous les autres nœuds d'un graphe pondéré à arêtes positives." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  3. BASES DE DONNÉES
-      // ─────────────────────────────────────────
       {
         name: "Bases de données",
         questions: [
-          {
-            question: "Quelle commande SQL permet d'extraire des données d'une table ?",
-            choices: ["INSERT", "UPDATE", "SELECT", "DELETE"],
-            correct: 2,
-            explanation: "La commande SELECT est utilisée pour interroger et extraire des données d'une base de données relationnelle."
-          },
-          {
-            question: "Qu'est-ce qu'une clé primaire dans une base de données relationnelle ?",
-            choices: ["Un mot de passe pour accéder à la base", "Un identifiant unique pour chaque enregistrement", "Une colonne obligatoire dans chaque table", "Un index sur plusieurs colonnes"],
-            correct: 1,
-            explanation: "La clé primaire identifie de manière unique chaque enregistrement d'une table — elle ne peut pas être NULL ni dupliquée."
-          },
-          {
-            question: "Quelle clause SQL permet de filtrer les résultats avant agrégation ?",
-            choices: ["ORDER BY", "GROUP BY", "WHERE", "HAVING"],
-            correct: 2,
-            explanation: "La clause WHERE filtre les lignes avant l'agrégation. HAVING filtre après un GROUP BY."
-          },
-          {
-            question: "Qu'est-ce qu'une jointure (JOIN) en SQL ?",
-            choices: ["Une opération pour copier une table", "Une façon de combiner des lignes de deux tables ou plus selon une condition", "Un type d'index", "Une contrainte d'intégrité"],
-            correct: 1,
-            explanation: "JOIN combine des lignes de deux tables ou plus selon une condition de relation entre elles (généralement basée sur une clé étrangère)."
-          },
-          {
-            question: "Quelle est la différence entre DELETE et TRUNCATE en SQL ?",
-            choices: ["DELETE supprime la table, TRUNCATE supprime les données", "Aucune différence", "DELETE supprime ligne par ligne (rollback possible), TRUNCATE vide tout en une opération", "TRUNCATE supprime les colonnes"],
-            correct: 2,
-            explanation: "DELETE supprime ligne par ligne et peut être annulé (rollback). TRUNCATE supprime toutes les données rapidement et ne peut généralement pas être annulé."
-          },
-          {
-            question: "Qu'est-ce qu'une clé étrangère (foreign key) ?",
-            choices: [
-              "Une clé utilisée pour chiffrer la base de données",
-              "Une colonne qui référence la clé primaire d'une autre table pour établir une relation",
-              "Une clé d'accès depuis un pays étranger",
-              "Un index secondaire"
-            ],
-            correct: 1,
-            explanation: "Une clé étrangère est une colonne (ou ensemble de colonnes) qui référence la clé primaire d'une autre table, garantissant l'intégrité référentielle."
-          },
-          {
-            question: "Que signifie ACID dans le contexte des bases de données ?",
-            choices: [
-              "Atomicité, Cohérence, Isolation, Durabilité",
-              "Association, Création, Indexation, Duplication",
-              "Automatique, Contrôlé, Intégré, Distribué",
-              "Accès, Connexion, Intégrité, Data"
-            ],
-            correct: 0,
-            explanation: "ACID garantit la fiabilité des transactions : Atomicité (tout ou rien), Cohérence (état valide), Isolation (transactions indépendantes), Durabilité (données persistées)."
-          },
-          {
-            question: "Quelle est la différence entre une base de données relationnelle et NoSQL ?",
-            choices: [
-              "Les bases NoSQL sont plus rapides dans tous les cas",
-              "Les bases relationnelles utilisent des tables SQL, les NoSQL utilisent divers formats (documents, clé-valeur, graphes…)",
-              "NoSQL ne peut pas stocker des données structurées",
-              "Les bases relationnelles ne supportent pas les transactions"
-            ],
-            correct: 1,
-            explanation: "Les BDD relationnelles (MySQL, PostgreSQL) structurent les données en tables avec des schémas fixes. Les NoSQL (MongoDB, Redis, Cassandra) offrent plus de flexibilité avec différents modèles de stockage."
-          },
-          {
-            question: "Qu'est-ce qu'un index dans une base de données ?",
-            choices: [
-              "Une liste alphabétique de toutes les tables",
-              "Une structure de données qui accélère les recherches sur une ou plusieurs colonnes",
-              "Un résumé du contenu de la base",
-              "Un type de jointure"
-            ],
-            correct: 1,
-            explanation: "Un index est une structure (souvent un B-tree) qui permet de localiser rapidement des enregistrements sans parcourir toute la table, au prix d'un espace disque supplémentaire."
-          },
-          {
-            question: "Qu'est-ce que la normalisation d'une base de données ?",
-            choices: [
-              "La conversion de toutes les valeurs en minuscules",
-              "Un processus d'organisation des données pour réduire la redondance et améliorer l'intégrité",
-              "La compression des données",
-              "La suppression des tables inutilisées"
-            ],
-            correct: 1,
-            explanation: "La normalisation organise les données en appliquant des formes normales (1NF, 2NF, 3NF…) pour éliminer les redondances et les anomalies de mise à jour."
-          },
-          {
-            question: "Quelle commande SQL permet de modifier des données existantes ?",
-            choices: ["INSERT", "ALTER", "UPDATE", "MODIFY"],
-            correct: 2,
-            explanation: "La commande UPDATE modifie les valeurs des colonnes d'enregistrements existants. INSERT ajoute de nouveaux enregistrements."
-          },
-          {
-            question: "Qu'est-ce qu'une vue (VIEW) en SQL ?",
-            choices: [
-              "Une copie physique d'une table",
-              "Une requête SELECT sauvegardée et utilisable comme une table virtuelle",
-              "Un type d'index",
-              "Un rapport généré automatiquement"
-            ],
-            correct: 1,
-            explanation: "Une vue est une requête SELECT stockée sous un nom. Elle se comporte comme une table virtuelle et simplifie les requêtes complexes sans dupliquer les données."
-          },
-          {
-            question: "Quel type de JOIN retourne uniquement les lignes qui ont une correspondance dans les deux tables ?",
-            choices: ["LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN", "INNER JOIN"],
-            correct: 3,
-            explanation: "INNER JOIN retourne seulement les lignes qui ont une correspondance dans les deux tables. Les LEFT/RIGHT JOIN incluent aussi les lignes sans correspondance d'un côté."
-          },
-          {
-            question: "Qu'est-ce qu'un trigger (déclencheur) en base de données ?",
-            choices: [
-              "Un bouton dans l'interface d'administration",
-              "Une procédure qui s'exécute automatiquement en réponse à un événement (INSERT, UPDATE, DELETE)",
-              "Un type de contrainte d'intégrité",
-              "Une commande pour sauvegarder la base"
-            ],
-            correct: 1,
-            explanation: "Un trigger est un bloc de code qui s'exécute automatiquement avant ou après un événement DML (INSERT, UPDATE, DELETE) sur une table."
-          },
-          {
-            question: "Qu'est-ce que le sharding dans les bases de données ?",
-            choices: [
-              "Une technique de chiffrement",
-              "La division d'une base de données en plusieurs partitions réparties sur plusieurs serveurs",
-              "Un type de sauvegarde incrémentale",
-              "Un algorithme de tri des données"
-            ],
-            correct: 1,
-            explanation: "Le sharding partitionne horizontalement les données sur plusieurs serveurs pour améliorer la scalabilité et les performances des bases de données à très grande échelle."
-          }
+          { question: "Quelle commande SQL permet d'extraire des données ?", choices: ["INSERT", "UPDATE", "SELECT", "DELETE"], correct: 2, explanation: "SELECT interroge et extrait des données d'une base de données relationnelle." },
+          { question: "Qu'est-ce qu'une clé primaire ?", choices: ["Un mot de passe d'accès", "Un identifiant unique pour chaque enregistrement", "Une colonne obligatoire", "Un index secondaire"], correct: 1, explanation: "La clé primaire identifie de façon unique chaque enregistrement — elle ne peut pas être NULL ni dupliquée." },
+          { question: "Que signifie ACID dans le contexte des bases de données ?", choices: ["Atomicité, Cohérence, Isolation, Durabilité", "Association, Création, Indexation, Duplication", "Automatique, Contrôlé, Intégré, Distribué", "Accès, Connexion, Intégrité, Data"], correct: 0, explanation: "ACID garantit la fiabilité des transactions : Atomicité, Cohérence, Isolation, Durabilité." },
+          { question: "Quel type de JOIN retourne uniquement les lignes correspondantes dans les deux tables ?", choices: ["LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN", "INNER JOIN"], correct: 3, explanation: "INNER JOIN retourne seulement les lignes qui ont une correspondance dans les deux tables." },
+          { question: "Qu'est-ce qu'un index dans une base de données ?", choices: ["Une liste alphabétique de tables", "Une structure qui accélère les recherches sur une ou plusieurs colonnes", "Un résumé de la base", "Un type de jointure"], correct: 1, explanation: "Un index (souvent un B-tree) permet de localiser rapidement des enregistrements sans parcourir toute la table." },
+          { question: "Qu'est-ce que la normalisation d'une base de données ?", choices: ["La conversion en minuscules", "Un processus pour réduire la redondance et améliorer l'intégrité", "La compression des données", "La suppression des tables inutilisées"], correct: 1, explanation: "La normalisation applique des formes normales (1NF, 2NF, 3NF…) pour éliminer les redondances." },
+          { question: "Qu'est-ce qu'un trigger (déclencheur) ?", choices: ["Un bouton d'administration", "Une procédure qui s'exécute automatiquement en réponse à un événement DML", "Un type de contrainte", "Une commande de sauvegarde"], correct: 1, explanation: "Un trigger s'exécute automatiquement avant ou après un INSERT, UPDATE ou DELETE sur une table." },
+          { question: "Qu'est-ce que le sharding ?", choices: ["Une technique de chiffrement", "La division d'une base de données en partitions réparties sur plusieurs serveurs", "Un type de sauvegarde incrémentale", "Un algorithme de tri"], correct: 1, explanation: "Le sharding partitionne horizontalement les données sur plusieurs serveurs pour améliorer la scalabilité." },
+          { question: "Quelle est la différence entre une base relationnelle et NoSQL ?", choices: ["NoSQL est toujours plus rapide", "Les bases relationnelles utilisent des tables SQL, les NoSQL divers formats (documents, clé-valeur…)", "NoSQL ne stocke pas de données structurées", "Les bases relationnelles ne supportent pas les transactions"], correct: 1, explanation: "Les BDD relationnelles (MySQL, PostgreSQL) ont des schémas fixes. Les NoSQL (MongoDB, Redis) offrent plus de flexibilité." },
+          { question: "Qu'est-ce qu'une vue (VIEW) en SQL ?", choices: ["Une copie physique d'une table", "Une requête SELECT sauvegardée utilisable comme table virtuelle", "Un type d'index", "Un rapport automatique"], correct: 1, explanation: "Une vue est une requête stockée sous un nom. Elle se comporte comme une table virtuelle sans dupliquer les données." },
+          { question: "Qu'est-ce qu'une transaction dans une base de données ?", choices: ["Une requête SELECT simple", "Un ensemble d'opérations traitées comme une unité indivisible", "Une connexion à la base", "Un type de sauvegarde"], correct: 1, explanation: "Une transaction regroupe plusieurs opérations qui s'exécutent entièrement (commit) ou pas du tout (rollback), garantissant l'atomicité." },
+          { question: "Quel est le rôle d'un ORM (Object-Relational Mapper) ?", choices: ["Optimiser les requêtes SQL", "Faire correspondre les objets d'un langage de programmation avec des tables de base de données", "Gérer les connexions à la base", "Chiffrer les données en base"], correct: 1, explanation: "Un ORM (ex: Hibernate, SQLAlchemy, Eloquent) permet de manipuler la base de données via des objets sans écrire de SQL brut." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  4. PROGRAMMATION
-      // ─────────────────────────────────────────
       {
         name: "Programmation",
         questions: [
-          {
-            question: "Qu'est-ce que la programmation orientée objet (POO) ?",
-            choices: ["Un paradigme basé sur des fonctions mathématiques", "Un paradigme basé sur des objets qui regroupent données et comportements", "Un langage de programmation", "Un type de base de données"],
-            correct: 1,
-            explanation: "La POO organise le code en objets qui encapsulent des données (attributs) et des comportements (méthodes). Les 4 piliers : encapsulation, héritage, polymorphisme, abstraction."
-          },
-          {
-            question: "Quel mot-clé Python est utilisé pour définir une fonction ?",
-            choices: ["function", "def", "func", "define"],
-            correct: 1,
-            explanation: "En Python, 'def' est utilisé pour déclarer une fonction : def ma_fonction(params):"
-          },
-          {
-            question: "Qu'est-ce qu'un pointeur en langage C ?",
-            choices: ["Une variable qui stocke une valeur entière", "Une variable qui stocke l'adresse mémoire d'une autre variable", "Une structure de données", "Un type de boucle"],
-            correct: 1,
-            explanation: "Un pointeur est une variable qui contient l'adresse mémoire d'une autre variable, permettant une gestion directe de la mémoire."
-          },
-          {
-            question: "Quelle est la différence entre == et === en JavaScript ?",
-            choices: ["Aucune différence", "=== compare aussi le type, == fait une conversion de type", "== compare aussi le type", "=== est uniquement pour les chaînes"],
-            correct: 1,
-            explanation: "=== (égalité stricte) compare la valeur ET le type sans conversion. == peut convertir les types avant de comparer (ex: '5' == 5 est vrai, '5' === 5 est faux)."
-          },
-          {
-            question: "Qu'est-ce qu'une API REST ?",
-            choices: ["Un langage de programmation", "Un type de base de données", "Une interface qui permet la communication entre systèmes via HTTP", "Un protocole de chiffrement"],
-            correct: 2,
-            explanation: "Une API REST utilise les verbes HTTP (GET, POST, PUT, DELETE) pour permettre la communication entre systèmes de manière stateless."
-          },
-          {
-            question: "Qu'est-ce que le polymorphisme en POO ?",
-            choices: [
-              "La capacité d'un objet à changer de type",
-              "La capacité de plusieurs classes à implémenter la même interface ou méthode de façon différente",
-              "L'héritage multiple",
-              "La copie d'un objet"
-            ],
-            correct: 1,
-            explanation: "Le polymorphisme permet à des objets de classes différentes d'être traités via une interface commune, chacun répondant à sa propre façon à un même appel de méthode."
-          },
-          {
-            question: "Qu'est-ce qu'une exception en programmation ?",
-            choices: [
-              "Une variable globale",
-              "Un événement anormal qui interrompt le flux normal du programme",
-              "Une fonction sans paramètre",
-              "Un type de boucle spéciale"
-            ],
-            correct: 1,
-            explanation: "Une exception est un événement inattendu (erreur réseau, division par zéro…) qui interrompt le flux normal. Elle peut être capturée avec try/catch pour être gérée."
-          },
-          {
-            question: "Qu'est-ce que la programmation fonctionnelle ?",
-            choices: [
-              "Un paradigme qui utilise des fonctions mathématiques pures sans effets de bord",
-              "La programmation de fonctions Windows",
-              "Un paradigme orienté objets",
-              "La programmation de fonctions réseau"
-            ],
-            correct: 0,
-            explanation: "La programmation fonctionnelle utilise des fonctions pures (même entrée → même sortie, sans effets de bord), l'immuabilité et des fonctions d'ordre supérieur."
-          },
-          {
-            question: "Que fait le mot-clé 'static' dans une méthode de classe en Java ?",
-            choices: [
-              "Rend la méthode privée",
-              "La méthode appartient à la classe elle-même, pas à une instance",
-              "Empêche la méthode d'être héritée",
-              "Rend la méthode plus rapide"
-            ],
-            correct: 1,
-            explanation: "Une méthode 'static' appartient à la classe et non à une instance. On peut l'appeler directement via le nom de la classe sans créer d'objet."
-          },
-          {
-            question: "Qu'est-ce que Git ?",
-            choices: [
-              "Un langage de programmation",
-              "Un système de gestion de versions distribué",
-              "Un IDE (environnement de développement)",
-              "Un framework web"
-            ],
-            correct: 1,
-            explanation: "Git est un système de contrôle de versions distribué qui permet de suivre les modifications du code, de collaborer et de gérer différentes branches de développement."
-          },
-          {
-            question: "Qu'est-ce qu'un design pattern (patron de conception) ?",
-            choices: [
-              "Un modèle graphique pour les interfaces",
-              "Une solution réutilisable à un problème courant de conception logicielle",
-              "Un framework de test",
-              "Un type de base de données"
-            ],
-            correct: 1,
-            explanation: "Les design patterns sont des solutions éprouvées et réutilisables à des problèmes récurrents de conception. Exemples : Singleton, Observer, Factory, MVC."
-          },
-          {
-            question: "Qu'est-ce que l'héritage en POO ?",
-            choices: [
-              "La copie d'une variable dans une autre",
-              "La capacité d'une classe à hériter des attributs et méthodes d'une classe parente",
-              "La suppression d'une classe",
-              "L'importation d'une bibliothèque"
-            ],
-            correct: 1,
-            explanation: "L'héritage permet à une classe enfant de réutiliser les attributs et méthodes de la classe parente, favorisant la réutilisation du code et la hiérarchie des classes."
-          },
-          {
-            question: "Qu'est-ce qu'un garbage collector (ramasse-miettes) ?",
-            choices: [
-              "Un outil de nettoyage de fichiers inutiles",
-              "Un mécanisme automatique de gestion de la mémoire qui libère les objets non utilisés",
-              "Un outil d'analyse de code",
-              "Un processus de compression de données"
-            ],
-            correct: 1,
-            explanation: "Le garbage collector libère automatiquement la mémoire occupée par des objets qui ne sont plus référencés, évitant les fuites mémoire (utilisé en Java, Python, C#…)."
-          },
-          {
-            question: "Que signifie le principe DRY en développement logiciel ?",
-            choices: [
-              "Développement Rapide Yolo",
-              "Don't Repeat Yourself — éviter la duplication de code",
-              "Design Responsive Yesterday",
-              "Data Relational Yield"
-            ],
-            correct: 1,
-            explanation: "DRY (Don't Repeat Yourself) est un principe qui prône l'élimination des duplications de code. Chaque logique doit avoir une représentation unique dans le système."
-          },
-          {
-            question: "Qu'est-ce que l'encapsulation en POO ?",
-            choices: [
-              "La compression des données",
-              "Le regroupement des données et méthodes dans une classe avec contrôle d'accès",
-              "La création de copies d'objets",
-              "La suppression des attributs inutilisés"
-            ],
-            correct: 1,
-            explanation: "L'encapsulation regroupe données et méthodes dans une classe et contrôle leur accessibilité via des modificateurs (public, private, protected) pour protéger l'intégrité des données."
-          }
+          { question: "Qu'est-ce que la programmation orientée objet (POO) ?", choices: ["Un paradigme basé sur des fonctions mathématiques", "Un paradigme basé sur des objets regroupant données et comportements", "Un langage de programmation", "Un type de base de données"], correct: 1, explanation: "La POO organise le code en objets qui encapsulent des données (attributs) et des comportements (méthodes). Piliers : encapsulation, héritage, polymorphisme, abstraction." },
+          { question: "Qu'est-ce que le polymorphisme en POO ?", choices: ["La capacité d'un objet à changer de type", "La capacité de plusieurs classes à implémenter la même interface de façon différente", "L'héritage multiple", "La copie d'un objet"], correct: 1, explanation: "Le polymorphisme permet à des objets de classes différentes de répondre à une même interface, chacun à sa manière." },
+          { question: "Que fait le mot-clé 'static' dans une méthode de classe en Java ?", choices: ["Rend la méthode privée", "La méthode appartient à la classe, pas à une instance", "Empêche l'héritage", "Rend la méthode plus rapide"], correct: 1, explanation: "Une méthode 'static' appartient à la classe, pas à une instance. On l'appelle via le nom de la classe directement." },
+          { question: "Qu'est-ce qu'un garbage collector ?", choices: ["Un outil de nettoyage de fichiers", "Un mécanisme automatique qui libère la mémoire des objets non utilisés", "Un outil d'analyse de code", "Un processus de compression"], correct: 1, explanation: "Le garbage collector libère automatiquement la mémoire occupée par des objets plus référencés (Java, Python, C#…)." },
+          { question: "Que signifie le principe DRY ?", choices: ["Développement Rapide Yolo", "Don't Repeat Yourself — éviter la duplication de code", "Design Responsive Yesterday", "Data Relational Yield"], correct: 1, explanation: "DRY (Don't Repeat Yourself) prône l'élimination des duplications : chaque logique doit avoir une représentation unique." },
+          { question: "Qu'est-ce que la programmation fonctionnelle ?", choices: ["Un paradigme qui utilise des fonctions mathématiques pures sans effets de bord", "La programmation de fonctions Windows", "Un paradigme orienté objets", "La programmation réseau"], correct: 0, explanation: "La programmation fonctionnelle utilise des fonctions pures (même entrée → même sortie), l'immuabilité et des fonctions d'ordre supérieur." },
+          { question: "Qu'est-ce qu'une closure en programmation ?", choices: ["Une fonction qui ferme le programme", "Une fonction qui capture les variables de son environnement lexical", "Un type d'exception", "Une méthode privée"], correct: 1, explanation: "Une closure est une fonction qui 'capture' les variables de la portée dans laquelle elle a été définie, même après que cette portée ait disparu." },
+          { question: "Quelle est la différence entre un langage compilé et interprété ?", choices: ["Un langage compilé est plus récent", "Un langage compilé est traduit en code machine avant exécution, un interprété est traduit ligne par ligne à l'exécution", "Un langage interprété est plus rapide", "Aucune différence pratique"], correct: 1, explanation: "Les langages compilés (C, C++, Rust) produisent un exécutable binaire. Les langages interprétés (Python, JavaScript) sont traduits à la volée pendant l'exécution." },
+          { question: "Qu'est-ce que la récursion terminale (tail recursion) ?", choices: ["Une récursion qui ne se termine jamais", "Une forme de récursion où l'appel récursif est la dernière opération, optimisable par le compilateur", "Un type de boucle récursive", "Une récursion avec plusieurs cas de base"], correct: 1, explanation: "La récursion terminale place l'appel récursif en dernière instruction. Les compilateurs peuvent l'optimiser en boucle, évitant le dépassement de pile." },
+          { question: "Qu'est-ce qu'un design pattern Singleton ?", choices: ["Un pattern qui crée une copie unique d'un objet", "Un pattern qui garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global", "Un pattern pour créer des familles d'objets", "Un pattern de communication entre objets"], correct: 1, explanation: "Le Singleton assure qu'une classe n'est instanciée qu'une seule fois. Utile pour les configurations, connexions DB, loggers." },
+          { question: "Qu'est-ce que l'injection de dépendances ?", choices: ["Une technique d'attaque logicielle", "Un patron de conception où les dépendances d'un objet lui sont fournies de l'extérieur", "Un type d'héritage", "Une méthode de test unitaire"], correct: 1, explanation: "L'injection de dépendances découple les composants en fournissant leurs dépendances de l'extérieur plutôt qu'en les créant eux-mêmes, facilitant les tests et la maintenabilité." },
+          { question: "Que représente le paradigme de programmation réactive ?", choices: ["Un style basé sur des boucles d'événements", "Un paradigme centré sur les flux de données asynchrones et la propagation des changements", "Un type de programmation orientée objets", "Un paradigme de programmation parallèle"], correct: 1, explanation: "La programmation réactive (RxJS, Reactor…) modélise les données comme des flux observables. Les changements se propagent automatiquement aux abonnés." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  5. SÉCURITÉ INFORMATIQUE
-      // ─────────────────────────────────────────
       {
         name: "Sécurité informatique",
         questions: [
-          {
-            question: "Qu'est-ce qu'une attaque par injection SQL ?",
-            choices: ["Une attaque physique sur un serveur", "L'insertion de code SQL malveillant dans une requête pour manipuler la base de données", "Un virus qui corrompt des fichiers SQL", "Une technique de sauvegarde de données"],
-            correct: 1,
-            explanation: "L'injection SQL consiste à insérer du code SQL malveillant dans les champs d'entrée pour manipuler ou accéder illégalement à la base de données."
-          },
-          {
-            question: "Que signifie l'acronyme HTTPS ?",
-            choices: ["HyperText Transfer Protocol Secure", "High Transfer Text Protocol System", "HyperText Transmission Protocol Standard", "Hosted Text Transfer Protocol Secure"],
-            correct: 0,
-            explanation: "HTTPS = HyperText Transfer Protocol Secure. Il utilise TLS/SSL pour chiffrer les communications entre le navigateur et le serveur."
-          },
-          {
-            question: "Qu'est-ce qu'un pare-feu (firewall) ?",
-            choices: ["Un antivirus", "Un système qui surveille et contrôle le trafic réseau selon des règles de sécurité", "Un logiciel de sauvegarde", "Un protocole de communication sécurisé"],
-            correct: 1,
-            explanation: "Un pare-feu surveille et contrôle le trafic réseau entrant et sortant selon des règles prédéfinies, bloquant les connexions non autorisées."
-          },
-          {
-            question: "Qu'est-ce que le phishing ?",
-            choices: ["Une technique de compression de données", "Un type de chiffrement", "Une attaque par usurpation d'identité pour voler des informations sensibles", "Un protocole de transfert de fichiers"],
-            correct: 2,
-            explanation: "Le phishing est une attaque par ingénierie sociale où l'attaquant se fait passer pour une entité de confiance (banque, service en ligne) pour voler des identifiants ou données."
-          },
-          {
-            question: "Qu'est-ce que le chiffrement symétrique ?",
-            choices: ["Un chiffrement avec clé publique et clé privée", "Un chiffrement qui utilise la même clé pour chiffrer et déchiffrer", "Un chiffrement basé sur des nombres premiers", "Un type de compression"],
-            correct: 1,
-            explanation: "Le chiffrement symétrique utilise la même clé secrète pour chiffrer et déchiffrer les données (ex: AES, DES). Plus rapide que l'asymétrique mais nécessite un échange de clé sécurisé."
-          },
-          {
-            question: "Qu'est-ce qu'une attaque DDoS ?",
-            choices: [
-              "Un virus qui supprime des données",
-              "Une attaque qui inonde un serveur de requêtes pour le rendre indisponible",
-              "Une intrusion physique dans un datacenter",
-              "Un chiffrement malveillant de fichiers"
-            ],
-            correct: 1,
-            explanation: "Une attaque DDoS (Distributed Denial of Service) utilise un réseau de machines infectées (botnet) pour inonder un serveur de requêtes jusqu'à le rendre indisponible."
-          },
-          {
-            question: "Qu'est-ce que l'authentification à deux facteurs (2FA) ?",
-            choices: [
-              "Un double mot de passe",
-              "Une méthode qui combine deux types de vérification différents pour confirmer l'identité",
-              "Deux comptes utilisateurs liés",
-              "Un chiffrement à deux clés"
-            ],
-            correct: 1,
-            explanation: "Le 2FA combine deux facteurs : quelque chose que vous connaissez (mot de passe) et quelque chose que vous possédez (code SMS, clé physique) ou êtes (biométrie)."
-          },
-          {
-            question: "Qu'est-ce qu'un ransomware ?",
-            choices: [
-              "Un logiciel de surveillance réseau",
-              "Un malware qui chiffre les fichiers et demande une rançon pour les déchiffrer",
-              "Un type de pare-feu",
-              "Un protocole d'authentification"
-            ],
-            correct: 1,
-            explanation: "Un ransomware est un malware qui chiffre les données de la victime et exige une rançon (souvent en cryptomonnaie) en échange de la clé de déchiffrement."
-          },
-          {
-            question: "Qu'est-ce qu'une vulnérabilité XSS (Cross-Site Scripting) ?",
-            choices: [
-              "Une attaque sur les serveurs DNS",
-              "L'injection de scripts malveillants dans une page web vue par d'autres utilisateurs",
-              "Une faille dans les protocoles réseau",
-              "Un virus qui cible les navigateurs"
-            ],
-            correct: 1,
-            explanation: "XSS consiste à injecter du code JavaScript malveillant dans une page web. Lorsque d'autres utilisateurs visitent la page, le script s'exécute dans leur navigateur."
-          },
-          {
-            question: "Qu'est-ce qu'un certificat SSL/TLS ?",
-            choices: [
-              "Un mot de passe chiffré",
-              "Un document numérique qui authentifie l'identité d'un site et permet le chiffrement HTTPS",
-              "Un type de pare-feu applicatif",
-              "Un protocole de compression"
-            ],
-            correct: 1,
-            explanation: "Un certificat SSL/TLS est émis par une Autorité de Certification. Il confirme l'identité du serveur et permet d'établir une connexion chiffrée (HTTPS)."
-          },
-          {
-            question: "Qu'est-ce que le principe du moindre privilège ?",
-            choices: [
-              "Donner les droits maximaux à tous les utilisateurs",
-              "Accorder à chaque utilisateur uniquement les droits nécessaires à ses fonctions",
-              "Supprimer tous les droits des utilisateurs",
-              "Partager les mêmes droits entre tous les utilisateurs"
-            ],
-            correct: 1,
-            explanation: "Le principe du moindre privilège (PoLP) consiste à n'accorder que les permissions strictement nécessaires à un utilisateur ou processus, limitant ainsi l'impact d'une compromission."
-          },
-          {
-            question: "Qu'est-ce qu'un test de pénétration (pentest) ?",
-            choices: [
-              "Un test de vitesse réseau",
-              "Une attaque simulée et autorisée pour identifier les vulnérabilités d'un système",
-              "Un audit de code source",
-              "Un test de charge de serveur"
-            ],
-            correct: 1,
-            explanation: "Un pentest est une cyberattaque simulée et éthique réalisée par des experts pour identifier et exploiter les vulnérabilités d'un système avant que des attaquants réels ne le fassent."
-          },
-          {
-            question: "Que représente la triade CIA en sécurité informatique ?",
-            choices: [
-              "Contrôle, Intégration, Authentification",
-              "Confidentialité, Intégrité, Disponibilité",
-              "Chiffrement, Identification, Autorisation",
-              "Connexion, Isolation, Accès"
-            ],
-            correct: 1,
-            explanation: "La triade CIA est le modèle fondamental de la sécurité : Confidentialité (accès aux données autorisés seulement), Intégrité (données exactes et non altérées), Disponibilité (accès garanti aux utilisateurs légitimes)."
-          },
-          {
-            question: "Qu'est-ce qu'une attaque de l'homme du milieu (Man-in-the-Middle) ?",
-            choices: [
-              "Une attaque physique sur un câble réseau",
-              "Un attaquant qui s'intercale secrètement dans une communication entre deux parties",
-              "Un virus qui s'installe dans la RAM",
-              "Une attaque par force brute sur les mots de passe"
-            ],
-            correct: 1,
-            explanation: "Dans une attaque MitM, l'attaquant intercepte secrètement les communications entre deux parties, pouvant lire, modifier ou injecter des données à leur insu."
-          },
-          {
-            question: "Quel est le rôle d'un SIEM en sécurité informatique ?",
-            choices: [
-              "Chiffrer les données en transit",
-              "Collecter, analyser et corréler les événements de sécurité en temps réel",
-              "Bloquer automatiquement les attaques DDoS",
-              "Gérer les certificats SSL"
-            ],
-            correct: 1,
-            explanation: "Un SIEM (Security Information and Event Management) centralise les logs, détecte des comportements suspects, génère des alertes et aide à la réponse aux incidents de sécurité."
-          }
+          { question: "Qu'est-ce qu'une attaque par injection SQL ?", choices: ["Une attaque physique sur un serveur", "L'insertion de code SQL malveillant pour manipuler la base de données", "Un virus qui corrompt des fichiers SQL", "Une technique de sauvegarde"], correct: 1, explanation: "L'injection SQL insère du code SQL malveillant dans les champs d'entrée pour manipuler ou accéder illégalement à la BDD." },
+          { question: "Que représente la triade CIA en sécurité ?", choices: ["Contrôle, Intégration, Authentification", "Confidentialité, Intégrité, Disponibilité", "Chiffrement, Identification, Autorisation", "Connexion, Isolation, Accès"], correct: 1, explanation: "La triade CIA : Confidentialité (accès autorisés), Intégrité (données non altérées), Disponibilité (accès garanti aux utilisateurs légitimes)." },
+          { question: "Qu'est-ce qu'un ransomware ?", choices: ["Un logiciel de surveillance réseau", "Un malware qui chiffre les fichiers et exige une rançon", "Un type de pare-feu", "Un protocole d'authentification"], correct: 1, explanation: "Un ransomware chiffre les données de la victime et exige une rançon (souvent en cryptomonnaie) pour la clé de déchiffrement." },
+          { question: "Qu'est-ce qu'une vulnérabilité XSS ?", choices: ["Une attaque sur les serveurs DNS", "L'injection de scripts malveillants dans une page web vue par d'autres utilisateurs", "Une faille dans les protocoles réseau", "Un virus ciblant les navigateurs"], correct: 1, explanation: "XSS (Cross-Site Scripting) injecte du JavaScript malveillant dans une page web. Il s'exécute dans le navigateur des visiteurs." },
+          { question: "Qu'est-ce que l'authentification à deux facteurs (2FA) ?", choices: ["Un double mot de passe", "Une méthode qui combine deux types de vérification différents", "Deux comptes liés", "Un chiffrement à deux clés"], correct: 1, explanation: "Le 2FA combine deux facteurs : quelque chose que vous connaissez (mot de passe) et quelque chose que vous possédez (code SMS, clé physique)." },
+          { question: "Qu'est-ce qu'un test de pénétration (pentest) ?", choices: ["Un test de vitesse réseau", "Une attaque simulée et autorisée pour identifier les vulnérabilités", "Un audit de code source", "Un test de charge"], correct: 1, explanation: "Un pentest est une cyberattaque éthique réalisée par des experts pour identifier les vulnérabilités avant de vrais attaquants." },
+          { question: "Qu'est-ce que le principe du moindre privilège ?", choices: ["Donner les droits maximaux à tous", "Accorder uniquement les droits nécessaires à chaque utilisateur", "Supprimer tous les droits", "Partager les mêmes droits entre tous"], correct: 1, explanation: "Le PoLP (Principle of Least Privilege) limite les droits au strict nécessaire, réduisant la surface d'attaque en cas de compromission." },
+          { question: "Qu'est-ce qu'une attaque de l'homme du milieu (MitM) ?", choices: ["Une attaque physique sur un câble", "Un attaquant qui s'intercale secrètement dans une communication", "Un virus en RAM", "Une attaque par force brute"], correct: 1, explanation: "Dans une attaque MitM, l'attaquant intercepte et peut lire, modifier ou injecter des données entre deux parties à leur insu." },
+          { question: "Qu'est-ce qu'un SIEM ?", choices: ["Un pare-feu de nouvelle génération", "Un système qui collecte, analyse et corrèle les événements de sécurité en temps réel", "Un antivirus centralisé", "Un protocole de chiffrement"], correct: 1, explanation: "Un SIEM (Security Information and Event Management) centralise les logs, détecte des comportements suspects et aide à la réponse aux incidents." },
+          { question: "Qu'est-ce que l'OWASP Top 10 ?", choices: ["Un classement des meilleurs hackers", "Une liste des 10 risques de sécurité les plus critiques pour les applications web", "Un standard de chiffrement", "Un protocole d'authentification"], correct: 1, explanation: "L'OWASP Top 10 recense les vulnérabilités web les plus répandues (injection, XSS, mauvaise authentification…) pour aider les développeurs à les éviter." },
+          { question: "Qu'est-ce que le chiffrement asymétrique ?", choices: ["Un chiffrement avec une seule clé partagée", "Un chiffrement utilisant une paire de clés : une publique pour chiffrer, une privée pour déchiffrer", "Un chiffrement basé sur des séquences aléatoires", "Un chiffrement utilisé uniquement pour les emails"], correct: 1, explanation: "Le chiffrement asymétrique (RSA, ECC) utilise une clé publique pour chiffrer et une clé privée pour déchiffrer. À la base du HTTPS et des signatures numériques." },
+          { question: "Qu'est-ce que le Social Engineering ?", choices: ["L'ingénierie des réseaux sociaux", "La manipulation psychologique de personnes pour obtenir des informations confidentielles", "Un type d'attaque réseau", "Une technique de développement collaboratif"], correct: 1, explanation: "Le Social Engineering exploite la psychologie humaine (confiance, peur, urgence) plutôt que les vulnérabilités techniques pour obtenir des accès ou informations." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  6. SYSTÈMES D'EXPLOITATION
-      // ─────────────────────────────────────────
       {
         name: "Systèmes d'exploitation",
         questions: [
-          {
-            question: "Quel est le rôle principal d'un système d'exploitation (OS) ?",
-            choices: [
-              "Développer des applications logicielles",
-              "Gérer les ressources matérielles et fournir des services aux applications",
-              "Protéger contre les virus",
-              "Optimiser les requêtes SQL"
-            ],
-            correct: 1,
-            explanation: "L'OS gère le processeur, la mémoire, les périphériques et le stockage, et fournit une interface entre le matériel et les logiciels."
-          },
-          {
-            question: "Qu'est-ce qu'un processus en informatique ?",
-            choices: [
-              "Un fichier stocké sur le disque dur",
-              "Un programme en cours d'exécution avec ses ressources allouées",
-              "Un type de mémoire RAM",
-              "Un protocole réseau"
-            ],
-            correct: 1,
-            explanation: "Un processus est un programme en cours d'exécution. Il possède son propre espace mémoire, ses fichiers ouverts et son contexte d'exécution."
-          },
-          {
-            question: "Qu'est-ce qu'un deadlock (interblocage) ?",
-            choices: [
-              "Un bug qui cause un redémarrage du système",
-              "Une situation où deux processus ou plus s'attendent mutuellement indéfiniment",
-              "Un type d'attaque réseau",
-              "Un mécanisme de sécurité"
-            ],
-            correct: 1,
-            explanation: "Un deadlock survient quand des processus se bloquent mutuellement car chacun attend une ressource détenue par un autre, sans qu'aucun ne puisse progresser."
-          },
-          {
-            question: "Quelle est la différence entre mémoire RAM et ROM ?",
-            choices: [
-              "La RAM est plus lente que la ROM",
-              "La RAM est volatile (perd les données hors tension), la ROM est non volatile (données permanentes)",
-              "La ROM est modifiable, la RAM ne l'est pas",
-              "Aucune différence"
-            ],
-            correct: 1,
-            explanation: "La RAM (mémoire vive) est volatile : les données disparaissent à l'extinction. La ROM est non volatile et contient des données permanentes comme le BIOS/UEFI."
-          },
-          {
-            question: "Qu'est-ce que la pagination en gestion de la mémoire ?",
-            choices: [
-              "L'affichage de pages web en mémoire",
-              "La division de la mémoire en blocs de taille fixe (pages) pour faciliter l'allocation",
-              "La numérotation des fichiers système",
-              "Un type de compression de mémoire"
-            ],
-            correct: 1,
-            explanation: "La pagination divise la mémoire physique et virtuelle en pages de taille fixe. Elle permet à l'OS d'allouer de la mémoire de manière non contiguë et implémente la mémoire virtuelle."
-          },
-          {
-            question: "Qu'est-ce qu'un thread ?",
-            choices: [
-              "Un type de virus informatique",
-              "La plus petite unité d'exécution au sein d'un processus, partageant sa mémoire",
-              "Un type de fichier système",
-              "Un protocole réseau léger"
-            ],
-            correct: 1,
-            explanation: "Un thread est une unité d'exécution légère qui partage l'espace mémoire de son processus parent. Plusieurs threads peuvent s'exécuter en parallèle dans un même processus."
-          },
-          {
-            question: "Qu'est-ce que le noyau (kernel) d'un OS ?",
-            choices: [
-              "L'interface graphique de l'OS",
-              "Le cœur de l'OS qui gère directement le matériel et les ressources système",
-              "L'antivirus intégré à l'OS",
-              "Le gestionnaire de fichiers"
-            ],
-            correct: 1,
-            explanation: "Le noyau est la partie centrale de l'OS. Il s'exécute en mode privilégié et gère directement la mémoire, les processus, les périphériques et les appels système."
-          },
-          {
-            question: "Quelle commande Linux permet d'afficher les processus en cours d'exécution ?",
-            choices: ["ls", "pwd", "ps", "cd"],
-            correct: 2,
-            explanation: "La commande 'ps' (Process Status) affiche les processus actifs. 'top' et 'htop' offrent une vue dynamique en temps réel."
-          },
-          {
-            question: "Qu'est-ce qu'un système de fichiers ?",
-            choices: [
-              "Un logiciel de gestion de documents",
-              "Une structure qui organise et stocke les fichiers sur un support de stockage",
-              "Un type de mémoire cache",
-              "Un protocole de transfert de fichiers"
-            ],
-            correct: 1,
-            explanation: "Le système de fichiers (NTFS, ext4, FAT32…) définit comment les données sont organisées, indexées et stockées sur un disque, et comment elles sont retrouvées."
-          },
-          {
-            question: "Qu'est-ce que la mémoire virtuelle ?",
-            choices: [
-              "Une mémoire RAM qui n'existe pas physiquement",
-              "Une technique qui utilise l'espace disque comme extension de la RAM",
-              "Un type de mémoire cache",
-              "La mémoire des machines virtuelles"
-            ],
-            correct: 1,
-            explanation: "La mémoire virtuelle permet aux programmes d'utiliser plus de mémoire que la RAM disponible en utilisant une partie du disque dur (swap/fichier de pagination) comme mémoire secondaire."
-          },
-          {
-            question: "Quelle est la différence entre un processus et un thread ?",
-            choices: [
-              "Un thread est plus lourd qu'un processus",
-              "Un processus a son propre espace mémoire isolé, les threads partagent celui de leur processus",
-              "Les threads ne peuvent pas s'exécuter en parallèle",
-              "Un processus est une sous-unité d'un thread"
-            ],
-            correct: 1,
-            explanation: "Un processus est isolé avec son propre espace mémoire. Les threads d'un même processus partagent la mémoire, ce qui les rend plus légers mais nécessite une synchronisation."
-          },
-          {
-            question: "Qu'est-ce qu'un hyperviseur ?",
-            choices: [
-              "Un type de processeur haute performance",
-              "Un logiciel qui crée et gère des machines virtuelles",
-              "Un système de fichiers avancé",
-              "Un protocole de virtualisation réseau"
-            ],
-            correct: 1,
-            explanation: "Un hyperviseur (VMware, VirtualBox, KVM…) crée et gère des machines virtuelles (VM) en partageant les ressources physiques entre plusieurs OS invités."
-          },
-          {
-            question: "Que signifie l'acronyme BIOS ?",
-            choices: [
-              "Basic Input Output System",
-              "Binary Integrated Operating System",
-              "Basic Internal Operating Software",
-              "Built-In Operating System"
-            ],
-            correct: 0,
-            explanation: "Le BIOS (Basic Input Output System) est le firmware stocké en ROM qui initialise le matériel au démarrage et amorce le chargement de l'OS. Il est de plus en plus remplacé par l'UEFI."
-          },
-          {
-            question: "Qu'est-ce qu'un signal SIGKILL sous Linux ?",
-            choices: [
-              "Un signal pour mettre en pause un processus",
-              "Un signal qui demande à un processus de se terminer proprement",
-              "Un signal de terminaison forcée qu'un processus ne peut pas ignorer",
-              "Un signal de redémarrage du système"
-            ],
-            correct: 2,
-            explanation: "SIGKILL (signal 9) force immédiatement la terminaison d'un processus sans lui donner la possibilité de nettoyer ses ressources. Il ne peut pas être ignoré ni intercepté."
-          },
-          {
-            question: "Qu'est-ce que le scheduling (ordonnancement) de processus ?",
-            choices: [
-              "La planification des sauvegardes automatiques",
-              "Le mécanisme qui décide quel processus s'exécute sur le CPU et pendant combien de temps",
-              "La gestion des files d'impression",
-              "La mise à jour automatique de l'OS"
-            ],
-            correct: 1,
-            explanation: "Le scheduler de l'OS décide de l'ordre et du temps d'utilisation du CPU par les différents processus, selon des algorithmes comme Round Robin, FIFO, ou les files de priorité."
-          }
+          { question: "Qu'est-ce qu'un processus en informatique ?", choices: ["Un fichier sur disque", "Un programme en cours d'exécution avec ses ressources allouées", "Un type de mémoire RAM", "Un protocole réseau"], correct: 1, explanation: "Un processus est un programme en cours d'exécution. Il possède son propre espace mémoire, fichiers ouverts et contexte." },
+          { question: "Qu'est-ce qu'un deadlock ?", choices: ["Un bug qui cause un redémarrage", "Une situation où des processus s'attendent mutuellement indéfiniment", "Un type d'attaque réseau", "Un mécanisme de sécurité"], correct: 1, explanation: "Un deadlock survient quand des processus se bloquent mutuellement car chacun attend une ressource détenue par un autre." },
+          { question: "Qu'est-ce que la pagination en gestion mémoire ?", choices: ["L'affichage de pages web", "La division de la mémoire en blocs de taille fixe pour faciliter l'allocation", "La numérotation des fichiers système", "Un type de compression"], correct: 1, explanation: "La pagination divise la mémoire physique et virtuelle en pages de taille fixe, permettant une allocation non contiguë." },
+          { question: "Qu'est-ce que le noyau (kernel) d'un OS ?", choices: ["L'interface graphique", "Le cœur de l'OS qui gère directement le matériel et les ressources système", "L'antivirus intégré", "Le gestionnaire de fichiers"], correct: 1, explanation: "Le noyau s'exécute en mode privilégié et gère directement la mémoire, les processus, les périphériques et les appels système." },
+          { question: "Quelle commande Linux affiche les processus en cours ?", choices: ["ls", "pwd", "ps", "cd"], correct: 2, explanation: "La commande 'ps' affiche les processus actifs. 'top' et 'htop' offrent une vue dynamique en temps réel." },
+          { question: "Qu'est-ce que la mémoire virtuelle ?", choices: ["Une RAM qui n'existe pas physiquement", "Une technique qui utilise l'espace disque comme extension de la RAM", "Un type de mémoire cache", "La mémoire des machines virtuelles"], correct: 1, explanation: "La mémoire virtuelle permet aux programmes d'utiliser plus de mémoire que la RAM disponible en utilisant une partie du disque (swap)." },
+          { question: "Quelle est la différence entre un processus et un thread ?", choices: ["Un thread est plus lourd", "Un processus a son propre espace mémoire isolé, les threads partagent celui de leur processus", "Les threads ne peuvent pas s'exécuter en parallèle", "Un processus est une sous-unité d'un thread"], correct: 1, explanation: "Un processus est isolé avec son propre espace mémoire. Les threads d'un même processus partagent la mémoire." },
+          { question: "Qu'est-ce qu'un hyperviseur ?", choices: ["Un processeur haute performance", "Un logiciel qui crée et gère des machines virtuelles", "Un système de fichiers avancé", "Un protocole de virtualisation réseau"], correct: 1, explanation: "Un hyperviseur (VMware, VirtualBox, KVM) crée et gère des VMs en partageant les ressources physiques entre plusieurs OS invités." },
+          { question: "Qu'est-ce que le scheduling (ordonnancement) de processus ?", choices: ["La planification des sauvegardes", "Le mécanisme qui décide quel processus utilise le CPU et pendant combien de temps", "La gestion des files d'impression", "La mise à jour automatique"], correct: 1, explanation: "Le scheduler décide de l'ordre et du temps d'utilisation du CPU par les processus, selon des algorithmes comme Round Robin ou FIFO." },
+          { question: "Qu'est-ce qu'un appel système (syscall) ?", choices: ["Un appel téléphonique d'urgence", "Une interface permettant aux programmes utilisateur de demander des services au noyau", "Un type de protocole réseau", "Une commande de démarrage système"], correct: 1, explanation: "Un appel système est le mécanisme par lequel un programme en mode utilisateur demande un service au noyau (lire un fichier, allouer de la mémoire…)." },
+          { question: "Qu'est-ce que le mode protégé dans les processeurs x86 ?", choices: ["Un mode de sécurité réseau", "Un mode d'exécution qui active la protection mémoire et la multitâche avec des niveaux de privilège", "Un mode basse consommation", "Un mode de débogage"], correct: 1, explanation: "Le mode protégé (opposé du mode réel) active la segmentation, la pagination, la multitâche et les anneaux de privilège (ring 0/3) sur les processeurs x86." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  7. DÉVELOPPEMENT WEB
-      // ─────────────────────────────────────────
       {
         name: "Développement Web",
         questions: [
-          {
-            question: "Que signifie HTML ?",
-            choices: ["HyperText Markup Language", "High Tech Modern Language", "HyperText Machine Language", "Hybrid Text Markup Language"],
-            correct: 0,
-            explanation: "HTML (HyperText Markup Language) est le langage de balisage standard utilisé pour créer la structure des pages web."
-          },
-          {
-            question: "Quelle propriété CSS est utilisée pour centrer un élément horizontalement dans un flexbox ?",
-            choices: ["align-items", "justify-content", "text-align", "margin: auto"],
-            correct: 1,
-            explanation: "Dans un conteneur flex, 'justify-content: center' centre les éléments le long de l'axe principal (horizontal par défaut)."
-          },
-          {
-            question: "Qu'est-ce que le DOM en JavaScript ?",
-            choices: [
-              "Un langage de programmation",
-              "La représentation objet de la structure HTML d'une page, manipulable en JavaScript",
-              "Un protocole de communication",
-              "Un type de base de données web"
-            ],
-            correct: 1,
-            explanation: "Le DOM (Document Object Model) représente la page HTML comme un arbre d'objets. JavaScript peut le manipuler pour modifier dynamiquement le contenu et la structure de la page."
-          },
-          {
-            question: "Qu'est-ce qu'une requête AJAX ?",
-            choices: [
-              "Un type d'attaque web",
-              "Une technique qui permet d'envoyer/recevoir des données depuis le serveur sans recharger la page",
-              "Un framework CSS",
-              "Un protocole de chiffrement"
-            ],
-            correct: 1,
-            explanation: "AJAX (Asynchronous JavaScript And XML) permet des échanges asynchrones avec le serveur (aujourd'hui via fetch ou XMLHttpRequest) pour mettre à jour une page sans la recharger."
-          },
-          {
-            question: "Quelle est la différence entre GET et POST en HTTP ?",
-            choices: [
-              "GET est plus sécurisé que POST",
-              "GET envoie les paramètres dans l'URL, POST les envoie dans le corps de la requête",
-              "POST est réservé aux téléchargements de fichiers",
-              "GET ne peut pas envoyer de données"
-            ],
-            correct: 1,
-            explanation: "GET transmet les paramètres dans l'URL (visible, limité en taille, idempotent). POST les envoie dans le corps de la requête (non visible dans l'URL, adapté aux formulaires et données sensibles)."
-          },
-          {
-            question: "Qu'est-ce que le CSS Box Model ?",
-            choices: [
-              "Une technique de mise en page CSS",
-              "Le modèle qui décrit l'espace occupé par un élément : content, padding, border, margin",
-              "Un type de sélecteur CSS",
-              "Un framework de mise en page"
-            ],
-            correct: 1,
-            explanation: "Le Box Model CSS décrit chaque élément comme une boîte composée de : content (contenu), padding (espacement interne), border (bordure) et margin (espacement externe)."
-          },
-          {
-            question: "Qu'est-ce que le responsive design ?",
-            choices: [
-              "Un design qui répond aux clics de l'utilisateur",
-              "Une approche qui adapte l'interface à différentes tailles d'écran (mobile, tablette, desktop)",
-              "Un framework JavaScript",
-              "Une technique d'animation CSS"
-            ],
-            correct: 1,
-            explanation: "Le responsive design utilise des media queries CSS, des grilles flexibles et des images fluides pour que l'interface s'adapte automatiquement à la taille de l'écran."
-          },
-          {
-            question: "Qu'est-ce que le localStorage en JavaScript ?",
-            choices: [
-              "Un système de fichiers local",
-              "Un mécanisme de stockage de données côté client persistant au-delà de la session",
-              "Une base de données JavaScript",
-              "Un type de cookie sécurisé"
-            ],
-            correct: 1,
-            explanation: "localStorage est une API Web qui permet de stocker des données clé-valeur côté navigateur de manière persistante (contrairement à sessionStorage qui est limité à la session)."
-          },
-          {
-            question: "Qu'est-ce qu'un framework front-end comme React ou Vue ?",
-            choices: [
-              "Un langage de programmation côté serveur",
-              "Une bibliothèque/framework JavaScript qui facilite la création d'interfaces utilisateur réactives",
-              "Un serveur web",
-              "Un système de gestion de base de données"
-            ],
-            correct: 1,
-            explanation: "React (Meta), Vue (Evan You) et Angular (Google) sont des frameworks/bibliothèques JavaScript qui facilitent la création d'interfaces interactives basées sur des composants réutilisables."
-          },
-          {
-            question: "Qu'est-ce que le protocole WebSocket ?",
-            choices: [
-              "Un protocole de transfert de fichiers",
-              "Un protocole de communication bidirectionnelle en temps réel sur une connexion TCP persistante",
-              "Une extension du protocole HTTP",
-              "Un protocole de chiffrement web"
-            ],
-            correct: 1,
-            explanation: "WebSocket permet une communication full-duplex et en temps réel entre le navigateur et le serveur sur une seule connexion TCP persistante, idéal pour les chats ou jeux en ligne."
-          },
-          {
-            question: "Que fait la balise HTML <meta name='viewport'> ?",
-            choices: [
-              "Elle définit le titre de la page",
-              "Elle contrôle la manière dont la page est affichée sur les appareils mobiles",
-              "Elle ajoute des métadonnées pour le référencement uniquement",
-              "Elle lie un fichier CSS externe"
-            ],
-            correct: 1,
-            explanation: "La balise viewport indique au navigateur mobile comment contrôler les dimensions et l'échelle de la page, essentielle pour le responsive design."
-          },
-          {
-            question: "Qu'est-ce que le SEO ?",
-            choices: [
-              "Un langage de programmation",
-              "L'optimisation pour les moteurs de recherche afin d'améliorer le classement d'un site",
-              "Un protocole de sécurité web",
-              "Un type de serveur web"
-            ],
-            correct: 1,
-            explanation: "Le SEO (Search Engine Optimization) regroupe les pratiques visant à améliorer la visibilité et le classement d'un site dans les résultats de recherche organiques."
-          },
-          {
-            question: "Qu'est-ce qu'un cookie HTTP ?",
-            choices: [
-              "Un fichier de configuration du serveur",
-              "Un petit fichier de données stocké par le navigateur, envoyé au serveur à chaque requête",
-              "Un type de session serveur",
-              "Une technique de mise en cache"
-            ],
-            correct: 1,
-            explanation: "Un cookie est un petit fichier texte stocké par le navigateur. Il permet au serveur de maintenir un état entre les requêtes (sessions, préférences, suivi)."
-          },
-          {
-            question: "Qu'est-ce que Node.js ?",
-            choices: [
-              "Un framework front-end JavaScript",
-              "Un environnement d'exécution JavaScript côté serveur basé sur le moteur V8",
-              "Un système de gestion de base de données",
-              "Un langage de programmation"
-            ],
-            correct: 1,
-            explanation: "Node.js permet d'exécuter du JavaScript côté serveur grâce au moteur V8 de Chrome. Son modèle événementiel non-bloquant le rend adapté aux applications temps réel."
-          },
-          {
-            question: "Que signifie CORS ?",
-            choices: [
-              "Cross-Origin Resource Sharing — mécanisme permettant à un navigateur d'accéder à des ressources d'un domaine différent",
-              "Common Object Request System",
-              "Cross-Origin Response Security",
-              "Client-Oriented Resource Server"
-            ],
-            correct: 0,
-            explanation: "CORS est une politique de sécurité des navigateurs qui, par défaut, bloque les requêtes vers un domaine différent. Les serveurs peuvent l'autoriser via des en-têtes HTTP spécifiques."
-          }
+          { question: "Que signifie HTML ?", choices: ["HyperText Markup Language", "High Tech Modern Language", "HyperText Machine Language", "Hybrid Text Markup Language"], correct: 0, explanation: "HTML (HyperText Markup Language) est le langage de balisage standard pour créer la structure des pages web." },
+          { question: "Qu'est-ce que le DOM en JavaScript ?", choices: ["Un langage de programmation", "La représentation objet de la structure HTML, manipulable en JavaScript", "Un protocole de communication", "Un type de base de données web"], correct: 1, explanation: "Le DOM (Document Object Model) représente la page HTML comme un arbre d'objets. JS peut le manipuler pour modifier dynamiquement la page." },
+          { question: "Quelle est la différence entre GET et POST en HTTP ?", choices: ["GET est plus sécurisé", "GET envoie les paramètres dans l'URL, POST les envoie dans le corps de la requête", "POST est réservé aux fichiers", "GET ne peut pas envoyer de données"], correct: 1, explanation: "GET transmet les paramètres dans l'URL (visible, limité en taille). POST les envoie dans le corps (non visible dans l'URL, adapté aux formulaires)." },
+          { question: "Qu'est-ce que le responsive design ?", choices: ["Un design qui répond aux clics", "Une approche qui adapte l'interface à différentes tailles d'écran", "Un framework JavaScript", "Une technique d'animation CSS"], correct: 1, explanation: "Le responsive design utilise des media queries CSS, des grilles flexibles et des images fluides pour adapter l'interface automatiquement." },
+          { question: "Qu'est-ce que le protocole WebSocket ?", choices: ["Un protocole de transfert de fichiers", "Un protocole de communication bidirectionnelle en temps réel sur TCP persistant", "Une extension du protocole HTTP", "Un protocole de chiffrement web"], correct: 1, explanation: "WebSocket permet une communication full-duplex en temps réel sur une connexion TCP persistante, idéal pour les chats et jeux en ligne." },
+          { question: "Que fait la balise HTML <meta name='viewport'> ?", choices: ["Elle définit le titre de la page", "Elle contrôle l'affichage sur les appareils mobiles", "Elle ajoute des métadonnées SEO uniquement", "Elle lie un fichier CSS"], correct: 1, explanation: "La balise viewport contrôle les dimensions et l'échelle sur mobile, essentielle pour le responsive design." },
+          { question: "Qu'est-ce que Node.js ?", choices: ["Un framework front-end JavaScript", "Un environnement d'exécution JavaScript côté serveur basé sur le moteur V8", "Un système de gestion de base de données", "Un langage de programmation"], correct: 1, explanation: "Node.js permet d'exécuter du JavaScript côté serveur grâce au moteur V8. Son modèle événementiel non-bloquant convient aux apps temps réel." },
+          { question: "Que signifie CORS ?", choices: ["Cross-Origin Resource Sharing — mécanisme permettant l'accès à des ressources d'un domaine différent", "Common Object Request System", "Cross-Origin Response Security", "Client-Oriented Resource Server"], correct: 0, explanation: "CORS est une politique de sécurité des navigateurs. Les serveurs l'autorisent via des en-têtes HTTP spécifiques." },
+          { question: "Qu'est-ce que GraphQL ?", choices: ["Un type de base de données graphique", "Un langage de requête pour API qui permet de demander exactement les données nécessaires", "Un framework CSS", "Un protocole de cache HTTP"], correct: 1, explanation: "GraphQL (créé par Meta) est un langage de requête pour API permettant au client de spécifier exactement les données dont il a besoin, évitant le sur-/sous-chargement." },
+          { question: "Qu'est-ce qu'un cookie HTTP ?", choices: ["Un fichier de configuration serveur", "Un petit fichier de données stocké par le navigateur et envoyé à chaque requête", "Un type de session serveur", "Une technique de mise en cache"], correct: 1, explanation: "Un cookie est un petit fichier texte stocké par le navigateur permettant de maintenir un état entre requêtes (sessions, préférences, suivi)." },
+          { question: "Qu'est-ce que le SSR (Server-Side Rendering) ?", choices: ["Un type de serveur web", "Le rendu de la page HTML côté serveur avant envoi au client", "Un protocole de sécurité", "Un type de base de données"], correct: 1, explanation: "Le SSR génère le HTML côté serveur à chaque requête (Next.js, Nuxt.js). Meilleur SEO et temps d'affichage initial, mais charge serveur plus élevée." },
+          { question: "Qu'est-ce qu'un JWT (JSON Web Token) ?", choices: ["Un format de fichier JSON", "Un token compact et signé pour transmettre des informations entre parties de façon vérifiable", "Un type de cookie sécurisé", "Un protocole d'authentification réseau"], correct: 1, explanation: "Un JWT est composé de trois parties (header, payload, signature) encodées en Base64. Il permet une authentification stateless sans session serveur." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  8. ARCHITECTURE & HARDWARE
-      // ─────────────────────────────────────────
-      {
-        name: "Architecture & Hardware",
-        questions: [
-          {
-            question: "Qu'est-ce que l'ALU dans un processeur ?",
-            choices: [
-              "Arithmetic Logic Unit — unité qui effectue les opérations arithmétiques et logiques",
-              "Advanced Loading Unit",
-              "Automatic Link Updater",
-              "Application Layer Unit"
-            ],
-            correct: 0,
-            explanation: "L'ALU (Arithmetic Logic Unit) est le composant du processeur qui effectue les opérations arithmétiques (addition, soustraction…) et logiques (AND, OR, NOT…)."
-          },
-          {
-            question: "Qu'est-ce que la mémoire cache du processeur ?",
-            choices: [
-              "Une sauvegarde automatique de la RAM",
-              "Une mémoire très rapide intégrée au processeur pour stocker les données fréquemment utilisées",
-              "Un disque dur haute vitesse",
-              "La mémoire vidéo du GPU"
-            ],
-            correct: 1,
-            explanation: "La mémoire cache (L1, L2, L3) est une mémoire ultra-rapide proche du CPU. Elle réduit le temps d'accès aux données fréquemment utilisées, évitant d'aller chercher en RAM."
-          },
-          {
-            question: "Quelle est la différence entre un CPU et un GPU ?",
-            choices: [
-              "Le GPU est plus puissant dans tous les cas",
-              "Le CPU est optimisé pour des tâches séquentielles complexes, le GPU pour des calculs parallèles massifs",
-              "Le GPU gère la mémoire RAM, le CPU gère la mémoire vidéo",
-              "Le CPU et le GPU font le même travail"
-            ],
-            correct: 1,
-            explanation: "Le CPU a quelques cœurs puissants pour des tâches séquentielles. Le GPU a des milliers de petits cœurs pour traiter des milliers d'opérations simples en parallèle (graphisme, IA)."
-          },
-          {
-            question: "Qu'est-ce que le bus de données dans un ordinateur ?",
-            choices: [
-              "Un logiciel de gestion de transport",
-              "Un canal de communication qui transfère des données entre les composants de l'ordinateur",
-              "Un type de mémoire partagée",
-              "Un protocole réseau interne"
-            ],
-            correct: 1,
-            explanation: "Le bus est un ensemble de conducteurs électriques qui permettent le transfert de données entre le CPU, la RAM, les cartes d'extension et autres composants."
-          },
-          {
-            question: "Qu'est-ce que la fréquence d'horloge d'un processeur ?",
-            choices: [
-              "La vitesse de la connexion réseau",
-              "Le nombre de cycles d'opérations que le CPU peut effectuer par seconde",
-              "La vitesse de lecture/écriture du disque dur",
-              "La fréquence de rafraîchissement de l'écran"
-            ],
-            correct: 1,
-            explanation: "La fréquence d'horloge (en GHz) indique combien de cycles le processeur effectue par seconde. Un processeur à 3 GHz effectue 3 milliards de cycles par seconde."
-          },
-          {
-            question: "Quelle est la différence entre un disque HDD et un SSD ?",
-            choices: [
-              "Le SSD est moins fiable que le HDD",
-              "Le HDD utilise des plateaux magnétiques rotatifs, le SSD utilise de la mémoire flash sans pièces mobiles",
-              "Le HDD est plus rapide en lecture",
-              "Les deux technologies sont identiques"
-            ],
-            correct: 1,
-            explanation: "Le HDD (disque dur) utilise des plateaux magnétiques rotatifs — moins cher, plus lent, fragile aux chocs. Le SSD utilise la mémoire flash — plus rapide, silencieux, résistant, mais plus cher."
-          },
-          {
-            question: "Qu'est-ce que le pipeline dans l'architecture d'un processeur ?",
-            choices: [
-              "Un câble qui relie le CPU à la RAM",
-              "Une technique qui permet d'exécuter plusieurs instructions en se chevauchant pour améliorer les performances",
-              "Un type de mémoire cache",
-              "Un protocole de communication entre CPU et GPU"
-            ],
-            correct: 1,
-            explanation: "Le pipeline divise l'exécution d'une instruction en étapes (fetch, decode, execute, write-back…) et permet à plusieurs instructions d'être à différentes étapes simultanément."
-          },
-          {
-            question: "Qu'est-ce que l'architecture RISC ?",
-            choices: [
-              "Reduced Instruction Set Computer — processeur avec un jeu d'instructions simple et réduit",
-              "Rapid Instruction Speed Computer",
-              "Real-time Instruction Set Controller",
-              "Remote Integrated System Circuit"
-            ],
-            correct: 0,
-            explanation: "RISC (Reduced Instruction Set Computer) utilise un petit nombre d'instructions simples exécutées rapidement (en un cycle). ARM est un exemple populaire. L'opposé est CISC (x86)."
-          },
-          {
-            question: "Qu'est-ce que le chipset d'une carte mère ?",
-            choices: [
-              "Un ensemble de processeurs graphiques",
-              "Un ensemble de circuits intégrés qui contrôlent la communication entre le CPU, la RAM et les périphériques",
-              "La mémoire BIOS",
-              "Un type de connecteur PCIe"
-            ],
-            correct: 1,
-            explanation: "Le chipset est le 'chef d'orchestre' de la carte mère. Il coordonne les échanges de données entre le processeur, la mémoire vive, les cartes d'extension et les périphériques."
-          },
-          {
-            question: "Qu'est-ce que la mémoire VRAM ?",
-            choices: [
-              "Une variante de la mémoire virtuelle",
-              "La mémoire dédiée du GPU, utilisée pour stocker les textures et les données graphiques",
-              "Un type de mémoire cache L3",
-              "La mémoire morte du BIOS"
-            ],
-            correct: 1,
-            explanation: "La VRAM (Video RAM) est la mémoire intégrée dans la carte graphique. Elle stocke les textures, tampons de trame et données graphiques pour un accès rapide par le GPU."
-          },
-          {
-            question: "Que représente le nombre de cœurs (cores) dans un processeur moderne ?",
-            choices: [
-              "Le nombre de transistors",
-              "Le nombre d'unités de traitement indépendantes capables d'exécuter des tâches en parallèle",
-              "La fréquence d'horloge",
-              "La taille du cache L2"
-            ],
-            correct: 1,
-            explanation: "Chaque cœur est une unité de traitement indépendante. Un processeur 8 cœurs peut traiter 8 tâches en simultané, améliorant les performances multitâches."
-          },
-          {
-            question: "Qu'est-ce que l'interface PCIe (PCI Express) ?",
-            choices: [
-              "Un protocole réseau",
-              "Un bus série haute vitesse pour connecter des cartes d'extension (GPU, SSD NVMe…) à la carte mère",
-              "Un type de connecteur d'alimentation",
-              "Un protocole de communication USB"
-            ],
-            correct: 1,
-            explanation: "PCIe est un bus série haute vitesse qui remplace PCI. Il est utilisé pour connecter les cartes graphiques, les SSD NVMe et d'autres cartes d'extension à la carte mère."
-          }
-        ]
-      },
-
-      // ─────────────────────────────────────────
-      //  9. CLOUD & DEVOPS
-      // ─────────────────────────────────────────
       {
         name: "Cloud & DevOps",
         questions: [
-          {
-            question: "Que signifie IaaS dans le cloud computing ?",
-            choices: [
-              "Infrastructure as a Service — fourniture de ressources matérielles virtualisées à la demande",
-              "Integration as a Service",
-              "Internet as a System",
-              "Intelligent Automation as a Service"
-            ],
-            correct: 0,
-            explanation: "IaaS fournit des ressources informatiques virtualisées (serveurs, stockage, réseau) via Internet. Exemples : AWS EC2, Azure VMs, Google Compute Engine."
-          },
-          {
-            question: "Qu'est-ce que Docker ?",
-            choices: [
-              "Un langage de programmation pour le cloud",
-              "Un outil de conteneurisation qui empaquette une application et ses dépendances dans un conteneur portable",
-              "Un fournisseur de services cloud",
-              "Un système d'exploitation léger"
-            ],
-            correct: 1,
-            explanation: "Docker crée des conteneurs légers et portables qui encapsulent une application et toutes ses dépendances, garantissant un comportement identique quel que soit l'environnement."
-          },
-          {
-            question: "Quelle est la différence entre un conteneur Docker et une machine virtuelle ?",
-            choices: [
-              "Les conteneurs sont plus lents que les VMs",
-              "Les conteneurs partagent le noyau de l'OS hôte et sont plus légers, les VMs ont leur propre OS complet",
-              "Les VMs consomment moins de ressources",
-              "Aucune différence notable"
-            ],
-            correct: 1,
-            explanation: "Les conteneurs partagent le noyau de l'OS hôte, démarrent en secondes et consomment peu de ressources. Les VMs embarquent un OS complet, sont plus isolées mais plus lourdes."
-          },
-          {
-            question: "Qu'est-ce que Kubernetes ?",
-            choices: [
-              "Un langage de programmation pour le cloud",
-              "Un outil d'orchestration de conteneurs qui automatise le déploiement et la gestion à grande échelle",
-              "Un service de stockage cloud",
-              "Un système de monitoring réseau"
-            ],
-            correct: 1,
-            explanation: "Kubernetes (K8s) automatise le déploiement, la mise à l'échelle et la gestion de conteneurs. Il répartit la charge, assure la disponibilité et gère les défaillances automatiquement."
-          },
-          {
-            question: "Qu'est-ce que l'intégration continue (CI) ?",
-            choices: [
-              "L'intégration de différents services cloud",
-              "La pratique d'intégrer fréquemment le code dans un dépôt partagé avec vérification automatique",
-              "Une méthode de déploiement manuel",
-              "Un type de test de performance"
-            ],
-            correct: 1,
-            explanation: "La CI (Continuous Integration) consiste à fusionner le code régulièrement dans un dépôt commun et à déclencher automatiquement des builds et tests pour détecter les erreurs tôt."
-          },
-          {
-            question: "Que signifie SaaS ?",
-            choices: [
-              "Software as a Service — logiciel hébergé dans le cloud et accessible via un navigateur",
-              "System as a Solution",
-              "Security as a Service",
-              "Storage as a System"
-            ],
-            correct: 0,
-            explanation: "SaaS est un modèle de distribution où le logiciel est hébergé dans le cloud et accessible via Internet sans installation locale. Exemples : Gmail, Slack, Salesforce, Microsoft 365."
-          },
-          {
-            question: "Qu'est-ce que l'infrastructure as code (IaC) ?",
-            choices: [
-              "La programmation des processeurs",
-              "La gestion et le provisionnement de l'infrastructure via des fichiers de configuration versionnés",
-              "Un type de conteneur cloud",
-              "La programmation de firmware"
-            ],
-            correct: 1,
-            explanation: "L'IaC permet de définir l'infrastructure (serveurs, réseaux, BDD) dans des fichiers de code (Terraform, CloudFormation) versionnable, reproductible et automatisable."
-          },
-          {
-            question: "Qu'est-ce que le load balancing ?",
-            choices: [
-              "La compression des données dans le cloud",
-              "La distribution du trafic entrant sur plusieurs serveurs pour optimiser les performances et la disponibilité",
-              "Un type de sauvegarde cloud",
-              "La gestion de la bande passante"
-            ],
-            correct: 1,
-            explanation: "Le load balancer répartit les requêtes entrantes sur plusieurs serveurs, évitant la surcharge d'un seul serveur et assurant la haute disponibilité de l'application."
-          },
-          {
-            question: "Qu'est-ce qu'un pipeline CI/CD ?",
-            choices: [
-              "Un réseau de câbles dans un datacenter",
-              "Un ensemble automatisé d'étapes pour tester, valider et déployer le code en production",
-              "Un protocole réseau pour les microservices",
-              "Un type de base de données distribuée"
-            ],
-            correct: 1,
-            explanation: "Un pipeline CI/CD automatise le flux de : commit → build → tests → validation → déploiement, réduisant les erreurs humaines et accélérant la livraison de logiciels."
-          },
-          {
-            question: "Qu'est-ce qu'une architecture microservices ?",
-            choices: [
-              "Une application très légère",
-              "Un style d'architecture qui décompose une application en petits services indépendants communiquant via des API",
-              "Un type de conteneur Docker minimal",
-              "Un système d'exploitation pour microprocesseurs"
-            ],
-            correct: 1,
-            explanation: "Les microservices décomposent une application en services indépendants (authentification, paiement, catalogue…), chacun déployable séparément, à l'opposé de l'architecture monolithique."
-          },
-          {
-            question: "Qu'est-ce que le monitoring (supervision) dans un environnement cloud ?",
-            choices: [
-              "La surveillance physique des serveurs",
-              "La collecte et l'analyse de métriques (CPU, mémoire, latence…) pour détecter les anomalies et alerter",
-              "Un type de test de sécurité",
-              "La gestion des droits d'accès"
-            ],
-            correct: 1,
-            explanation: "Le monitoring collecte en temps réel des métriques système et applicatives, crée des tableaux de bord et envoie des alertes pour permettre une réponse rapide aux incidents."
-          },
-          {
-            question: "Qu'est-ce que le serverless computing ?",
-            choices: [
-              "Un cloud sans serveurs physiques",
-              "Un modèle où le développeur déploie du code sans gérer l'infrastructure sous-jacente",
-              "Un type de virtualisation légère",
-              "Un système distribué sans point central"
-            ],
-            correct: 1,
-            explanation: "Le serverless (AWS Lambda, Azure Functions…) permet d'exécuter du code à la demande sans gérer de serveurs. Le fournisseur alloue automatiquement les ressources et facture à l'usage."
-          }
+          { question: "Que signifie IaaS ?", choices: ["Infrastructure as a Service — ressources matérielles virtualisées à la demande", "Integration as a Service", "Internet as a System", "Intelligent Automation as a Service"], correct: 0, explanation: "IaaS fournit des ressources virtualisées (serveurs, stockage, réseau) à la demande. Exemples : AWS EC2, Azure VMs." },
+          { question: "Qu'est-ce que Docker ?", choices: ["Un langage de programmation cloud", "Un outil de conteneurisation qui empaquette une application et ses dépendances", "Un fournisseur cloud", "Un système d'exploitation léger"], correct: 1, explanation: "Docker crée des conteneurs portables encapsulant une application et ses dépendances, garantissant un comportement identique dans tout environnement." },
+          { question: "Qu'est-ce que Kubernetes ?", choices: ["Un langage cloud", "Un outil d'orchestration de conteneurs pour le déploiement et la gestion à grande échelle", "Un service de stockage cloud", "Un système de monitoring réseau"], correct: 1, explanation: "Kubernetes (K8s) automatise le déploiement, la mise à l'échelle et la gestion de conteneurs. Il assure la disponibilité et gère les défaillances." },
+          { question: "Qu'est-ce que l'intégration continue (CI) ?", choices: ["L'intégration de services cloud", "La pratique d'intégrer fréquemment le code avec vérification automatique", "Une méthode de déploiement manuel", "Un test de performance"], correct: 1, explanation: "La CI intègre régulièrement le code dans un dépôt commun et déclenche automatiquement builds et tests pour détecter les erreurs tôt." },
+          { question: "Qu'est-ce que l'infrastructure as code (IaC) ?", choices: ["La programmation des processeurs", "La gestion de l'infrastructure via des fichiers de configuration versionnés", "Un type de conteneur cloud", "La programmation de firmware"], correct: 1, explanation: "L'IaC (Terraform, CloudFormation) définit l'infrastructure dans du code versionnable, reproductible et automatisable." },
+          { question: "Qu'est-ce que le load balancing ?", choices: ["La compression cloud", "La distribution du trafic sur plusieurs serveurs pour optimiser performances et disponibilité", "Un type de sauvegarde cloud", "La gestion de bande passante"], correct: 1, explanation: "Le load balancer répartit les requêtes sur plusieurs serveurs, évitant la surcharge et assurant la haute disponibilité." },
+          { question: "Qu'est-ce qu'une architecture microservices ?", choices: ["Une application très légère", "Un style qui décompose une application en services indépendants communiquant via des API", "Un conteneur Docker minimal", "Un OS pour microprocesseurs"], correct: 1, explanation: "Les microservices décomposent une application en services indépendants (auth, paiement, catalogue…), chacun déployable séparément." },
+          { question: "Qu'est-ce que le serverless computing ?", choices: ["Un cloud sans serveurs physiques", "Un modèle où le développeur déploie du code sans gérer l'infrastructure", "Un type de virtualisation légère", "Un système distribué sans point central"], correct: 1, explanation: "Le serverless (AWS Lambda, Azure Functions) exécute du code à la demande sans gestion de serveurs. Facturation à l'usage." },
+          { question: "Qu'est-ce que le GitOps ?", choices: ["Un gestionnaire de versions avancé", "Une approche où Git est la source unique de vérité pour les déploiements d'infrastructure", "Un type de pipeline CI/CD", "Un outil de monitoring Git"], correct: 1, explanation: "GitOps utilise Git comme source de vérité pour l'infrastructure et les déploiements. Les changements dans Git déclenchent automatiquement les mises à jour en production." },
+          { question: "Qu'est-ce qu'un registre de conteneurs (container registry) ?", choices: ["Un outil de monitoring", "Un dépôt centralisé pour stocker et distribuer des images Docker", "Un type de base de données cloud", "Un gestionnaire de pods Kubernetes"], correct: 1, explanation: "Un registre (Docker Hub, ECR, GCR) stocke et distribue des images de conteneurs. Les équipes y publient et récupèrent des images versionnées." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  10. INTELLIGENCE ARTIFICIELLE
-      // ─────────────────────────────────────────
       {
         name: "Intelligence Artificielle",
         questions: [
-          {
-            question: "Qu'est-ce que le machine learning (apprentissage automatique) ?",
-            choices: [
-              "La programmation manuelle de règles pour résoudre des problèmes",
-              "Un domaine de l'IA où les systèmes apprennent à partir de données sans être explicitement programmés",
-              "Un algorithme de tri avancé",
-              "Un type de base de données intelligente"
-            ],
-            correct: 1,
-            explanation: "Le machine learning permet aux systèmes d'apprendre et de s'améliorer automatiquement à partir de données et d'expériences, sans être programmés pour chaque cas."
-          },
-          {
-            question: "Quelle est la différence entre l'apprentissage supervisé et non supervisé ?",
-            choices: [
-              "L'apprentissage supervisé est plus rapide",
-              "L'apprentissage supervisé utilise des données étiquetées, le non supervisé trouve des structures dans des données non étiquetées",
-              "L'apprentissage non supervisé nécessite plus de données",
-              "Aucune différence fondamentale"
-            ],
-            correct: 1,
-            explanation: "En apprentissage supervisé, on fournit des données avec leurs étiquettes (réponses correctes). En non supervisé, l'algorithme découvre lui-même des structures (clusters) dans les données."
-          },
-          {
-            question: "Qu'est-ce qu'un réseau de neurones artificiel ?",
-            choices: [
-              "Un réseau informatique bio-inspiré",
-              "Un modèle inspiré du cerveau humain, composé de couches de neurones artificiels qui traitent l'information",
-              "Un algorithme de tri basé sur la biologie",
-              "Un type de base de données distribuée"
-            ],
-            correct: 1,
-            explanation: "Un réseau de neurones artificiel est composé de couches de nœuds (neurones) connectés. Les poids des connexions s'ajustent pendant l'entraînement pour apprendre des patterns."
-          },
-          {
-            question: "Qu'est-ce que le deep learning ?",
-            choices: [
-              "Un apprentissage qui prend beaucoup de temps",
-              "Un sous-domaine du machine learning utilisant des réseaux de neurones à multiples couches profondes",
-              "Un algorithme de recherche exhaustive",
-              "Une technique d'optimisation de base de données"
-            ],
-            correct: 1,
-            explanation: "Le deep learning utilise des réseaux de neurones avec de nombreuses couches cachées pour apprendre des représentations hiérarchiques complexes des données (images, son, texte)."
-          },
-          {
-            question: "Qu'est-ce que l'overfitting (surapprentissage) en machine learning ?",
-            choices: [
-              "Un modèle trop simple pour apprendre",
-              "Quand un modèle apprend trop bien les données d'entraînement et se généralise mal aux nouvelles données",
-              "Un manque de données d'entraînement",
-              "Un problème de vitesse d'entraînement"
-            ],
-            correct: 1,
-            explanation: "L'overfitting survient quand un modèle mémorise les données d'entraînement (y compris le bruit) et performe mal sur de nouvelles données. On le combat avec la régularisation, le dropout ou plus de données."
-          },
-          {
-            question: "Qu'est-ce qu'un algorithme de classification en ML ?",
-            choices: [
-              "Un algorithme qui trie des données alphabétiquement",
-              "Un algorithme qui prédit à quelle catégorie appartient un exemple",
-              "Un algorithme de compression de données",
-              "Un algorithme de recherche de doublons"
-            ],
-            correct: 1,
-            explanation: "La classification assigne chaque exemple à une catégorie prédéfinie (spam/non-spam, chat/chien…). Exemples d'algorithmes : régression logistique, SVM, arbres de décision, réseaux de neurones."
-          },
-          {
-            question: "Qu'est-ce que le traitement du langage naturel (NLP) ?",
-            choices: [
-              "Un protocole de communication réseau",
-              "Un domaine de l'IA qui permet aux machines de comprendre, interpréter et générer du langage humain",
-              "Un type de chiffrement basé sur le langage",
-              "Une technique de compression de texte"
-            ],
-            correct: 1,
-            explanation: "Le NLP (Natural Language Processing) permet aux ordinateurs d'analyser, comprendre et générer du texte ou de la parole humaine. Il est à la base des chatbots, traducteurs et assistants vocaux."
-          },
-          {
-            question: "Qu'est-ce que la fonction de perte (loss function) en deep learning ?",
-            choices: [
-              "Une fonction qui mesure la vitesse d'entraînement",
-              "Une fonction qui mesure l'écart entre les prédictions du modèle et les valeurs réelles",
-              "Une fonction d'activation du réseau",
-              "Une fonction de compression des données"
-            ],
-            correct: 1,
-            explanation: "La loss function quantifie l'erreur du modèle. L'objectif de l'entraînement est de minimiser cette erreur via l'optimisation (descente de gradient). Exemples : MSE, cross-entropie."
-          },
-          {
-            question: "Qu'est-ce qu'un LLM (Large Language Model) ?",
-            choices: [
-              "Un type de base de données pour le langage",
-              "Un modèle de deep learning entraîné sur de grandes quantités de texte pour générer et comprendre le langage",
-              "Un algorithme de compression de texte",
-              "Un protocole de communication réseau"
-            ],
-            correct: 1,
-            explanation: "Un LLM est un modèle de langage (basé sur Transformer) entraîné sur d'immenses corpus de texte. Il peut générer du texte, répondre à des questions, traduire… Exemples : GPT, Claude, Gemini."
-          },
-          {
-            question: "Qu'est-ce que le reinforcement learning (apprentissage par renforcement) ?",
-            choices: [
-              "Un apprentissage qui utilise uniquement des données étiquetées",
-              "Un type d'apprentissage où un agent apprend en interagissant avec un environnement et en recevant des récompenses/punitions",
-              "Un algorithme de clustering",
-              "Une technique de régression linéaire"
-            ],
-            correct: 1,
-            explanation: "En reinforcement learning, un agent prend des actions dans un environnement pour maximiser une récompense cumulative. Utilisé dans les jeux (AlphaGo), la robotique et les véhicules autonomes."
-          },
-          {
-            question: "Qu'est-ce qu'une matrice de confusion en évaluation de modèle ML ?",
-            choices: [
-              "Un tableau qui montre les performances du modèle en croisant les prédictions et les valeurs réelles",
-              "Une erreur fréquente dans les réseaux de neurones",
-              "Un tableau de paramètres d'entraînement",
-              "Un type de visualisation de données"
-            ],
-            correct: 0,
-            explanation: "La matrice de confusion compare les classes prédites aux classes réelles. Elle permet de calculer la précision, le rappel, le F1-score et d'identifier les types d'erreurs du modèle."
-          },
-          {
-            question: "Qu'est-ce que la descente de gradient ?",
-            choices: [
-              "Un algorithme de tri",
-              "Un algorithme d'optimisation qui ajuste les paramètres d'un modèle pour minimiser la fonction de perte",
-              "Une technique de visualisation de données",
-              "Un protocole de communication réseau"
-            ],
-            correct: 1,
-            explanation: "La descente de gradient ajuste itérativement les poids du modèle dans la direction opposée au gradient de la loss function, réduisant progressivement l'erreur."
-          }
+          { question: "Qu'est-ce que le machine learning ?", choices: ["La programmation manuelle de règles", "Un domaine de l'IA où les systèmes apprennent à partir de données sans être explicitement programmés", "Un algorithme de tri avancé", "Un type de base de données intelligente"], correct: 1, explanation: "Le machine learning permet aux systèmes d'apprendre et de s'améliorer automatiquement à partir de données." },
+          { question: "Qu'est-ce que l'overfitting ?", choices: ["Un modèle trop simple", "Quand un modèle mémorise les données d'entraînement et se généralise mal aux nouvelles données", "Un manque de données", "Un problème de vitesse"], correct: 1, explanation: "L'overfitting survient quand un modèle mémorise le bruit des données d'entraînement et performe mal sur de nouvelles données." },
+          { question: "Qu'est-ce qu'un LLM ?", choices: ["Un type de base de données", "Un modèle de deep learning entraîné sur de grandes quantités de texte pour générer et comprendre le langage", "Un algorithme de compression de texte", "Un protocole réseau"], correct: 1, explanation: "Un LLM (Large Language Model) est basé sur l'architecture Transformer. Exemples : GPT, Claude, Gemini, LLaMA." },
+          { question: "Qu'est-ce que le reinforcement learning ?", choices: ["Un apprentissage avec données étiquetées", "Un type où un agent apprend en interagissant avec un environnement et en recevant des récompenses/punitions", "Un algorithme de clustering", "Une technique de régression"], correct: 1, explanation: "En reinforcement learning, un agent maximise une récompense cumulative via ses actions. Utilisé dans AlphaGo, la robotique, les véhicules autonomes." },
+          { question: "Qu'est-ce que la descente de gradient ?", choices: ["Un algorithme de tri", "Un algorithme d'optimisation qui ajuste les paramètres pour minimiser la fonction de perte", "Une technique de visualisation", "Un protocole réseau"], correct: 1, explanation: "La descente de gradient ajuste itérativement les poids dans la direction opposée au gradient de la loss function pour réduire l'erreur." },
+          { question: "Qu'est-ce que le transfer learning ?", choices: ["Le transfert de données entre modèles", "La réutilisation d'un modèle pré-entraîné sur une tâche pour l'adapter à une nouvelle tâche", "Un type d'apprentissage non supervisé", "La copie d'un réseau de neurones"], correct: 1, explanation: "Le transfer learning réutilise les représentations apprises par un modèle pré-entraîné (ex: BERT, ResNet) et les affine (fine-tuning) pour une tâche spécifique." },
+          { question: "Qu'est-ce que l'architecture Transformer ?", choices: ["Un type de circuit électronique", "Une architecture de réseau de neurones basée sur l'attention, à la base des LLMs modernes", "Un compilateur optimisé", "Un type de base de données vectorielle"], correct: 1, explanation: "L'architecture Transformer (Vaswani et al., 2017) utilise le mécanisme d'attention pour traiter des séquences en parallèle. Elle est à la base de BERT, GPT, etc." },
+          { question: "Qu'est-ce qu'un réseau de neurones convolutif (CNN) ?", choices: ["Un réseau optimisé pour le traitement du texte", "Un réseau spécialisé dans le traitement d'images via des filtres convolutifs", "Un réseau récurrent", "Un réseau de neurones pour les graphes"], correct: 1, explanation: "Les CNN utilisent des couches de convolution pour détecter des caractéristiques locales dans les images (bords, textures, formes). Très utilisés en vision par ordinateur." },
+          { question: "Qu'est-ce que le NLP ?", choices: ["Un protocole réseau", "Un domaine de l'IA pour comprendre, interpréter et générer du langage humain", "Un type de chiffrement textuel", "Une technique de compression"], correct: 1, explanation: "Le NLP (Natural Language Processing) permet aux machines d'analyser et générer du langage humain. Il est à la base des chatbots, traducteurs et assistants vocaux." },
+          { question: "Que représente le RAG (Retrieval-Augmented Generation) ?", choices: ["Un type de réseau récurrent", "Une technique combinant recherche d'informations et génération de texte pour améliorer les LLMs", "Un algorithme d'entraînement", "Un type de données d'entraînement"], correct: 1, explanation: "Le RAG améliore les LLMs en récupérant des documents pertinents depuis une base de connaissances externe avant de générer une réponse, réduisant les hallucinations." },
         ]
       },
 
-      // ─────────────────────────────────────────
-      //  11. GÉNIE LOGICIEL
-      // ─────────────────────────────────────────
+      {
+        name: "Architecture & Hardware",
+        questions: [
+          { question: "Qu'est-ce que l'ALU dans un processeur ?", choices: ["Arithmetic Logic Unit — effectue les opérations arithmétiques et logiques", "Advanced Loading Unit", "Automatic Link Updater", "Application Layer Unit"], correct: 0, explanation: "L'ALU effectue les opérations arithmétiques (addition, soustraction) et logiques (AND, OR, NOT) du processeur." },
+          { question: "Quelle est la différence entre un CPU et un GPU ?", choices: ["Le GPU est toujours plus puissant", "Le CPU est optimisé pour des tâches séquentielles, le GPU pour des calculs parallèles massifs", "Le GPU gère la RAM", "CPU et GPU font le même travail"], correct: 1, explanation: "Le CPU a quelques cœurs puissants pour des tâches séquentielles. Le GPU a des milliers de petits cœurs pour traiter massivement en parallèle." },
+          { question: "Qu'est-ce que le pipeline dans l'architecture d'un processeur ?", choices: ["Un câble CPU-RAM", "Une technique permettant d'exécuter plusieurs instructions en se chevauchant", "Un type de cache", "Un protocole CPU-GPU"], correct: 1, explanation: "Le pipeline divise l'exécution d'instructions en étapes (fetch, decode, execute, write-back) permettant à plusieurs instructions d'être simultanément en cours." },
+          { question: "Quelle est la différence entre HDD et SSD ?", choices: ["Le SSD est moins fiable", "Le HDD utilise des plateaux magnétiques rotatifs, le SSD utilise de la mémoire flash", "Le HDD est plus rapide", "Ils sont techniquement identiques"], correct: 1, explanation: "HDD : plateaux magnétiques rotatifs — moins cher, plus lent, fragile. SSD : mémoire flash — plus rapide, silencieux, résistant aux chocs, plus cher." },
+          { question: "Qu'est-ce que l'architecture RISC ?", choices: ["Reduced Instruction Set Computer — processeur avec un jeu d'instructions simple et réduit", "Rapid Instruction Speed Computer", "Real-time Instruction Set Controller", "Remote Integrated System Circuit"], correct: 0, explanation: "RISC (Reduced Instruction Set Computer) utilise des instructions simples exécutées en un cycle. ARM est un exemple emblématique, à la base des smartphones." },
+          { question: "Qu'est-ce que l'interface PCIe ?", choices: ["Un protocole réseau", "Un bus série haute vitesse pour connecter cartes d'extension (GPU, SSD NVMe) à la carte mère", "Un connecteur d'alimentation", "Un protocole USB"], correct: 1, explanation: "PCIe est un bus série haute vitesse pour connecter GPU, SSD NVMe et autres cartes d'extension à la carte mère." },
+          { question: "Qu'est-ce que la mémoire cache du processeur ?", choices: ["Une sauvegarde automatique de la RAM", "Une mémoire très rapide intégrée au CPU pour stocker les données fréquemment utilisées", "Un disque dur haute vitesse", "La mémoire vidéo du GPU"], correct: 1, explanation: "La cache (L1, L2, L3) est ultra-rapide et proche du CPU. Elle réduit le temps d'accès aux données fréquentes, évitant des allers-retours en RAM." },
+          { question: "Qu'est-ce que la mémoire RAM DDR5 par rapport à DDR4 ?", choices: ["DDR5 est une marque différente de RAM", "DDR5 offre une bande passante et une efficacité énergétique améliorées par rapport à DDR4", "DDR5 est plus lente mais moins chère", "DDR5 utilise un format physique identique à DDR4"], correct: 1, explanation: "DDR5 double la bande passante et améliore l'efficacité énergétique par rapport à DDR4. Elle utilise un nouveau format de slot incompatible avec DDR4." },
+          { question: "Qu'est-ce que la prédiction de branchement (branch prediction) dans un CPU ?", choices: ["Un mécanisme de débogage", "Une technique où le processeur prédit le résultat d'une condition pour continuer l'exécution sans attendre", "Un type d'optimisation du compilateur", "Une technique de cache mémoire"], correct: 1, explanation: "La prédiction de branchement permet au CPU de continuer à exécuter des instructions en anticipant le résultat d'un branchement conditionnel, améliorant le débit du pipeline." },
+          { question: "Qu'est-ce que le NUMA (Non-Uniform Memory Access) ?", choices: ["Un type de mémoire cache", "Une architecture multi-processeurs où le temps d'accès à la mémoire dépend de l'emplacement du processeur", "Un protocole de bus", "Un type de disque dur"], correct: 1, explanation: "En NUMA, chaque processeur a une mémoire locale (accès rapide) et peut accéder à la mémoire d'autres processeurs (accès plus lent). Courant dans les serveurs multi-socket." },
+        ]
+      },
+
       {
         name: "Génie Logiciel",
         questions: [
-          {
-            question: "Qu'est-ce que la méthode Agile ?",
-            choices: [
-              "Une méthode de développement linéaire en cascade",
-              "Un ensemble de pratiques itératives et collaboratives pour développer des logiciels de façon flexible",
-              "Un langage de programmation moderne",
-              "Un outil de gestion de version"
-            ],
-            correct: 1,
-            explanation: "Agile est un ensemble de méthodes (Scrum, Kanban…) basées sur des itérations courtes (sprints), la collaboration client, et l'adaptation aux changements plutôt que le suivi d'un plan rigide."
-          },
-          {
-            question: "Qu'est-ce qu'un test unitaire ?",
-            choices: [
-              "Un test effectué par l'utilisateur final",
-              "Un test qui vérifie le comportement d'une unité isolée de code (fonction, méthode)",
-              "Un test de performance globale du système",
-              "Un test de sécurité"
-            ],
-            correct: 1,
-            explanation: "Un test unitaire vérifie qu'une petite unité de code (fonction, méthode) fonctionne correctement en isolation. Il est automatisé et exécuté fréquemment pour détecter les régressions."
-          },
-          {
-            question: "Qu'est-ce que le principe SOLID ?",
-            choices: [
-              "Un algorithme de tri",
-              "Un ensemble de 5 principes de conception orientée objet pour rendre le code maintenable",
-              "Un framework de tests",
-              "Un protocole de sécurité"
-            ],
-            correct: 1,
-            explanation: "SOLID : Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. Ces principes guident la conception de code robuste et maintenable."
-          },
-          {
-            question: "Qu'est-ce que le refactoring ?",
-            choices: [
-              "La réécriture complète d'une application",
-              "La restructuration du code existant sans changer son comportement pour améliorer la lisibilité et la maintenabilité",
-              "La création de nouveaux tests automatisés",
-              "La migration vers un nouveau langage"
-            ],
-            correct: 1,
-            explanation: "Le refactoring améliore la structure interne du code (lisibilité, performance, maintenabilité) sans modifier son comportement externe, sécurisé par des tests automatisés."
-          },
-          {
-            question: "Qu'est-ce qu'un sprint en méthodologie Scrum ?",
-            choices: [
-              "Un test de performance du logiciel",
-              "Une itération de développement de durée fixe (généralement 1 à 4 semaines) avec des objectifs définis",
-              "Une réunion d'équipe hebdomadaire",
-              "Un déploiement urgent en production"
-            ],
-            correct: 1,
-            explanation: "Un sprint Scrum est une itération de durée fixe (1-4 semaines) pendant laquelle l'équipe produit un incrément potentiellement livrable du produit."
-          },
-          {
-            question: "Qu'est-ce que le TDD (Test-Driven Development) ?",
-            choices: [
-              "Une méthode où les tests sont écrits après le code",
-              "Une méthode où les tests sont écrits avant le code, guidant son développement",
-              "Un type de test d'intégration",
-              "Un framework de tests automatisés"
-            ],
-            correct: 1,
-            explanation: "Le TDD suit le cycle Red-Green-Refactor : écrire un test qui échoue, écrire le code minimal pour le faire passer, puis refactoriser. Les tests guident la conception du code."
-          },
-          {
-            question: "Qu'est-ce qu'une code review (revue de code) ?",
-            choices: [
-              "Un audit de sécurité automatisé",
-              "L'examen du code source par des pairs pour détecter les bugs, améliorer la qualité et partager les connaissances",
-              "Un test de performance du code",
-              "Une comparaison de versions de code"
-            ],
-            correct: 1,
-            explanation: "La revue de code est une pratique où d'autres développeurs lisent et commentent le code d'un collègue avant son intégration, améliorant la qualité et favorisant le partage de connaissances."
-          },
-          {
-            question: "Qu'est-ce qu'une dette technique ?",
-            choices: [
-              "Le coût financier d'un projet logiciel",
-              "L'accumulation de solutions rapides et imparfaites qui augmentent la complexité et le coût de maintenance futur",
-              "Le nombre de bugs non résolus",
-              "Le retard de livraison d'un projet"
-            ],
-            correct: 1,
-            explanation: "La dette technique désigne les compromis de qualité acceptés pour livrer plus vite. Comme une dette financière, elle s'accumule et génère des 'intérêts' sous forme de ralentissements futurs."
-          },
-          {
-            question: "Qu'est-ce que le modèle en cascade (Waterfall) ?",
-            choices: [
-              "Une méthode agile avec des itérations courtes",
-              "Un modèle de développement séquentiel avec des phases distinctes (analyse → conception → implémentation → test → déploiement)",
-              "Un type de pipeline CI/CD",
-              "Un modèle de gestion de base de données"
-            ],
-            correct: 1,
-            explanation: "Le modèle Waterfall est un processus linéaire et séquentiel où chaque phase doit être terminée avant de passer à la suivante. Peu flexible aux changements en cours de projet."
-          },
-          {
-            question: "Qu'est-ce qu'un diagramme UML ?",
-            choices: [
-              "Un type de langage de programmation visuel",
-              "Un langage de modélisation standardisé pour visualiser la conception d'un système logiciel",
-              "Un outil de gestion de version graphique",
-              "Un protocole de communication entre composants"
-            ],
-            correct: 1,
-            explanation: "UML (Unified Modeling Language) est un langage de modélisation standardisé. Il propose divers diagrammes (classes, séquence, cas d'utilisation…) pour documenter et concevoir des systèmes."
-          }
+          { question: "Qu'est-ce que la méthode Agile ?", choices: ["Une méthode de développement en cascade", "Un ensemble de pratiques itératives pour développer des logiciels de façon flexible", "Un langage de programmation moderne", "Un outil de versioning"], correct: 1, explanation: "Agile (Scrum, Kanban…) est basé sur des itérations courtes, la collaboration et l'adaptation aux changements." },
+          { question: "Qu'est-ce que le TDD (Test-Driven Development) ?", choices: ["Les tests sont écrits après le code", "Les tests sont écrits avant le code, guidant son développement", "Un type de test d'intégration", "Un framework de tests"], correct: 1, explanation: "TDD suit le cycle Red-Green-Refactor : écrire un test qui échoue, écrire le code minimal pour le faire passer, puis refactoriser." },
+          { question: "Qu'est-ce que le principe SOLID ?", choices: ["Un algorithme de tri", "5 principes de conception orientée objet pour un code maintenable", "Un framework de tests", "Un protocole de sécurité"], correct: 1, explanation: "SOLID : Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion." },
+          { question: "Qu'est-ce que la dette technique ?", choices: ["Le coût financier d'un projet", "L'accumulation de solutions rapides imparfaites qui augmentent le coût de maintenance futur", "Le nombre de bugs non résolus", "Le retard de livraison"], correct: 1, explanation: "La dette technique désigne les compromis de qualité acceptés pour livrer plus vite. Elle s'accumule et génère des surcoûts futurs." },
+          { question: "Qu'est-ce que le refactoring ?", choices: ["La réécriture complète d'une application", "La restructuration du code sans changer son comportement pour améliorer lisibilité et maintenabilité", "La création de tests automatisés", "La migration vers un nouveau langage"], correct: 1, explanation: "Le refactoring améliore la structure interne du code sans modifier son comportement externe, sécurisé par des tests." },
+          { question: "Qu'est-ce qu'un diagramme UML ?", choices: ["Un langage de programmation visuel", "Un langage de modélisation standardisé pour visualiser la conception d'un système", "Un outil de versioning graphique", "Un protocole de communication entre composants"], correct: 1, explanation: "UML (Unified Modeling Language) propose divers diagrammes (classes, séquence, cas d'utilisation…) pour documenter des systèmes." },
+          { question: "Qu'est-ce que l'intégration continue vs livraison continue vs déploiement continu ?", choices: ["Ce sont trois noms pour la même chose", "CI intègre et teste, CD (livraison) prépare la release, CD (déploiement) déploie automatiquement en production", "CI est manuel, les autres sont automatiques", "Seul le déploiement continu inclut des tests"], correct: 1, explanation: "CI : intégration et tests automatiques. Livraison continue : release prête à déployer manuellement. Déploiement continu : déploiement automatique en production après les tests." },
+          { question: "Qu'est-ce qu'un sprint en Scrum ?", choices: ["Un test de performance", "Une itération de développement de durée fixe (1-4 semaines) avec des objectifs définis", "Une réunion hebdomadaire", "Un déploiement urgent"], correct: 1, explanation: "Un sprint Scrum est une itération de durée fixe pendant laquelle l'équipe produit un incrément potentiellement livrable." },
+          { question: "Qu'est-ce que la couverture de code (code coverage) ?", choices: ["Le nombre de lignes de code", "Le pourcentage de code exécuté lors des tests automatisés", "La qualité du code source", "Le nombre de développeurs travaillant sur le code"], correct: 1, explanation: "La couverture de code mesure le pourcentage de code exécuté par les tests. Une couverture élevée réduit le risque de bugs non détectés." },
+          { question: "Qu'est-ce que le pair programming ?", choices: ["La programmation à distance", "Une pratique où deux développeurs travaillent ensemble sur le même code en temps réel", "Un type de revue de code asynchrone", "La programmation en binôme en parallèle sur des tâches différentes"], correct: 1, explanation: "Le pair programming place deux développeurs devant le même écran : un 'driver' qui code, un 'observer' qui revoit et réfléchit. Améliore la qualité et le partage de connaissances." },
         ]
-      }
+      },
 
     ]
-  }
-  // ─────────────────────────────────────────────────────────
-  // Autres matières à venir — même structure à respecter :
-  // ─────────────────────────────────────────────────────────
-  // mathematiques: { label: "Mathématiques", icon: "📐", color: "#059669", categories: [...] },
-  // physique:      { label: "Physique",       icon: "⚛️",  color: "#dc2626", categories: [...] },
-  // histoire:      { label: "Histoire",       icon: "📜",  color: "#b45309", categories: [...] },
+  },
+
+  // ══════════════════════════════════════════════════════
+  //  ÉLECTRONIQUE & SYSTÈMES EMBARQUÉS
+  // ══════════════════════════════════════════════════════
+  electronique: {
+    label: "Électronique & Embarqué",
+    icon: "⚡",
+    color: "#d97706",
+    categories: [
+
+      {
+        name: "Électronique numérique",
+        questions: [
+          { question: "Qu'est-ce qu'une porte logique AND ?", choices: ["Sa sortie est 1 si au moins une entrée est 1", "Sa sortie est 1 uniquement si toutes les entrées sont 1", "Sa sortie est toujours l'inverse de l'entrée", "Sa sortie est 1 si exactement une entrée est 1"], correct: 1, explanation: "La porte AND produit 1 uniquement quand toutes ses entrées sont à 1. Table de vérité : 0&0=0, 0&1=0, 1&1=1." },
+          { question: "Qu'est-ce qu'un flip-flop (bascule) D ?", choices: ["Un compteur binaire", "Un élément de mémoire qui stocke 1 bit et se met à jour sur le front d'horloge", "Un convertisseur analogique-numérique", "Un registre à décalage"], correct: 1, explanation: "La bascule D (Data) capture la valeur de son entrée D au front montant (ou descendant) de l'horloge et la maintient jusqu'au prochain cycle." },
+          { question: "Que représente le système binaire ?", choices: ["Un système à 8 chiffres", "Un système de numération à base 2 utilisant uniquement 0 et 1", "Un système de codage des couleurs", "Un protocole de communication"], correct: 1, explanation: "Le binaire utilise uniquement deux chiffres (0 et 1) qui correspondent aux états LOW et HIGH d'un signal électrique. Fondamental en informatique et électronique." },
+          { question: "Qu'est-ce que la logique CMOS ?", choices: ["Un type de processeur", "Une technologie de circuits intégrés utilisant des transistors MOS complémentaires à faible consommation", "Un standard de communication série", "Un type de mémoire non volatile"], correct: 1, explanation: "CMOS (Complementary Metal-Oxide-Semiconductor) combine des transistors NMOS et PMOS. Sa caractéristique principale est la très faible consommation en statique." },
+          { question: "Qu'est-ce qu'un multiplexeur (MUX) ?", choices: ["Un amplificateur de signal", "Un circuit qui sélectionne une entrée parmi plusieurs et la route vers une sortie unique", "Un convertisseur de tension", "Un type de mémoire"], correct: 1, explanation: "Un multiplexeur sélectionne une parmi N entrées et la connecte à la sortie, contrôlé par des lignes de sélection. Un MUX 4:1 a 4 entrées, 1 sortie, 2 lignes de sélection." },
+          { question: "Qu'est-ce qu'un additionneur complet (full adder) ?", choices: ["Un circuit qui additionne deux nombres multi-bits", "Un circuit combinatoire qui additionne 3 bits (A, B, retenue entrante) et produit une somme et une retenue", "Un processeur arithmétique complet", "Un type de registre"], correct: 1, explanation: "Un full adder additionne A + B + Cin et produit Sum et Cout. On cascade plusieurs full adders pour additionner des nombres multi-bits." },
+          { question: "Quelle est la différence entre un circuit combinatoire et séquentiel ?", choices: ["Le circuit combinatoire est plus rapide", "Le circuit combinatoire dépend uniquement des entrées actuelles, le séquentiel aussi de l'état passé", "Le circuit séquentiel n'utilise pas de portes logiques", "Il n'y a pas de différence fondamentale"], correct: 1, explanation: "Un circuit combinatoire (AND, OR, MUX) produit une sortie déterminée uniquement par ses entrées actuelles. Un circuit séquentiel (compteur, registre) mémorise un état." },
+          { question: "Qu'est-ce que le code Gray ?", choices: ["Un code de couleurs RGB", "Un code binaire où deux valeurs successives ne diffèrent que d'un seul bit", "Un protocole de communication série", "Un type d'encodage de données compressées"], correct: 1, explanation: "Le code Gray (ou binaire réfléchi) assure que deux valeurs consécutives ne diffèrent que d'un seul bit, ce qui réduit les erreurs lors de transitions dans les encodeurs." },
+          { question: "Qu'est-ce qu'un convertisseur ADC ?", choices: ["Un amplificateur différentiel", "Un composant qui convertit un signal analogique continu en valeur numérique discrète", "Un contrôleur de bus de données", "Un type de mémoire analogique"], correct: 1, explanation: "Un ADC (Analog-to-Digital Converter) échantillonne et quantifie un signal analogique en valeur numérique. La résolution (8, 12, 16 bits) détermine la précision." },
+          { question: "Qu'est-ce qu'un registre à décalage ?", choices: ["Un type de RAM", "Un circuit séquentiel qui déplace les bits de position en position à chaque coup d'horloge", "Un compteur binaire", "Un type d'additionneur"], correct: 1, explanation: "Un registre à décalage stocke une séquence de bits et les décale d'une position à chaque cycle d'horloge. Utilisé pour la sérialisation/désérialisation de données." },
+          { question: "Qu'est-ce que la table de Karnaugh ?", choices: ["Un tableau de vérité classique", "Un outil graphique pour simplifier des expressions booléennes et minimiser les circuits logiques", "Un type de diagramme de timing", "Un protocole de test de circuits"], correct: 1, explanation: "La table de Karnaugh (K-map) permet de simplifier visuellement des fonctions booléennes en regroupant les 1 adjacents, réduisant le nombre de portes nécessaires." },
+          { question: "Qu'est-ce que le protocole I2C ?", choices: ["Un standard de bus série à deux fils (SDA, SCL) pour communiquer entre composants sur courte distance", "Un type de mémoire Flash", "Un protocole réseau embarqué", "Un convertisseur de tension numérique"], correct: 0, explanation: "I2C (Inter-Integrated Circuit) utilise deux fils : SDA (données) et SCL (horloge). Il permet à plusieurs maîtres/esclaves de communiquer sur le même bus avec adressage." },
+        ]
+      },
+
+      {
+        name: "Systèmes embarqués",
+        questions: [
+          { question: "Qu'est-ce qu'un microcontrôleur ?", choices: ["Un ordinateur miniature complet intégrant CPU, mémoire et périphériques sur une seule puce", "Un processeur haute performance", "Un type de système d'exploitation embarqué", "Un capteur programmable"], correct: 0, explanation: "Un microcontrôleur (Arduino UNO, STM32, ESP32…) intègre sur une seule puce : CPU, RAM, Flash, timers, GPIO, ADC, interfaces de communication." },
+          { question: "Qu'est-ce qu'un RTOS (Real-Time Operating System) ?", choices: ["Un OS pour serveurs temps réel", "Un système d'exploitation garantissant des réponses dans des délais stricts et déterministes", "Un simulateur de systèmes embarqués", "Un type de compilateur embarqué"], correct: 1, explanation: "Un RTOS (FreeRTOS, VxWorks, Zephyr…) garantit que les tâches critiques s'exécutent dans un délai maximal garanti, essentiel pour les systèmes temps réel." },
+          { question: "Qu'est-ce que le protocole SPI ?", choices: ["Un bus série synchrone à 4 fils (MOSI, MISO, SCK, CS) pour communication haute vitesse", "Un standard de mémoire Flash", "Un protocole réseau embarqué", "Un type d'interruption"], correct: 0, explanation: "SPI (Serial Peripheral Interface) utilise 4 fils : MOSI (master→slave), MISO (slave→master), SCK (horloge), CS (sélection). Plus rapide que I2C, pas d'adressage." },
+          { question: "Qu'est-ce qu'une interruption dans un système embarqué ?", choices: ["Une erreur critique qui arrête le programme", "Un signal qui suspend le programme principal pour exécuter une routine de service d'interruption (ISR)", "Un type de minuterie", "Une technique de débogage"], correct: 1, explanation: "Une interruption signale au CPU un événement asynchrone (bouton, timer, réception UART). Le CPU suspend sa tâche, exécute l'ISR, puis reprend." },
+          { question: "Qu'est-ce que le débogage JTAG ?", choices: ["Un protocole réseau embarqué", "Un standard d'interface de test et débogage qui permet d'accéder à l'état interne du processeur", "Un type de programmateur Flash", "Un protocole de communication série"], correct: 1, explanation: "JTAG (IEEE 1149.1) est une interface de débogage qui permet de lire/écrire les registres, poser des points d'arrêt et programmer la Flash sans démonter le circuit." },
+          { question: "Qu'est-ce que le protocole CAN bus ?", choices: ["Un protocole réseau pour caméras", "Un bus série robuste pour la communication entre microcontrôleurs, très utilisé dans l'automobile", "Un type de mémoire embarquée", "Un protocole de programmation OTA"], correct: 1, explanation: "CAN (Controller Area Network) est un bus série différentiel robuste aux perturbations électromagnétiques, standard dans l'automobile (ECU, ABS, airbags) et l'industrie." },
+          { question: "Qu'est-ce que le bootloader dans un système embarqué ?", choices: ["Un programme de démarrage de l'OS desktop", "Un petit programme qui s'exécute au démarrage pour initialiser le matériel et charger le firmware principal", "Un type de débogueur embarqué", "Un gestionnaire de mémoire Flash"], correct: 1, explanation: "Le bootloader s'exécute en premier au démarrage. Il initialise le matériel, vérifie l'intégrité du firmware et le charge en mémoire. Il permet aussi les mises à jour firmware." },
+          { question: "Qu'est-ce que le DMA (Direct Memory Access) ?", choices: ["Un type d'accès direct à la mémoire RAM", "Un mécanisme permettant aux périphériques de transférer des données en mémoire sans intervention du CPU", "Un protocole de bus mémoire", "Un type de contrôleur d'interruptions"], correct: 1, explanation: "Le DMA permet aux périphériques (ADC, UART, SPI…) de transférer des données directement en RAM sans mobiliser le CPU, libérant celui-ci pour d'autres tâches." },
+          { question: "Qu'est-ce que le Watchdog Timer ?", choices: ["Un timer pour mesurer les performances", "Un minuteur qui réinitialise automatiquement le système si le programme ne le rafraîchit pas périodiquement", "Un type d'interruption externe", "Un compteur de cycles d'horloge"], correct: 1, explanation: "Le watchdog est un timer de sécurité. Si le programme plante ou se bloque et ne rafraîchit pas le watchdog à temps, celui-ci déclenche un reset automatique du microcontrôleur." },
+          { question: "Qu'est-ce que la mémoire Flash dans les systèmes embarqués ?", choices: ["Une mémoire RAM ultra-rapide", "Une mémoire non volatile effaçable électriquement qui stocke le firmware du microcontrôleur", "Un type de registre interne", "Une mémoire cache"], correct: 1, explanation: "La mémoire Flash est non volatile (conserve les données sans alimentation) et stocke le programme (firmware). Elle s'efface par blocs et a un nombre limité de cycles d'écriture." },
+          { question: "Qu'est-ce que le protocole UART ?", choices: ["Un bus parallèle haute vitesse", "Un protocole de communication série asynchrone utilisant deux fils (TX, RX)", "Un type d'interruption réseau", "Un protocole de débogage JTAG"], correct: 1, explanation: "UART (Universal Asynchronous Receiver-Transmitter) est le protocole série le plus simple : TX envoie, RX reçoit. Pas d'horloge partagée — les deux parties doivent avoir le même baud rate." },
+          { question: "Qu'est-ce que l'IoT (Internet of Things) ?", choices: ["Un type de réseau privé", "L'interconnexion d'objets physiques équipés de capteurs et de connectivité pour échanger des données", "Un protocole de communication M2M", "Un type de système d'exploitation embarqué"], correct: 1, explanation: "L'IoT connecte des objets physiques (capteurs, actionneurs, appareils) à Internet pour collecter, analyser et agir sur des données en temps réel." },
+        ]
+      },
+
+      {
+        name: "Traitement du signal",
+        questions: [
+          { question: "Qu'est-ce que la transformée de Fourier ?", choices: ["Un algorithme de tri", "Un outil mathématique qui décompose un signal en ses fréquences constituantes", "Un type de filtre numérique", "Un protocole de modulation"], correct: 1, explanation: "La transformée de Fourier convertit un signal du domaine temporel vers le domaine fréquentiel, révélant les fréquences qui composent le signal." },
+          { question: "Qu'est-ce que le théorème de Shannon-Nyquist ?", choices: ["Un théorème sur la complexité des algorithmes", "Un théorème stipulant que la fréquence d'échantillonnage doit être au moins deux fois la fréquence maximale du signal", "Un théorème de compression des données", "Un principe de cryptographie"], correct: 1, explanation: "Le théorème de Nyquist-Shannon stipule que pour reconstruire un signal sans aliasing, il faut l'échantillonner à au moins 2× sa fréquence maximale." },
+          { question: "Qu'est-ce qu'un filtre passe-bas ?", choices: ["Un filtre qui laisse passer les hautes fréquences", "Un filtre qui laisse passer les basses fréquences et atténue les hautes", "Un filtre qui atténue toutes les fréquences", "Un filtre qui ne laisse passer qu'une fréquence"], correct: 1, explanation: "Un filtre passe-bas laisse passer les fréquences en dessous de sa fréquence de coupure et atténue celles au-dessus. Utilisé pour le lissage et l'anti-aliasing." },
+          { question: "Qu'est-ce que la modulation AM (Amplitude Modulation) ?", choices: ["Une technique où la fréquence du signal porteur varie avec le signal d'information", "Une technique où l'amplitude du signal porteur varie avec le signal d'information", "Une technique de compression audio", "Un type de codage numérique"], correct: 1, explanation: "En AM, l'amplitude du signal porteur haute fréquence est modulée par le signal d'information. Utilisée en radiodiffusion (stations AM)." },
+          { question: "Qu'est-ce que la FFT (Fast Fourier Transform) ?", choices: ["Un filtre rapide", "Un algorithme efficace pour calculer la transformée de Fourier discrète en O(n log n)", "Un type de modulation", "Un standard de compression audio"], correct: 1, explanation: "La FFT (Cooley-Tukey) calcule la DFT en O(n log n) au lieu de O(n²), rendant le traitement spectral réel possible sur des processeurs embarqués." },
+          { question: "Qu'est-ce que la convolution en traitement du signal ?", choices: ["Une technique de multiplication matricielle", "Une opération mathématique qui combine deux signaux pour produire un troisième décrivant la réponse d'un système", "Un type de filtre adaptatif", "Une méthode de compression"], correct: 1, explanation: "La convolution applique la réponse impulsionnelle d'un système à un signal d'entrée. Fondamentale pour les filtres numériques et les CNN en IA." },
+          { question: "Qu'est-ce que le rapport signal sur bruit (SNR) ?", choices: ["Le ratio entre la puissance utile du signal et la puissance du bruit parasite", "Le ratio entre fréquence maximale et minimale", "La bande passante d'un canal", "La fréquence d'échantillonnage"], correct: 0, explanation: "Le SNR (Signal-to-Noise Ratio) mesure la qualité d'un signal en comparant sa puissance utile à celle du bruit. Exprimé en dB : SNR = 10·log10(Psignal/Pbruit)." },
+          { question: "Qu'est-ce que la modulation PWM (Pulse Width Modulation) ?", choices: ["Une technique de modulation de fréquence", "Une technique qui encode l'information dans la durée des impulsions d'un signal numérique", "Un type de filtre numérique", "Un protocole de communication série"], correct: 1, explanation: "La PWM fait varier le rapport cyclique (duty cycle) d'un signal carré pour encoder une valeur analogique. Utilisée pour contrôler la vitesse de moteurs, la luminosité de LEDs." },
+        ]
+      },
+
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  //  MATHÉMATIQUES POUR L'INGÉNIEUR
+  // ══════════════════════════════════════════════════════
+  mathematiques: {
+    label: "Mathématiques",
+    icon: "📐",
+    color: "#059669",
+    categories: [
+
+      {
+        name: "Algèbre linéaire",
+        questions: [
+          { question: "Qu'est-ce que le produit scalaire de deux vecteurs ?", choices: ["La somme de leurs composantes", "Une opération qui produit un scalaire : Σ(ai × bi)", "Le vecteur perpendiculaire aux deux vecteurs", "Le produit de leurs normes"], correct: 1, explanation: "Le produit scalaire (dot product) est Σ(ai × bi). Si le résultat est 0, les vecteurs sont orthogonaux. Il est fondamental en IA pour calculer des similarités." },
+          { question: "Qu'est-ce que la décomposition en valeurs singulières (SVD) ?", choices: ["Un algorithme de tri matriciel", "Une factorisation d'une matrice en trois matrices U·Σ·V⊤", "Un type de multiplication matricielle", "Un algorithme de compression de texte"], correct: 1, explanation: "La SVD décompose toute matrice en U·Σ·V⊤ où U et V sont orthogonales et Σ est diagonale. Utilisée pour la réduction de dimensionnalité (PCA), la compression d'images." },
+          { question: "Qu'est-ce qu'une matrice inversible ?", choices: ["Une matrice avec des valeurs négatives", "Une matrice carrée dont le déterminant est non nul et qui admet une matrice inverse", "Une matrice symétrique", "Une matrice dont tous les éléments sont inversés"], correct: 1, explanation: "Une matrice carrée A est inversible (non singulière) si det(A) ≠ 0. Il existe alors A⁻¹ telle que A·A⁻¹ = I." },
+          { question: "Qu'est-ce qu'un vecteur propre (eigenvector) ?", choices: ["Un vecteur unitaire", "Un vecteur non nul qui ne change pas de direction quand on lui applique une transformation linéaire", "Le vecteur de plus grande norme d'une matrice", "Un vecteur orthogonal à tous les autres"], correct: 1, explanation: "Un vecteur propre v satisfait A·v = λ·v, où λ est la valeur propre (eigenvalue). Fondamental pour la PCA, la diagonalisation de matrices et la compréhension des transformations." },
+          { question: "Qu'est-ce que le rang d'une matrice ?", choices: ["Sa dimension (nombre de lignes)", "Le nombre maximum de lignes (ou colonnes) linéairement indépendantes", "La valeur de son déterminant", "Le nombre d'éléments non nuls"], correct: 1, explanation: "Le rang d'une matrice est la dimension de l'espace vectoriel engendré par ses colonnes (ou ses lignes). Il indique le nombre de dimensions 'réellement' représentées." },
+          { question: "Que représente la norme L2 d'un vecteur ?", choices: ["La somme des valeurs absolues de ses composantes", "La racine carrée de la somme des carrés de ses composantes (distance euclidienne)", "La valeur maximale de ses composantes", "La somme de ses composantes"], correct: 1, explanation: "La norme L2 (norme euclidienne) est ||v||₂ = √(Σvᵢ²). C'est la longueur géométrique du vecteur dans l'espace euclidien." },
+          { question: "Qu'est-ce qu'une matrice diagonale ?", choices: ["Une matrice sans éléments nuls", "Une matrice carrée dont tous les éléments hors de la diagonale principale sont nuls", "Une matrice symétrique", "Une matrice d'identité"], correct: 1, explanation: "Une matrice diagonale a des éléments non nuls uniquement sur la diagonale principale. Les multiplications et inversions sont très simples avec des matrices diagonales." },
+          { question: "Qu'est-ce que la projection orthogonale d'un vecteur sur un autre ?", choices: ["Le vecteur perpendiculaire", "La composante de u dans la direction de v : proj = (u·v / ||v||²) × v", "Le produit vectoriel", "La somme normalisée des deux vecteurs"], correct: 1, explanation: "La projection orthogonale de u sur v donne la composante de u dans la direction de v. Utilisée en IA pour les embeddings et en géométrie computationnelle." },
+        ]
+      },
+
+      {
+        name: "Mathématiques discrètes",
+        questions: [
+          { question: "Qu'est-ce que la récurrence dans les mathématiques discrètes ?", choices: ["Une suite définie par rapport à ses termes précédents", "Une boucle infinie", "Un type de preuve mathématique", "Une fonction continue"], correct: 0, explanation: "Une relation de récurrence définit chaque terme en fonction des précédents. Ex : suite de Fibonacci : F(n) = F(n-1) + F(n-2), F(0)=0, F(1)=1." },
+          { question: "Qu'est-ce que la logique propositionnelle ?", choices: ["Un type d'algèbre", "Un système formel utilisant des propositions (vrai/faux) et des connecteurs logiques (ET, OU, NON…)", "Un protocole de communication", "Un type de preuve par récurrence"], correct: 1, explanation: "La logique propositionnelle manipule des propositions booléennes avec des opérateurs (∧ ET, ∨ OU, ¬ NON, → implication, ↔ équivalence)." },
+          { question: "Qu'est-ce que la combinatoire ?", choices: ["Un type d'algorithme de tri", "La branche des mathématiques qui étudie le comptage, l'arrangement et la combinaison de structures discrètes", "Un type de graphe", "Une méthode de preuve formelle"], correct: 1, explanation: "La combinatoire étudie les façons de compter, arranger et sélectionner des objets. Fondamentale en algorithmique et en probabilités." },
+          { question: "Combien de sous-ensembles possède un ensemble de n éléments ?", choices: ["n!", "n²", "2ⁿ", "n·(n-1)"], correct: 2, explanation: "Un ensemble de n éléments possède 2ⁿ sous-ensembles (y compris l'ensemble vide et l'ensemble lui-même). Chaque élément peut être inclus (1) ou exclu (0)." },
+          { question: "Qu'est-ce qu'un nombre premier ?", choices: ["Un nombre divisible par 2", "Un entier supérieur à 1 divisible uniquement par 1 et lui-même", "Un nombre impair", "Un nombre sans facteurs communs avec 10"], correct: 1, explanation: "Un nombre premier est divisible uniquement par 1 et lui-même (2, 3, 5, 7, 11…). Fondamental en cryptographie (RSA repose sur la difficulté de factoriser de grands nombres)." },
+          { question: "Qu'est-ce que la théorie des graphes ?", choices: ["L'étude des graphiques et courbes mathématiques", "L'étude de structures composées de nœuds (sommets) reliés par des arêtes", "Un type d'algorithme de tri", "L'étude des fonctions algébriques"], correct: 1, explanation: "La théorie des graphes étudie les structures sommets-arêtes, utilisées pour modéliser réseaux, relations sociales, cartes, circuits et bien d'autres problèmes." },
+          { question: "Qu'est-ce que l'algorithme d'Euclide ?", choices: ["Un algorithme de tri", "Un algorithme pour calculer le plus grand commun diviseur (PGCD) de deux entiers", "Un algorithme de recherche de nombres premiers", "Un algorithme de chiffrement"], correct: 1, explanation: "L'algorithme d'Euclide calcule le PGCD via des divisions successives : PGCD(a,b) = PGCD(b, a mod b) jusqu'à ce que b=0. Utilisé en cryptographie RSA." },
+          { question: "Qu'est-ce que l'induction mathématique ?", choices: ["Un type de raisonnement scientifique", "Une méthode de preuve qui démontre une propriété pour n=base, puis que si vrai pour n, c'est vrai pour n+1", "Un type d'algorithme récursif", "Une méthode de calcul numérique"], correct: 1, explanation: "L'induction (récurrence) prouve une propriété P(n) en deux étapes : P(base) est vrai, et P(n)→P(n+1). Comme un domino : si chacun fait tomber le suivant et le premier tombe…" },
+        ]
+      },
+
+      {
+        name: "Probabilités & Statistiques",
+        questions: [
+          { question: "Qu'est-ce que la probabilité conditionnelle P(A|B) ?", choices: ["La probabilité que A et B se produisent ensemble", "La probabilité que A se produise sachant que B s'est déjà produit", "La probabilité que A se produise sans B", "La somme des probabilités de A et B"], correct: 1, explanation: "P(A|B) = P(A∩B)/P(B). C'est la probabilité que A se réalise sachant que B est déjà arrivé. Fondamentale en classification bayésienne et en ML." },
+          { question: "Qu'est-ce que le théorème de Bayes ?", choices: ["P(A|B) = P(B|A)·P(A)/P(B)", "P(A|B) = P(A)+P(B)", "P(A|B) = P(A)·P(B)", "P(A|B) = 1-P(B|A)"], correct: 0, explanation: "Le théorème de Bayes : P(A|B) = P(B|A)·P(A)/P(B). Il permet d'inverser les probabilités conditionnelles. À la base des classifieurs naïfs bayésiens." },
+          { question: "Qu'est-ce que la variance d'une distribution ?", choices: ["La valeur la plus fréquente", "La mesure de la dispersion des valeurs autour de la moyenne : E[(X-μ)²]", "La valeur médiane", "La différence entre max et min"], correct: 1, explanation: "La variance mesure l'écart moyen quadratique par rapport à la moyenne. L'écart-type σ = √(variance) est plus interprétable car dans la même unité que les données." },
+          { question: "Qu'est-ce que la loi normale (gaussienne) ?", choices: ["Une loi de probabilité à distribution uniforme", "Une distribution en forme de cloche symétrique caractérisée par sa moyenne μ et son écart-type σ", "Une loi de probabilité discrète", "La loi des grands nombres"], correct: 1, explanation: "La loi normale (courbe en cloche) est la plus répandue en statistiques. Elle est caractérisée par μ (centre) et σ (largeur). Le théorème central limite explique sa omniprésence." },
+          { question: "Qu'est-ce que la corrélation entre deux variables ?", choices: ["Leur relation de causalité", "Une mesure de la force et du sens de leur relation linéaire, entre -1 et +1", "Leur covariance divisée par la variance", "Le fait qu'elles varient ensemble"], correct: 1, explanation: "Le coefficient de corrélation de Pearson mesure la relation linéaire entre -1 (corrélation négative parfaite) et +1 (positive parfaite). 0 indique l'absence de corrélation linéaire." },
+          { question: "Qu'est-ce que la loi des grands nombres ?", choices: ["Plus un nombre est grand, plus il est premier", "La moyenne empirique d'un grand nombre d'essais converge vers la moyenne théorique", "La probabilité d'un événement augmente avec le nombre d'essais", "Les grands échantillons suivent toujours une loi normale"], correct: 1, explanation: "La loi des grands nombres garantit que la moyenne d'un grand nombre d'essais indépendants et identiquement distribués converge vers l'espérance mathématique." },
+          { question: "Qu'est-ce qu'un test d'hypothèse en statistiques ?", choices: ["Un test de performance algorithmique", "Une procédure pour décider si les données sont compatibles avec une hypothèse nulle H₀", "Un type de validation croisée", "Un algorithme de clustering"], correct: 1, explanation: "Un test d'hypothèse (t-test, chi-deux…) calcule la probabilité (p-value) d'observer les données si H₀ est vraie. Si p < seuil (ex: 0.05), on rejette H₀." },
+          { question: "Qu'est-ce que la régression linéaire ?", choices: ["Un algorithme de classification", "Un modèle qui prédit une valeur continue en trouvant la droite minimisant la somme des erreurs au carré", "Un type de réseau de neurones", "Une méthode de clustering"], correct: 1, explanation: "La régression linéaire trouve la relation y = ax + b qui minimise la somme des carrés des résidus (méthode des moindres carrés). Fondement de nombreux modèles ML." },
+        ]
+      },
+
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  //  CRYPTOGRAPHIE & SÉCURITÉ AVANCÉE
+  // ══════════════════════════════════════════════════════
+  cryptographie: {
+    label: "Cryptographie",
+    icon: "🔐",
+    color: "#7c3aed",
+    categories: [
+
+      {
+        name: "Fondamentaux de la cryptographie",
+        questions: [
+          { question: "Qu'est-ce que le chiffrement RSA ?", choices: ["Un chiffrement symétrique", "Un algorithme de chiffrement asymétrique basé sur la difficulté de factoriser de grands entiers", "Un algorithme de hachage", "Un protocole de clé partagée"], correct: 1, explanation: "RSA repose sur la difficulté mathématique de factoriser le produit de deux grands nombres premiers. Une clé publique chiffre, la clé privée déchiffre." },
+          { question: "Qu'est-ce qu'une fonction de hachage cryptographique ?", choices: ["Un chiffrement réversible", "Une fonction à sens unique qui produit un condensé de taille fixe à partir de données de taille variable", "Un algorithme de chiffrement symétrique", "Un générateur de clés"], correct: 1, explanation: "Une fonction de hachage (SHA-256, MD5…) produit un hash de taille fixe. Elle est à sens unique (impossible de retrouver l'entrée depuis le hash) et sans collision apparente." },
+          { question: "Qu'est-ce que le protocole Diffie-Hellman ?", choices: ["Un algorithme de chiffrement RSA simplifié", "Un protocole d'échange de clés permettant à deux parties de partager un secret sur un canal non sécurisé", "Un type de signature numérique", "Un protocole d'authentification par mot de passe"], correct: 1, explanation: "Diffie-Hellman permet à deux parties d'établir une clé secrète partagée sur un canal public, sans jamais transmettre la clé elle-même. Fondé sur le problème du logarithme discret." },
+          { question: "Qu'est-ce qu'une signature numérique ?", choices: ["Un scan de signature manuscrite", "Un mécanisme cryptographique qui garantit l'authenticité et l'intégrité d'un message", "Un type de certificat SSL", "Un type de chiffrement symétrique"], correct: 1, explanation: "Une signature numérique est créée avec la clé privée de l'émetteur et vérifiable avec sa clé publique. Elle garantit que le message vient bien de lui et n'a pas été modifié." },
+          { question: "Qu'est-ce que l'algorithme AES ?", choices: ["Un algorithme asymétrique", "Un standard de chiffrement symétrique par blocs (128 bits) adopté par le NIST en 2001", "Un protocole de hachage", "Un protocole d'échange de clés"], correct: 1, explanation: "AES (Advanced Encryption Standard) est le standard mondial de chiffrement symétrique. Il opère sur des blocs de 128 bits avec des clés de 128, 192 ou 256 bits." },
+          { question: "Qu'est-ce qu'un certificat X.509 ?", choices: ["Un certificat de formation en sécurité", "Un format standard de certificat numérique liant une clé publique à une identité, signé par une autorité de certification", "Un type de protocole de chiffrement", "Un standard de signature électronique"], correct: 1, explanation: "Un certificat X.509 associe une clé publique à une identité (domaine, personne, organisation). Il est signé par une Autorité de Certification (CA) pour en garantir l'authenticité." },
+          { question: "Qu'est-ce que le sel (salt) dans le hachage de mots de passe ?", choices: ["Un algorithme de hachage sécurisé", "Une valeur aléatoire ajoutée au mot de passe avant hachage pour prévenir les attaques par tables arc-en-ciel", "Un type de chiffrement asymétrique", "Une clé de dérivation de mot de passe"], correct: 1, explanation: "Le sel est une valeur aléatoire unique ajoutée à chaque mot de passe avant hachage. Il rend inutiles les tables arc-en-ciel et garantit que deux utilisateurs avec le même mot de passe ont des hashes différents." },
+          { question: "Qu'est-ce que le protocole TLS 1.3 apporte par rapport à TLS 1.2 ?", choices: ["Il est plus lent mais plus sécurisé", "Il supprime des suites cryptographiques faibles, réduit la latence du handshake et impose le forward secrecy", "Il utilise RSA exclusivement", "Il est incompatible avec les anciens navigateurs"], correct: 1, explanation: "TLS 1.3 : suppression des algorithmes obsolètes (RSA key exchange, RC4, SHA-1), handshake en 1-RTT (vs 2-RTT), forward secrecy obligatoire, protection renforcée des métadonnées." },
+          { question: "Qu'est-ce que le forward secrecy (confidentialité persistante) ?", choices: ["Un chiffrement qui fonctionne même hors connexion", "La propriété garantissant que la compromission de la clé privée à long terme ne compromet pas les sessions passées", "Un type de protocole de clé symétrique", "Un mécanisme de vérification de certificat"], correct: 1, explanation: "Le forward secrecy (via ECDHE) génère des clés de session éphémères. Même si la clé privée du serveur est compromise plus tard, les sessions passées restent sécurisées." },
+          { question: "Qu'est-ce qu'une attaque par force brute sur un chiffrement ?", choices: ["Une attaque physique sur les serveurs", "L'essai systématique de toutes les clés possibles jusqu'à trouver la bonne", "Une attaque qui exploite des failles mathématiques", "Une technique d'ingénierie sociale"], correct: 1, explanation: "Une attaque par force brute teste toutes les combinaisons de clés possibles. AES-256 a 2²⁵⁶ clés possibles — avec toute la puissance de calcul actuelle, c'est computationnellement infaisable." },
+          { question: "Qu'est-ce que la cryptographie à courbe elliptique (ECC) ?", choices: ["Un chiffrement basé sur des matrices elliptiques", "Une cryptographie asymétrique basée sur l'algèbre des courbes elliptiques, offrant des clés plus courtes à sécurité équivalente", "Un type de protocole de hachage", "Un algorithme de signature symétrique"], correct: 1, explanation: "ECC offre le même niveau de sécurité que RSA avec des clés beaucoup plus courtes (256 bits ECC ≈ 3072 bits RSA). Idéal pour les systèmes embarqués et mobiles." },
+          { question: "Qu'est-ce qu'une attaque par canal auxiliaire (side-channel attack) ?", choices: ["Une attaque réseau sur un canal secondaire", "Une attaque qui exploite les informations physiques (temps d'exécution, consommation électrique, rayonnement) d'un système", "Une attaque man-in-the-middle", "Une attaque sur le protocole TLS"], correct: 1, explanation: "Les attaques par canal auxiliaire exploitent des informations physiques indirectes plutôt que des failles mathématiques : timing attacks, power analysis (DPA), attaques acoustiques." },
+        ]
+      },
+
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  //  COMPILATION & LANGAGES FORMELS
+  // ══════════════════════════════════════════════════════
+  compilation: {
+    label: "Compilation & Langages",
+    icon: "🔧",
+    color: "#0891b2",
+    categories: [
+
+      {
+        name: "Compilation",
+        questions: [
+          { question: "Quelles sont les phases principales d'un compilateur ?", choices: ["Lecture, Exécution, Sortie", "Analyse lexicale, Analyse syntaxique, Analyse sémantique, Génération de code, Optimisation", "Parsing, Linking, Exécution", "Tokenisation, Interprétation, Débogage"], correct: 1, explanation: "Un compilateur passe par : analyse lexicale (tokens), syntaxique (AST), sémantique (types), génération de code intermédiaire, optimisation, génération de code cible." },
+          { question: "Qu'est-ce qu'un token (lexème) en analyse lexicale ?", choices: ["Une erreur de syntaxe", "La plus petite unité significative d'un programme (mot-clé, identifiant, opérateur, littéral)", "Un commentaire dans le code", "Une variable non initialisée"], correct: 1, explanation: "Le lexeur découpe le code source en tokens : mots-clés (if, while), identifiants (maVariable), opérateurs (+, =), littéraux (42, 'hello'), délimiteurs ({, ;)." },
+          { question: "Qu'est-ce qu'un AST (Abstract Syntax Tree) ?", choices: ["Un arbre binaire de recherche", "Une représentation arborescente abstraite de la structure syntaxique d'un programme", "Un type de table des symboles", "Un arbre d'optimisation du code"], correct: 1, explanation: "L'AST est une représentation hiérarchique du programme après l'analyse syntaxique. Chaque nœud représente une construction du langage (expression, instruction, déclaration)." },
+          { question: "Qu'est-ce que la grammaire BNF (Backus-Naur Form) ?", choices: ["Un langage de programmation des années 60", "Une notation formelle pour décrire la syntaxe d'un langage de programmation", "Un type d'analyseur syntaxique", "Un format de documentation de code"], correct: 1, explanation: "BNF est une méta-syntaxe pour décrire les grammaires hors-contexte. Elle définit les règles de production d'un langage : expr ::= term '+' expr | term." },
+          { question: "Qu'est-ce qu'un linker (éditeur de liens) ?", choices: ["Un outil de débogage", "Un programme qui combine plusieurs fichiers objets compilés en un seul exécutable en résolvant les références externes", "Un type de compilateur", "Un interpréteur de bytecode"], correct: 1, explanation: "Le linker résout les références entre modules (fonctions appelées dans d'autres fichiers), lie les bibliothèques et produit l'exécutable ou la bibliothèque finale." },
+          { question: "Qu'est-ce que le bytecode (code intermédiaire) ?", choices: ["Le code assembleur final", "Un code intermédiaire portable exécuté par une machine virtuelle", "Un type de code optimisé", "Le code binaire natif"], correct: 1, explanation: "Le bytecode (Java .class, Python .pyc) est un code intermédiaire portable exécuté par une VM (JVM, CPython). Plus portable que le code natif, moins performant." },
+          { question: "Qu'est-ce que la compilation JIT (Just-In-Time) ?", choices: ["Une compilation lente et précise", "Une technique qui compile le bytecode en code natif au moment de l'exécution pour améliorer les performances", "Un type d'interprétation de code", "Un compilateur en temps réel"], correct: 1, explanation: "La compilation JIT (JVM HotSpot, V8 pour JS) compile le bytecode en code machine natif au moment de l'exécution, combinant la portabilité du bytecode et la performance du code natif." },
+          { question: "Qu'est-ce que la gestion des erreurs de type (type checking) ?", choices: ["La vérification de la syntaxe du code", "L'analyse qui vérifie que les opérations sont appliquées à des types de données compatibles", "La détection des fuites mémoire", "L'optimisation des boucles"], correct: 1, explanation: "Le type checking (statique ou dynamique) vérifie la cohérence des types : qu'on n'additionne pas un entier et un objet, que les fonctions reçoivent les bons types d'arguments." },
+          { question: "Qu'est-ce qu'une grammaire hors-contexte (CFG) ?", choices: ["Une grammaire utilisée hors de son contexte d'origine", "Une grammaire dont les règles de production ont un seul non-terminal à gauche, indépendamment du contexte", "Un type de grammaire pour les langages naturels", "Une grammaire sans règles récursives"], correct: 1, explanation: "Une CFG (Context-Free Grammar) définit les règles A → α sans condition sur l'environnement de A. La plupart des langages de programmation sont décrits par des CFGs." },
+          { question: "Qu'est-ce que l'optimisation du compilateur 'inline expansion' ?", choices: ["L'expansion de la mémoire stack", "Le remplacement d'un appel de fonction par le corps de la fonction pour éviter l'overhead d'appel", "L'optimisation des boucles imbriquées", "La réduction de la taille des exécutables"], correct: 1, explanation: "L'inlining substitue un appel de fonction par le code de la fonction elle-même. Élimine l'overhead d'appel (sauvegarde registres, empilement arguments) au prix d'un code plus large." },
+        ]
+      },
+
+      {
+        name: "Automates & Langages formels",
+        questions: [
+          { question: "Qu'est-ce qu'un automate fini déterministe (DFA) ?", choices: ["Un automate à mémoire infinie", "Un modèle de calcul avec un nombre fini d'états, une fonction de transition déterministe et des états acceptants", "Un type de machine de Turing", "Un automate probabiliste"], correct: 1, explanation: "Un DFA (Deterministic Finite Automaton) reconnaît les langages réguliers. Pour chaque état et symbole d'entrée, il y a exactement une transition possible." },
+          { question: "Qu'est-ce qu'une expression régulière (regex) ?", choices: ["Une formule mathématique complexe", "Une notation concise pour décrire des langages réguliers et des patterns de texte", "Un type de grammaire hors-contexte", "Un algorithme de recherche de texte"], correct: 1, explanation: "Une regex décrit des patterns de texte avec des opérateurs (., *, +, ?, [], |, ^, $). Elles correspondent exactement aux langages reconnaissables par des automates finis." },
+          { question: "Qu'est-ce que le lemme de pompage pour les langages réguliers ?", choices: ["Un lemme sur la compression de données", "Un outil pour prouver qu'un langage n'est pas régulier", "Une technique d'optimisation d'automates", "Un théorème sur la complexité des expressions régulières"], correct: 1, explanation: "Le lemme de pompage permet de démontrer qu'un langage n'est pas régulier : si pour tout mot suffisamment long, on ne peut pas 'pomper' une sous-chaîne, le langage n'est pas régulier." },
+          { question: "Qu'est-ce qu'une machine de Turing ?", choices: ["Un ordinateur des années 1940", "Un modèle de calcul abstrait avec une bande infinie et une tête de lecture/écriture, équivalent en puissance aux ordinateurs modernes", "Un type d'automate fini", "Un modèle de circuit logique"], correct: 1, explanation: "La machine de Turing (Alan Turing, 1936) est le modèle de calcul universel. Tout ce qui peut être calculé algorithmiquement peut l'être par une machine de Turing." },
+          { question: "Qu'est-ce que la hiérarchie de Chomsky ?", choices: ["Un classement des langages de programmation par popularité", "Une classification des grammaires formelles en 4 niveaux selon leur puissance expressive", "Un type de théorie des automates", "Un modèle de compilation"], correct: 1, explanation: "La hiérarchie de Chomsky classe les grammaires : Type 0 (non restreintes, Turing-complet), Type 1 (contextuelles), Type 2 (hors-contexte, la plupart des LPs), Type 3 (régulières)." },
+          { question: "Qu'est-ce que le problème de l'arrêt (Halting Problem) ?", choices: ["Le problème de démarrage des ordinateurs", "Le problème indécidable de savoir si un programme quelconque s'arrêtera ou tournera indéfiniment sur une entrée donnée", "Un type de boucle infinie", "Un problème de synchronisation de processus"], correct: 1, explanation: "Turing a prouvé en 1936 qu'il n'existe aucun algorithme général capable de déterminer si un programme arbitraire s'arrête. C'est le premier problème indécidable connu." },
+        ]
+      },
+
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  //  SYSTÈMES DISTRIBUÉS
+  // ══════════════════════════════════════════════════════
+  systemes_distribues: {
+    label: "Systèmes distribués",
+    icon: "🌐",
+    color: "#0f766e",
+    categories: [
+
+      {
+        name: "Systèmes distribués",
+        questions: [
+          { question: "Qu'est-ce que le théorème CAP ?", choices: ["Un théorème sur la complexité des algorithmes", "Un théorème stipulant qu'un système distribué ne peut garantir simultanément Cohérence, Disponibilité et Tolérance aux partitions", "Un protocole de consensus distribué", "Un modèle de réplication de données"], correct: 1, explanation: "Le théorème CAP (Brewer, 2000) : un système distribué ne peut garantir que 2 des 3 propriétés — Consistency, Availability, Partition tolerance — simultanément." },
+          { question: "Qu'est-ce que le consensus de Paxos ?", choices: ["Un protocole réseau de type P2P", "Un algorithme de consensus permettant à des nœuds distribués de se mettre d'accord sur une valeur malgré des défaillances", "Un type de réplication de base de données", "Un protocole d'élection de leader"], correct: 1, explanation: "Paxos (Lamport) est un algorithme de consensus tolérant aux pannes. Il garantit qu'un ensemble de nœuds s'accorde sur une valeur unique, même si certains tombent en panne." },
+          { question: "Qu'est-ce que l'algorithme Raft ?", choices: ["Un algorithme de tri distribué", "Un algorithme de consensus alternatif à Paxos, plus facile à comprendre et implémenter", "Un protocole de réplication maître-esclave", "Un algorithme de partitionnement de données"], correct: 1, explanation: "Raft (Ongaro & Ousterhout, 2014) est un algorithme de consensus conçu pour être plus compréhensible que Paxos. Il est utilisé dans etcd, CockroachDB, TiKV." },
+          { question: "Qu'est-ce que la cohérence éventuelle (eventual consistency) ?", choices: ["La cohérence immédiate de toutes les répliques", "Une garantie que les répliques convergeront vers le même état si aucune mise à jour n'est effectuée pendant suffisamment longtemps", "Un type de transaction distribuée", "La cohérence des données en temps réel"], correct: 1, explanation: "La cohérence éventuelle (DynamoDB, Cassandra) accepte des lectures potentiellement obsolètes en échange d'une haute disponibilité. Les répliques convergent avec le temps." },
+          { question: "Qu'est-ce qu'un système Peer-to-Peer (P2P) ?", choices: ["Un réseau avec un serveur central", "Un réseau décentralisé où chaque nœud peut agir à la fois comme client et serveur", "Un protocole de communication sécurisé", "Un type de base de données distribuée"], correct: 1, explanation: "Dans un réseau P2P (BitTorrent, blockchain), chaque pair peut partager des ressources directement avec les autres sans serveur central, offrant résilience et scalabilité." },
+          { question: "Qu'est-ce que le problème des généraux byzantins ?", choices: ["Un problème d'algorithme de routage", "Un problème de consensus distribué où certains nœuds peuvent envoyer des informations incorrectes ou malveillantes", "Un type d'attaque réseau", "Un problème de synchronisation d'horloge"], correct: 1, explanation: "Le problème byzantin (Lamport) modélise des systèmes où certains nœuds peuvent être défaillants ou malveillants. La tolérance aux fautes byzantines (BFT) est fondamentale dans les blockchains." },
+          { question: "Qu'est-ce que Map-Reduce ?", choices: ["Un algorithme de tri distribué", "Un modèle de programmation pour le traitement parallèle de grands ensembles de données sur un cluster", "Un protocole de réplication de fichiers", "Un type de base de données NoSQL"], correct: 1, explanation: "Map-Reduce (Google, 2004) décompose un traitement en une phase Map (transformation parallèle) et une phase Reduce (agrégation). À la base de Hadoop." },
+          { question: "Qu'est-ce que l'horloge de Lamport ?", choices: ["Un protocole de synchronisation NTP", "Un mécanisme de timestamps logiques pour ordonner les événements dans un système distribué sans horloge physique partagée", "Un algorithme de consensus", "Un type de verrou distribué"], correct: 1, explanation: "Les horloges de Lamport assignent des timestamps logiques croissants aux événements. Elles permettent d'établir une relation de causalité partielle entre événements distribués." },
+          { question: "Qu'est-ce que la réplication par leader (leader-follower replication) ?", choices: ["Un type de microservice", "Un schéma où un nœud leader accepte les écritures et les réplique vers des followers qui servent les lectures", "Un protocole de consensus P2P", "Un type de partitionnement de base de données"], correct: 1, explanation: "En réplication leader-follower (MySQL, PostgreSQL, Redis), le leader accepte toutes les écritures et les propage aux réplicas. Les followers servent les lectures, améliorant la scalabilité." },
+          { question: "Qu'est-ce qu'un circuit breaker pattern dans les microservices ?", choices: ["Un disjoncteur électrique", "Un pattern qui interrompt automatiquement les appels vers un service défaillant pour éviter une cascade de pannes", "Un type de load balancer", "Un mécanisme de sécurité réseau"], correct: 1, explanation: "Le circuit breaker (Hystrix, Resilience4j) surveille les échecs d'un service. Au-delà d'un seuil, il 'ouvre' et retourne une erreur rapide sans appeler le service, protégeant le système." },
+        ]
+      },
+
+    ]
+  },
+
 };
