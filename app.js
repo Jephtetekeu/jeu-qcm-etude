@@ -54,7 +54,9 @@ function initHome() {
     card.className = 'subject-card';
     card.dataset.key = key;
     card.innerHTML = `
-      <div class="subject-icon">${sub.icon}</div>
+      <div class="subject-icon" style="background:${sub.color}22; box-shadow: 0 0 0 1px ${sub.color}44;">
+        <i class="${sub.icon}" style="color:${sub.color};"></i>
+      </div>
       <div class="subject-name">${sub.label}</div>
       <div class="subject-count">${sub.categories.length} catégories · ${totalQ} questions</div>
     `;
@@ -63,14 +65,18 @@ function initHome() {
   });
 
   // Placeholder "bientôt" pour les matières à venir
-  [{ name: 'Physique', icon: '⚛️' }, { name: 'Histoire', icon: '📜' }, { name: 'Chimie', icon: '🧪' }].forEach(s => {
+  [
+    { name: 'Physique',  icon: 'fa-solid fa-atom'     },
+    { name: 'Histoire',  icon: 'fa-solid fa-landmark'  },
+    { name: 'Chimie',    icon: 'fa-solid fa-flask'     },
+  ].forEach(s => {
     const card = document.createElement('div');
     card.className = 'subject-card';
     card.style.opacity = '0.45';
     card.style.cursor = 'not-allowed';
     card.innerHTML = `
       <div class="badge-new">Bientôt</div>
-      <div class="subject-icon">${s.icon}</div>
+      <div class="subject-icon"><i class="${s.icon}"></i></div>
       <div class="subject-name">${s.name}</div>
       <div class="subject-count">À venir...</div>
     `;

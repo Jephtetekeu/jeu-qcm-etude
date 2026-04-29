@@ -5,7 +5,7 @@ const SUBJECTS = {
   // ══════════════════════════════════════════════════════
   informatique: {
     label: "Informatique",
-    icon: "💻",
+    icon: "fa-solid fa-laptop-code",
     color: "#4f46e5",
     categories: [
 
@@ -212,7 +212,7 @@ const SUBJECTS = {
   // ══════════════════════════════════════════════════════
   electronique: {
     label: "Électronique & Embarqué",
-    icon: "⚡",
+    icon: "fa-solid fa-microchip",
     color: "#d97706",
     categories: [
 
@@ -274,7 +274,7 @@ const SUBJECTS = {
   // ══════════════════════════════════════════════════════
   mathematiques: {
     label: "Mathématiques",
-    icon: "📐",
+    icon: "fa-solid fa-square-root-variable",
     color: "#059669",
     categories: [
 
@@ -328,7 +328,7 @@ const SUBJECTS = {
   // ══════════════════════════════════════════════════════
   cryptographie: {
     label: "Cryptographie",
-    icon: "🔐",
+    icon: "fa-solid fa-lock",
     color: "#7c3aed",
     categories: [
 
@@ -358,7 +358,7 @@ const SUBJECTS = {
   // ══════════════════════════════════════════════════════
   compilation: {
     label: "Compilation & Langages",
-    icon: "🔧",
+    icon: "fa-solid fa-code",
     color: "#0891b2",
     categories: [
 
@@ -398,7 +398,7 @@ const SUBJECTS = {
   // ══════════════════════════════════════════════════════
   systemes_distribues: {
     label: "Systèmes distribués",
-    icon: "🌐",
+    icon: "fa-solid fa-network-wired",
     color: "#0f766e",
     categories: [
 

@@ -104,7 +104,22 @@ body {
   background: rgba(79, 70, 229, 0.15);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
 }
-.subject-card .subject-icon { font-size: 2.5rem; }
+.subject-card .subject-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 4px;
+  background: rgba(255,255,255,0.07);
+  transition: transform 0.2s;
+}
+.subject-card:hover .subject-icon { transform: scale(1.1); }
+.subject-card .subject-icon i {
+  font-size: 1.9rem;
+  color: #fff;
+}
 .subject-card .subject-name {
   font-weight: 600;
   margin-top: 10px;
