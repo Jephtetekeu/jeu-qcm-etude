@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QCM Etude</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HOME ===== -->
+  <div id="home-screen" class="screen">
+    <div class="home-header">
+      <div class="logo">🎓</div>
+      <h1>QCM Étude</h1>
+      <p>Testez vos connaissances avec des questionnaires à choix multiples</p>
+    </div>
+
+    <div id="subjects-grid" class="subjects-grid"></div>
+
+    <div class="settings-row">
+      <div class="settings-group">
+        <label for="category-select">Catégorie</label>
+        <select id="category-select">
+          <option value="all">Toutes les catégories</option>
+        </select>
+      </div>
+      <div class="settings-group">
+        <label for="count-select">Nombre de questions</label>
+        <select id="count-select">
+          <option value="5">5 questions</option>
+          <option value="10" selected>10 questions</option>
+          <option value="15">15 questions</option>
+          <option value="20">20 questions</option>
+          <option value="999">Toutes</option>
+        </select>
+      </div>
+      <div class="settings-group">
+        <label for="time-select">Temps par question</label>
+        <select id="time-select">
+          <option value="15">15 secondes</option>
+          <option value="30" selected>30 secondes</option>
+          <option value="60">60 secondes</option>
+          <option value="999">Sans limite</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="home-actions">
+      <button id="start-btn" class="btn btn-primary" onclick="startQuiz()" disabled>
+        ▶ Commencer le quiz
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <div id="quiz-screen" class="screen">
+    <div class="quiz-header">
+      <div class="quiz-meta">
+        <span id="quiz-subject-badge" class="subject-badge">Informatique</span>
+        <span id="quiz-category" class="category-label"></span>
+      </div>
+      <div id="quiz-score" class="score-display">Score : <span>0</span></div>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-info">
+        <span id="progress-text">Question 1 / 10</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="timer-row">
+      <span class="timer-icon">⏱</span>
+      <div class="timer-bar">
+        <div id="timer-fill" class="timer-fill" style="width:100%"></div>
+      </div>
+      <span id="timer-text" class="timer-text">30s</span>
+    </div>
+
+    <div class="question-card">
+      <div id="question-number" class="question-number">Question 1</div>
+      <div id="question-text" class="question-text"></div>
+    </div>
+
+    <div id="choices-grid" class="choices-grid"></div>
+
+    <div id="explanation" class="explanation"></div>
+
+    <div class="quiz-actions">
+      <button class="btn btn-ghost" onclick="goHome()">✕ Abandonner</button>
+      <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()" style="display:none">
+        Question suivante →
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== RESULTS ===== -->
+  <div id="results-screen" class="screen">
+    <div class="results-header">
+      <div id="results-emoji" class="results-emoji">🏆</div>
+      <h2 id="results-title">Excellent travail !</h2>
+      <p id="results-subtitle"></p>
+    </div>
+
+    <div id="score-circle" class="score-circle excellent" style="margin:0 auto 28px;">
+      <div id="score-pct" class="score-number">0%</div>
+      <div id="score-fraction" class="score-label">0 / 0</div>
+    </div>
+
+    <div class="results-stats">
+      <div class="stat-box">
+        <div id="stat-correct" class="stat-value correct-color">0</div>
+        <div class="stat-label">Bonnes réponses</div>
+      </div>
+      <div class="stat-box">
+        <div id="stat-wrong" class="stat-value wrong-color">0</div>
+        <div class="stat-label">Mauvaises réponses</div>
+      </div>
+      <div class="stat-box">
+        <div id="stat-time" class="stat-value time-color">0s</div>
+        <div class="stat-label">Temps total</div>
+      </div>
+    </div>
+
+    <div class="results-review">
+      <h3>Récapitulatif des réponses</h3>
+      <div id="review-list"></div>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn btn-ghost" onclick="goHome()">🏠 Accueil</button>
+      <button class="btn btn-primary" onclick="restartQuiz()">🔄 Rejouer</button>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
