@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Fond arrondi -->
+  <rect width="32" height="32" rx="7" fill="#4f46e5"/>
+
+  <!-- Toque de diplômé -->
+  <!-- Base plate (bord du chapeau) -->
+  <polygon points="16,8 30,14 16,20 2,14" fill="#fff"/>
+
+  <!-- Dessus du chapeau (carré) -->
+  <rect x="11" y="6" width="10" height="8" rx="1" fill="#e0e7ff"/>
+
+  <!-- Cordon pendant -->
+  <line x1="30" y1="14" x2="30" y2="21" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="30" cy="22" r="2" fill="#fbbf24"/>
+
+  <!-- Corps du chapeau (trapèze bas) -->
+  <path d="M11,16 Q16,20 21,16 L21,22 Q16,25 11,22 Z" fill="#818cf8"/>
+</svg>
