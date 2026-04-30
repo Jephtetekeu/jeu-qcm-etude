@@ -833,9 +833,10 @@ function renderHistory() {
 }
 
 function clearHistory() {
-  if (!confirm('Effacer tout l\'historique ?')) return;
-  lsSet(LS.history, []);
-  renderHistory();
+  requirePin('Effacer l\'historique', 'Cette action supprimera définitivement toutes les sessions enregistrées.', () => {
+    lsSet(LS.history, []);
+    renderHistory();
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -872,9 +873,10 @@ function renderLeaderboard() {
 }
 
 function clearLeaderboard() {
-  if (!confirm('Effacer tout le classement ?')) return;
-  lsSet(LS.leaderboard, []);
-  renderLeaderboard();
+  requirePin('Effacer le classement', 'Cette action supprimera définitivement tous les scores enregistrés.', () => {
+    lsSet(LS.leaderboard, []);
+    renderLeaderboard();
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -955,10 +957,122 @@ function renderCustomList() {
 }
 
 function deleteCustomQuestion(id) {
-  if (!confirm('Supprimer cette question ?')) return;
-  lsSet(LS.custom, lsGet(LS.custom).filter(q => q.id !== id));
-  renderCustomList();
-  initHome();
+  requirePin('Supprimer la question', 'Cette action supprimera définitivement cette question personnalisée.', () => {
+    lsSet(LS.custom, lsGet(LS.custom).filter(q => q.id !== id));
+    renderCustomList();
+    initHome();
+  });
+}
+
+// ═══════════════════════════════════════════
+//  PIN PROTECTION
+// ═══════════════════════════════════════════
+const DEFAULT_PIN = '1234';
+let _pinCallback = null; // function to call after successful PIN
+
+function getPin() {
+  return localStorage.getItem('qcm_admin_pin') || DEFAULT_PIN;
+}
+
+function requirePin(title, desc, onSuccess) {
+  _pinCallback = onSuccess;
+  $('pin-modal-title').textContent = title;
+  $('pin-modal-desc').textContent  = desc;
+
+  // Reset fields
+  document.querySelectorAll('.pin-digit:not(.new-pin-digit)').forEach(d => {
+    d.value = '';
+    d.classList.remove('error', 'filled');
+  });
+  $('pin-error').classList.add('hidden');
+  $('change-pin-form').classList.add('hidden');
+  $('pin-change-success').classList.add('hidden');
+  document.querySelectorAll('.new-pin-digit').forEach(d => d.value = '');
+
+  $('pin-overlay').classList.remove('hidden');
+
+  // Focus first digit
+  const digits = document.querySelectorAll('.pin-digit:not(.new-pin-digit)');
+  digits[0].focus();
+
+  // Wire up auto-advance
+  digits.forEach((digit, i) => {
+    digit.oninput = () => {
+      digit.value = digit.value.replace(/\D/g, '').slice(-1);
+      digit.classList.toggle('filled', digit.value !== '');
+      digit.classList.remove('error');
+      $('pin-error').classList.add('hidden');
+      if (digit.value && i < digits.length - 1) digits[i + 1].focus();
+    };
+    digit.onkeydown = e => {
+      if (e.key === 'Backspace' && !digit.value && i > 0) digits[i - 1].focus();
+      if (e.key === 'Enter') confirmPin();
+    };
+  });
+}
+
+function closePinModal(event) {
+  // Close only if click on overlay background
+  if (event && event.target !== $('pin-overlay')) return;
+  $('pin-overlay').classList.add('hidden');
+  _pinCallback = null;
+}
+
+function confirmPin() {
+  const digits  = document.querySelectorAll('.pin-digit:not(.new-pin-digit)');
+  const entered = Array.from(digits).map(d => d.value).join('');
+
+  if (entered.length < 4) {
+    showPinError('Entrez les 4 chiffres du PIN.');
+    return;
+  }
+
+  if (entered === getPin()) {
+    $('pin-overlay').classList.add('hidden');
+    if (_pinCallback) { _pinCallback(); _pinCallback = null; }
+  } else {
+    showPinError('Code incorrect, réessayez.');
+    digits.forEach(d => { d.value = ''; d.classList.add('error'); d.classList.remove('filled'); });
+    digits[0].focus();
+  }
+}
+
+function showPinError(msg) {
+  const el = $('pin-error');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+function toggleChangePinForm() {
+  const form = $('change-pin-form');
+  form.classList.toggle('hidden');
+  if (!form.classList.contains('hidden')) {
+    const newDigits = document.querySelectorAll('.new-pin-digit');
+    newDigits.forEach((digit, i) => {
+      digit.value = '';
+      digit.oninput = () => {
+        digit.value = digit.value.replace(/\D/g, '').slice(-1);
+        if (digit.value && i < newDigits.length - 1) newDigits[i + 1].focus();
+      };
+      digit.onkeydown = e => {
+        if (e.key === 'Backspace' && !digit.value && i > 0) newDigits[i - 1].focus();
+        if (e.key === 'Enter') savePinChange();
+      };
+    });
+    newDigits[0].focus();
+  }
+}
+
+function savePinChange() {
+  const newPin = Array.from(document.querySelectorAll('.new-pin-digit')).map(d => d.value).join('');
+  if (newPin.length < 4) {
+    alert('Entrez un PIN de 4 chiffres.');
+    return;
+  }
+  localStorage.setItem('qcm_admin_pin', newPin);
+  $('pin-change-success').classList.remove('hidden');
+  setTimeout(() => $('pin-change-success').classList.add('hidden'), 2500);
+  document.querySelectorAll('.new-pin-digit').forEach(d => d.value = '');
 }
 
 // ═══════════════════════════════════════════
