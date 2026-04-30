@@ -106,6 +106,13 @@
         <i class="fa-solid fa-play"></i> Commencer
       </button>
     </div>
+
+    <footer class="app-footer">
+      Developed by <strong>Lord Jeff</strong> &nbsp;·&nbsp;
+      <a href="https://github.com/Jephtetekeu" target="_blank" rel="noopener" class="footer-gh-link">
+        <i class="fa-brands fa-github"></i> Jephtetekeu
+      </a>
+    </footer>
   </div>
 
   <!-- ═══════════ QUIZ ═══════════ -->
@@ -279,6 +286,67 @@
     </div>
 
     <div id="custom-list"></div>
+  </div>
+
+  <!-- ═══════════ MODAL PIN ═══════════ -->
+  <div id="pin-overlay" class="pin-overlay hidden" onclick="closePinModal(event)">
+    <div class="pin-modal">
+      <div class="pin-modal-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h3 id="pin-modal-title">Action protégée</h3>
+      <p id="pin-modal-desc">Entrez le code PIN administrateur pour continuer.</p>
+      <div class="pin-inputs" id="pin-inputs">
+        <input class="pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+        <input class="pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+        <input class="pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+        <input class="pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+      </div>
+      <div id="pin-error" class="pin-error hidden">Code incorrect, réessayez.</div>
+      <div class="pin-modal-actions">
+        <button class="btn btn-ghost" onclick="closePinModal()">Annuler</button>
+        <button class="btn btn-primary" onclick="confirmPin()">Confirmer</button>
+      </div>
+
+      <!-- Lien pour changer le PIN -->
+      <div class="pin-change-link">
+        <button class="link-btn" onclick="toggleChangePinForm()">
+          <i class="fa-solid fa-key"></i> Changer le code PIN
+        </button>
+      </div>
+
+      <!-- Étape 1 : vérifier le PIN actuel -->
+      <div id="change-pin-form" class="change-pin-form hidden">
+        <div id="verify-current-pin-step">
+          <p>PIN actuel (vérification d'identité)</p>
+          <div class="pin-inputs" id="current-pin-inputs">
+            <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+          </div>
+          <div id="current-pin-error" class="pin-error hidden">PIN actuel incorrect.</div>
+          <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="verifyCurrentPin()">
+            <i class="fa-solid fa-check"></i> Vérifier
+          </button>
+        </div>
+
+        <!-- Étape 2 : saisir le nouveau PIN (masqué jusqu'à vérification) -->
+        <div id="new-pin-step" class="hidden">
+          <p>Nouveau PIN (4 chiffres)</p>
+          <div class="pin-inputs" id="new-pin-inputs">
+            <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+          </div>
+          <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="savePinChange()">
+            Enregistrer le nouveau PIN
+          </button>
+          <div id="pin-change-success" class="pin-change-success hidden">
+            <i class="fa-solid fa-circle-check"></i> PIN mis à jour !
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="questions.js"></script>

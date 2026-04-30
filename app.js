@@ -833,9 +833,10 @@ function renderHistory() {
 }
 
 function clearHistory() {
-  if (!confirm('Effacer tout l\'historique ?')) return;
-  lsSet(LS.history, []);
-  renderHistory();
+  requirePin('Effacer l\'historique', 'Cette action supprimera définitivement toutes les sessions enregistrées.', () => {
+    lsSet(LS.history, []);
+    renderHistory();
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -872,9 +873,10 @@ function renderLeaderboard() {
 }
 
 function clearLeaderboard() {
-  if (!confirm('Effacer tout le classement ?')) return;
-  lsSet(LS.leaderboard, []);
-  renderLeaderboard();
+  requirePin('Effacer le classement', 'Cette action supprimera définitivement tous les scores enregistrés.', () => {
+    lsSet(LS.leaderboard, []);
+    renderLeaderboard();
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -955,10 +957,131 @@ function renderCustomList() {
 }
 
 function deleteCustomQuestion(id) {
-  if (!confirm('Supprimer cette question ?')) return;
-  lsSet(LS.custom, lsGet(LS.custom).filter(q => q.id !== id));
-  renderCustomList();
-  initHome();
+  requirePin('Supprimer la question', 'Cette action supprimera définitivement cette question personnalisée.', () => {
+    lsSet(LS.custom, lsGet(LS.custom).filter(q => q.id !== id));
+    renderCustomList();
+    initHome();
+  });
+}
+
+// ═══════════════════════════════════════════
+//  PIN PROTECTION
+// ═══════════════════════════════════════════
+const DEFAULT_PIN = '1234';
+let _pinCallback = null;
+
+function getPin() {
+  return localStorage.getItem('qcm_admin_pin') || DEFAULT_PIN;
+}
+
+function requirePin(title, desc, onSuccess) {
+  _pinCallback = onSuccess;
+  document.getElementById('pin-modal-title').textContent = title;
+  document.getElementById('pin-modal-desc').textContent = desc;
+
+  // Reset champs principal
+  document.querySelectorAll('#pin-inputs .pin-digit').forEach(i => { i.value = ''; i.classList.remove('error'); });
+  document.getElementById('pin-error').classList.add('hidden');
+
+  // Reset section changement PIN
+  document.getElementById('change-pin-form').classList.add('hidden');
+  document.getElementById('verify-current-pin-step').classList.remove('hidden');
+  document.getElementById('new-pin-step').classList.add('hidden');
+  document.querySelectorAll('.current-pin-digit').forEach(i => { i.value = ''; i.classList.remove('error'); });
+  document.querySelectorAll('.new-pin-digit').forEach(i => { i.value = ''; i.classList.remove('error'); });
+  document.getElementById('current-pin-error').classList.add('hidden');
+  document.getElementById('pin-change-success').classList.add('hidden');
+
+  document.getElementById('pin-overlay').classList.remove('hidden');
+
+  // Auto-avance sur les champs
+  setupPinInputs('#pin-inputs .pin-digit', confirmPin);
+  setupPinInputs('.current-pin-digit', verifyCurrentPin);
+  setupPinInputs('.new-pin-digit', savePinChange);
+
+  setTimeout(() => document.querySelector('#pin-inputs .pin-digit').focus(), 50);
+}
+
+function setupPinInputs(selector, onComplete) {
+  const inputs = document.querySelectorAll(selector);
+  inputs.forEach((input, idx) => {
+    input.oninput = () => {
+      input.value = input.value.replace(/\D/g, '');
+      if (input.value && idx < inputs.length - 1) inputs[idx + 1].focus();
+      if (input.value && idx === inputs.length - 1) onComplete();
+    };
+    input.onkeydown = e => {
+      if (e.key === 'Backspace' && !input.value && idx > 0) inputs[idx - 1].focus();
+    };
+  });
+}
+
+function closePinModal(event) {
+  if (event && event.target !== document.getElementById('pin-overlay')) return;
+  document.getElementById('pin-overlay').classList.add('hidden');
+  _pinCallback = null;
+}
+
+function confirmPin() {
+  const entered = [...document.querySelectorAll('#pin-inputs .pin-digit')].map(i => i.value).join('');
+  if (entered.length < 4) return;
+  if (entered === getPin()) {
+    document.getElementById('pin-overlay').classList.add('hidden');
+    if (_pinCallback) { _pinCallback(); _pinCallback = null; }
+  } else {
+    document.querySelectorAll('#pin-inputs .pin-digit').forEach(i => {
+      i.classList.add('error');
+      setTimeout(() => i.classList.remove('error'), 400);
+      i.value = '';
+    });
+    document.getElementById('pin-error').classList.remove('hidden');
+    document.querySelector('#pin-inputs .pin-digit').focus();
+  }
+}
+
+function toggleChangePinForm() {
+  const form = document.getElementById('change-pin-form');
+  const isHidden = form.classList.toggle('hidden');
+  if (!isHidden) {
+    // Réinitialiser les deux étapes à chaque ouverture
+    document.getElementById('verify-current-pin-step').classList.remove('hidden');
+    document.getElementById('new-pin-step').classList.add('hidden');
+    document.querySelectorAll('.current-pin-digit').forEach(i => { i.value = ''; i.classList.remove('error'); });
+    document.getElementById('current-pin-error').classList.add('hidden');
+    document.getElementById('pin-change-success').classList.add('hidden');
+    setTimeout(() => document.querySelector('.current-pin-digit').focus(), 50);
+  }
+}
+
+function verifyCurrentPin() {
+  const entered = [...document.querySelectorAll('.current-pin-digit')].map(i => i.value).join('');
+  if (entered.length < 4) return;
+  if (entered === getPin()) {
+    // Identité vérifiée → passer à l'étape 2
+    document.getElementById('verify-current-pin-step').classList.add('hidden');
+    document.getElementById('new-pin-step').classList.remove('hidden');
+    setTimeout(() => document.querySelector('.new-pin-digit').focus(), 50);
+  } else {
+    document.querySelectorAll('.current-pin-digit').forEach(i => {
+      i.classList.add('error');
+      setTimeout(() => i.classList.remove('error'), 400);
+      i.value = '';
+    });
+    document.getElementById('current-pin-error').classList.remove('hidden');
+    document.querySelector('.current-pin-digit').focus();
+  }
+}
+
+function savePinChange() {
+  const newPin = [...document.querySelectorAll('.new-pin-digit')].map(i => i.value).join('');
+  if (newPin.length < 4) return;
+  localStorage.setItem('qcm_admin_pin', newPin);
+  document.getElementById('pin-change-success').classList.remove('hidden');
+  document.querySelectorAll('.new-pin-digit').forEach(i => i.value = '');
+  setTimeout(() => {
+    document.getElementById('change-pin-form').classList.add('hidden');
+    document.getElementById('pin-change-success').classList.add('hidden');
+  }, 1800);
 }
 
 // ═══════════════════════════════════════════

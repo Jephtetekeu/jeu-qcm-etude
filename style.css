@@ -464,3 +464,77 @@ textarea { resize: vertical; }
   opacity: .5; font-size: .9rem; padding: 4px; transition: opacity .16s; flex-shrink: 0;
 }
 .custom-delete-btn:hover { opacity: 1; }
+
+/* ── PIN MODAL ── */
+.pin-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,.65); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+}
+.pin-modal {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 18px; padding: 32px 28px; max-width: 360px; width: 90%;
+  box-shadow: var(--shadow);
+}
+.pin-modal-icon {
+  font-size: 2rem; color: var(--primary-light);
+  text-align: center; margin-bottom: 12px;
+}
+.pin-modal h3 { text-align: center; font-size: 1.1rem; margin-bottom: 6px; }
+.pin-modal > p { text-align: center; color: var(--text-muted); font-size: .85rem; margin-bottom: 20px; }
+.pin-inputs {
+  display: flex; gap: 10px; justify-content: center; margin-bottom: 12px;
+}
+.pin-digit {
+  width: 52px; height: 58px; border-radius: 12px;
+  border: 2px solid var(--border); background: var(--bg);
+  color: var(--text); font-size: 1.6rem; text-align: center;
+  outline: none; transition: border-color .18s;
+}
+.pin-digit:focus { border-color: var(--primary-light); }
+.pin-digit.error { border-color: var(--danger); animation: shake .3s ease; }
+@keyframes shake {
+  0%,100% { transform: translateX(0) }
+  25%      { transform: translateX(-5px) }
+  75%      { transform: translateX(5px) }
+}
+.pin-error {
+  color: var(--danger); font-size: .8rem;
+  text-align: center; margin-bottom: 10px;
+}
+.pin-modal-actions {
+  display: flex; gap: 10px; justify-content: center; margin-top: 4px;
+}
+.pin-change-link {
+  text-align: center; margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.link-btn {
+  background: none; border: none; color: var(--text-muted);
+  font-size: .82rem; cursor: pointer; display: inline-flex;
+  align-items: center; gap: 6px; transition: color .18s;
+}
+.link-btn:hover { color: var(--primary-light); }
+.change-pin-form {
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+.change-pin-form p {
+  font-size: .82rem; color: var(--text-muted);
+  text-align: center; margin-bottom: 10px;
+}
+.pin-change-success {
+  color: var(--success); font-size: .82rem; margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+
+/* ── FOOTER ── */
+.app-footer {
+  text-align: center; padding: 20px 16px 8px;
+  font-size: .8rem; color: var(--text-muted);
+}
+.footer-gh-link {
+  color: var(--text-muted); text-decoration: none;
+  font-weight: 600; transition: color .2s;
+}
+.footer-gh-link:hover { color: var(--primary-light); }
+.footer-gh-link i { margin-right: 4px; }
