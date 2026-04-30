@@ -10,24 +10,56 @@
 </head>
 <body>
 
-  <!-- ===== HOME ===== -->
+  <!-- ═══════════ HOME ═══════════ -->
   <div id="home-screen" class="screen">
+
     <div class="home-header">
-      <div class="logo">🎓</div>
-      <h1>QCM Étude</h1>
-      <p>Testez vos connaissances avec des questionnaires à choix multiples</p>
+      <div class="logo-group">
+        <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <h1>QCM Étude</h1>
+          <p>Testez vos connaissances</p>
+        </div>
+      </div>
+      <div class="home-nav">
+        <button class="nav-btn" onclick="openHistory()" title="Historique">
+          <i class="fa-solid fa-chart-line"></i>
+        </button>
+        <button class="nav-btn" onclick="openLeaderboard()" title="Classement">
+          <i class="fa-solid fa-trophy"></i>
+        </button>
+        <button class="nav-btn" onclick="openCustom()" title="Mes questions">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+      </div>
     </div>
 
     <div id="subjects-grid" class="subjects-grid"></div>
 
+    <!-- Mode selector -->
+    <div class="mode-selector">
+      <button class="mode-btn active" data-mode="normal" onclick="setMode('normal',this)">
+        <i class="fa-solid fa-play"></i> Normal
+      </button>
+      <button class="mode-btn" data-mode="exam" onclick="setMode('exam',this)">
+        <i class="fa-solid fa-file-pen"></i> Examen blanc
+      </button>
+      <button class="mode-btn" data-mode="revision" onclick="setMode('revision',this)">
+        <i class="fa-solid fa-rotate-left"></i> Révision
+      </button>
+      <button class="mode-btn" data-mode="duel" onclick="setMode('duel',this)">
+        <i class="fa-solid fa-users"></i> Duel
+      </button>
+    </div>
+
     <div class="settings-row">
-      <div class="settings-group">
+      <div class="settings-group" id="grp-category">
         <label for="category-select">Catégorie</label>
         <select id="category-select">
           <option value="all">Toutes les catégories</option>
         </select>
       </div>
-      <div class="settings-group">
+      <div class="settings-group" id="grp-count">
         <label for="count-select">Nombre de questions</label>
         <select id="count-select">
           <option value="5">5 questions</option>
@@ -37,48 +69,72 @@
           <option value="999">Toutes</option>
         </select>
       </div>
-      <div class="settings-group">
-        <label for="time-select">Temps par question</label>
+      <div class="settings-group" id="grp-time">
+        <label for="time-select">Temps / question</label>
         <select id="time-select">
-          <option value="15">15 secondes</option>
-          <option value="30" selected>30 secondes</option>
-          <option value="60">60 secondes</option>
-          <option value="999">Sans limite</option>
+          <option value="15">15 s</option>
+          <option value="30" selected>30 s</option>
+          <option value="60">60 s</option>
+          <option value="9999">Sans limite</option>
         </select>
+      </div>
+      <div class="settings-group hidden" id="grp-exam-time">
+        <label for="exam-time-select">Durée de l'examen</label>
+        <select id="exam-time-select">
+          <option value="1800">30 minutes</option>
+          <option value="3600" selected>1 heure</option>
+          <option value="5400">1 h 30</option>
+          <option value="7200">2 heures</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Player names -->
+    <div class="player-row">
+      <div class="settings-group">
+        <label for="player-name"><i class="fa-solid fa-user"></i> Votre prénom</label>
+        <input type="text" id="player-name" placeholder="Pour le classement..." maxlength="20" />
+      </div>
+      <div class="settings-group hidden" id="grp-player2">
+        <label for="player2-name"><i class="fa-solid fa-user"></i> Joueur 2</label>
+        <input type="text" id="player2-name" placeholder="Prénom du joueur 2..." maxlength="20" />
       </div>
     </div>
 
     <div class="home-actions">
       <button id="start-btn" class="btn btn-primary" onclick="startQuiz()" disabled>
-        ▶ Commencer le quiz
+        <i class="fa-solid fa-play"></i> Commencer
       </button>
     </div>
   </div>
 
-  <!-- ===== QUIZ ===== -->
+  <!-- ═══════════ QUIZ ═══════════ -->
   <div id="quiz-screen" class="screen">
+
     <div class="quiz-header">
       <div class="quiz-meta">
-        <span id="quiz-subject-badge" class="subject-badge">Informatique</span>
+        <span id="quiz-subject-badge" class="subject-badge"></span>
         <span id="quiz-category" class="category-label"></span>
       </div>
       <div id="quiz-score" class="score-display">Score : <span>0</span></div>
     </div>
 
-    <div class="progress-container">
-      <div class="progress-info">
-        <span id="progress-text">Question 1 / 10</span>
-      </div>
-      <div class="progress-bar">
-        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
-      </div>
+    <!-- Barre timer examen (totale) -->
+    <div id="exam-banner" class="exam-banner hidden">
+      <i class="fa-solid fa-hourglass-half"></i>
+      <span id="exam-time-left">60:00</span>
+      <div class="exam-bar-track"><div id="exam-bar-fill" class="exam-bar-fill"></div></div>
     </div>
 
-    <div class="timer-row">
-      <span class="timer-icon">⏱</span>
-      <div class="timer-bar">
-        <div id="timer-fill" class="timer-fill" style="width:100%"></div>
-      </div>
+    <div class="progress-container">
+      <div class="progress-info"><span id="progress-text">Question 1 / 10</span></div>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <!-- Timer par question (masqué en mode exam) -->
+    <div id="question-timer-row" class="timer-row">
+      <span class="timer-icon"><i class="fa-regular fa-clock"></i></span>
+      <div class="timer-bar"><div id="timer-fill" class="timer-fill" style="width:100%"></div></div>
       <span id="timer-text" class="timer-text">30s</span>
     </div>
 
@@ -87,27 +143,36 @@
       <div id="question-text" class="question-text"></div>
     </div>
 
+    <!-- Choix normaux -->
     <div id="choices-grid" class="choices-grid"></div>
+
+    <!-- Duel : score live -->
+    <div id="duel-live-scores" class="duel-live-scores hidden">
+      <div class="dlp" id="dlp1"><span id="dlp1-name">J1</span><span id="dlp1-pts">0 pt</span></div>
+      <div class="duel-vs-badge">VS</div>
+      <div class="dlp" id="dlp2"><span id="dlp2-name">J2</span><span id="dlp2-pts">0 pt</span></div>
+    </div>
 
     <div id="explanation" class="explanation"></div>
 
     <div class="quiz-actions">
-      <button class="btn btn-ghost" onclick="goHome()">✕ Abandonner</button>
+      <button class="btn btn-ghost" onclick="goHome()"><i class="fa-solid fa-xmark"></i> Abandonner</button>
       <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()" style="display:none">
-        Question suivante →
+        Question suivante <i class="fa-solid fa-arrow-right"></i>
       </button>
     </div>
   </div>
 
-  <!-- ===== RESULTS ===== -->
+  <!-- ═══════════ RESULTS ═══════════ -->
   <div id="results-screen" class="screen">
+
     <div class="results-header">
-      <div id="results-emoji" class="results-emoji">🏆</div>
-      <h2 id="results-title">Excellent travail !</h2>
+      <div id="results-icon" class="results-icon"></div>
+      <h2 id="results-title"></h2>
       <p id="results-subtitle"></p>
     </div>
 
-    <div id="score-circle" class="score-circle excellent" style="margin:0 auto 28px;">
+    <div id="score-circle" class="score-circle" style="margin:0 auto 24px;">
       <div id="score-pct" class="score-number">0%</div>
       <div id="score-fraction" class="score-label">0 / 0</div>
     </div>
@@ -123,19 +188,97 @@
       </div>
       <div class="stat-box">
         <div id="stat-time" class="stat-value time-color">0s</div>
-        <div class="stat-label">Temps total</div>
+        <div class="stat-label">Temps utilisé</div>
       </div>
     </div>
 
+    <!-- Résultat duel -->
+    <div id="duel-result-box" class="duel-result-box hidden"></div>
+
     <div class="results-review">
-      <h3>Récapitulatif des réponses</h3>
+      <h3>Récapitulatif</h3>
       <div id="review-list"></div>
     </div>
 
     <div class="results-actions">
-      <button class="btn btn-ghost" onclick="goHome()">🏠 Accueil</button>
-      <button class="btn btn-primary" onclick="restartQuiz()">🔄 Rejouer</button>
+      <button class="btn btn-ghost" onclick="goHome()"><i class="fa-solid fa-house"></i> Accueil</button>
+      <button id="revise-btn" class="btn btn-ghost" onclick="startRevision()" style="display:none">
+        <i class="fa-solid fa-rotate-left"></i> Réviser erreurs
+      </button>
+      <button class="btn btn-primary" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> Rejouer</button>
     </div>
+  </div>
+
+  <!-- ═══════════ HISTORY ═══════════ -->
+  <div id="history-screen" class="screen">
+    <div class="secondary-header">
+      <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+      <h2><i class="fa-solid fa-chart-line"></i> Historique</h2>
+      <button class="icon-btn-danger" onclick="clearHistory()"><i class="fa-solid fa-trash"></i></button>
+    </div>
+    <div id="history-summary" class="history-summary"></div>
+    <div id="history-list" class="history-list"></div>
+  </div>
+
+  <!-- ═══════════ LEADERBOARD ═══════════ -->
+  <div id="leaderboard-screen" class="screen">
+    <div class="secondary-header">
+      <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+      <h2><i class="fa-solid fa-trophy"></i> Classement</h2>
+      <button class="icon-btn-danger" onclick="clearLeaderboard()"><i class="fa-solid fa-trash"></i></button>
+    </div>
+    <div id="leaderboard-list" class="leaderboard-list"></div>
+  </div>
+
+  <!-- ═══════════ CUSTOM QUESTIONS ═══════════ -->
+  <div id="custom-screen" class="screen">
+    <div class="secondary-header">
+      <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+      <h2><i class="fa-solid fa-pen-to-square"></i> Mes questions</h2>
+    </div>
+
+    <div class="card form-card">
+      <h3>Ajouter une question</h3>
+      <div class="form-group">
+        <label>Question *</label>
+        <textarea id="cq-question" rows="3" placeholder="Énoncé de votre question..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Catégorie *</label>
+        <input type="text" id="cq-category" placeholder="Ex: Réseaux, Python, Bases de données..." />
+      </div>
+      <div class="form-group">
+        <label>Réponses — cliquez la lettre pour marquer la bonne réponse</label>
+        <div id="cq-choices-container">
+          <div class="cq-choice-row">
+            <button class="cq-letter-btn" data-idx="0" onclick="setCorrectCustom(0)">A</button>
+            <input type="text" class="cq-choice-input" data-idx="0" placeholder="Choix A..." />
+          </div>
+          <div class="cq-choice-row">
+            <button class="cq-letter-btn" data-idx="1" onclick="setCorrectCustom(1)">B</button>
+            <input type="text" class="cq-choice-input" data-idx="1" placeholder="Choix B..." />
+          </div>
+          <div class="cq-choice-row">
+            <button class="cq-letter-btn" data-idx="2" onclick="setCorrectCustom(2)">C</button>
+            <input type="text" class="cq-choice-input" data-idx="2" placeholder="Choix C..." />
+          </div>
+          <div class="cq-choice-row">
+            <button class="cq-letter-btn" data-idx="3" onclick="setCorrectCustom(3)">D</button>
+            <input type="text" class="cq-choice-input" data-idx="3" placeholder="Choix D..." />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Explication (optionnel)</label>
+        <textarea id="cq-explanation" rows="2" placeholder="Pourquoi cette réponse est-elle correcte ?"></textarea>
+      </div>
+      <div id="cq-error" class="form-error hidden"></div>
+      <button class="btn btn-primary" onclick="saveCustomQuestion()">
+        <i class="fa-solid fa-plus"></i> Ajouter la question
+      </button>
+    </div>
+
+    <div id="custom-list"></div>
   </div>
 
   <script src="questions.js"></script>
