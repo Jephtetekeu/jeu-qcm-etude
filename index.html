@@ -17,20 +17,21 @@
       <div class="logo-group">
         <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <div>
-          <h1>QCM Étude</h1>
-          <p>Testez vos connaissances</p>
+          <h1 data-i18n="app.title">QCM Étude</h1>
+          <p data-i18n="app.subtitle">Testez vos connaissances</p>
         </div>
       </div>
       <div class="home-nav">
-        <button class="nav-btn" onclick="openHistory()" title="Historique">
+        <button class="nav-btn" onclick="openHistory()" data-i18n-title="nav.history" title="Historique">
           <i class="fa-solid fa-chart-line"></i>
         </button>
-        <button class="nav-btn" onclick="openLeaderboard()" title="Classement">
+        <button class="nav-btn" onclick="openLeaderboard()" data-i18n-title="nav.leaderboard" title="Classement">
           <i class="fa-solid fa-trophy"></i>
         </button>
-        <button class="nav-btn" onclick="openCustom()" title="Mes questions">
+        <button class="nav-btn" onclick="openCustom()" data-i18n-title="nav.myquestions" title="Mes questions">
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
+        <button class="nav-btn lang-btn" id="lang-btn" onclick="switchLang()">FR</button>
       </div>
     </div>
 
@@ -39,71 +40,74 @@
     <!-- Mode selector -->
     <div class="mode-selector">
       <button class="mode-btn active" data-mode="normal" onclick="setMode('normal',this)">
-        <i class="fa-solid fa-play"></i> Normal
+        <i class="fa-solid fa-play"></i> <span data-i18n="mode.normal">Normal</span>
       </button>
       <button class="mode-btn" data-mode="exam" onclick="setMode('exam',this)">
-        <i class="fa-solid fa-file-pen"></i> Examen blanc
+        <i class="fa-solid fa-file-pen"></i> <span data-i18n="mode.exam">Examen blanc</span>
       </button>
       <button class="mode-btn" data-mode="revision" onclick="setMode('revision',this)">
-        <i class="fa-solid fa-rotate-left"></i> Révision
+        <i class="fa-solid fa-rotate-left"></i> <span data-i18n="mode.revision">Révision</span>
       </button>
       <button class="mode-btn" data-mode="duel" onclick="setMode('duel',this)">
-        <i class="fa-solid fa-users"></i> Duel
+        <i class="fa-solid fa-users"></i> <span data-i18n="mode.duel">Duel</span>
       </button>
     </div>
 
     <div class="settings-row">
       <div class="settings-group" id="grp-category">
-        <label for="category-select">Catégorie</label>
+        <label for="category-select" data-i18n="settings.category">Catégorie</label>
         <select id="category-select">
-          <option value="all">Toutes les catégories</option>
+          <option value="all" data-i18n="settings.allcategories">Toutes les catégories</option>
         </select>
       </div>
       <div class="settings-group" id="grp-count">
-        <label for="count-select">Nombre de questions</label>
+        <label for="count-select" data-i18n="settings.count">Nombre de questions</label>
         <select id="count-select">
           <option value="5">5 questions</option>
           <option value="10" selected>10 questions</option>
           <option value="15">15 questions</option>
           <option value="20">20 questions</option>
-          <option value="999">Toutes</option>
+          <option value="999" data-i18n="settings.allquestions">Toutes</option>
         </select>
       </div>
       <div class="settings-group" id="grp-time">
-        <label for="time-select">Temps / question</label>
+        <label for="time-select" data-i18n="settings.time">Temps / question</label>
         <select id="time-select">
           <option value="15">15 s</option>
           <option value="30" selected>30 s</option>
           <option value="60">60 s</option>
-          <option value="9999">Sans limite</option>
+          <option value="9999" data-i18n="settings.nolimit">Sans limite</option>
         </select>
       </div>
       <div class="settings-group hidden" id="grp-exam-time">
-        <label for="exam-time-select">Durée de l'examen</label>
+        <label for="exam-time-select" data-i18n="settings.examtime">Durée de l'examen</label>
         <select id="exam-time-select">
-          <option value="1800">30 minutes</option>
-          <option value="3600" selected>1 heure</option>
-          <option value="5400">1 h 30</option>
-          <option value="7200">2 heures</option>
+          <option value="1800" data-i18n="time.30min">30 minutes</option>
+          <option value="3600" selected data-i18n="time.1h">1 heure</option>
+          <option value="5400" data-i18n="time.1h30">1 h 30</option>
+          <option value="7200" data-i18n="time.2h">2 heures</option>
         </select>
+      </div>
+      <div class="settings-group hidden" id="grp-revision-info">
+        <div id="revision-info-msg" class="revision-info"></div>
       </div>
     </div>
 
     <!-- Player names -->
     <div class="player-row">
       <div class="settings-group">
-        <label for="player-name"><i class="fa-solid fa-user"></i> Votre prénom</label>
-        <input type="text" id="player-name" placeholder="Pour le classement..." maxlength="20" />
+        <label for="player-name"><i class="fa-solid fa-user"></i> <span data-i18n="player.name">Votre prénom</span></label>
+        <input type="text" id="player-name" data-i18n-placeholder="player.nameplaceholder" placeholder="Pour le classement..." maxlength="20" />
       </div>
       <div class="settings-group hidden" id="grp-player2">
-        <label for="player2-name"><i class="fa-solid fa-user"></i> Joueur 2</label>
-        <input type="text" id="player2-name" placeholder="Prénom du joueur 2..." maxlength="20" />
+        <label for="player2-name"><i class="fa-solid fa-user"></i> <span data-i18n="player.p2name">Joueur 2</span></label>
+        <input type="text" id="player2-name" data-i18n-placeholder="player.p2placeholder" placeholder="Prénom du joueur 2..." maxlength="20" />
       </div>
     </div>
 
     <div class="home-actions">
       <button id="start-btn" class="btn btn-primary" onclick="startQuiz()" disabled>
-        <i class="fa-solid fa-play"></i> Commencer
+        <i class="fa-solid fa-play"></i> <span data-i18n="btn.start">Commencer</span>
       </button>
     </div>
 
@@ -163,9 +167,9 @@
     <div id="explanation" class="explanation"></div>
 
     <div class="quiz-actions">
-      <button class="btn btn-ghost" onclick="goHome()"><i class="fa-solid fa-xmark"></i> Abandonner</button>
+      <button class="btn btn-ghost" onclick="goHome()"><i class="fa-solid fa-xmark"></i> <span data-i18n="btn.quit">Abandonner</span></button>
       <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()" style="display:none">
-        Question suivante <i class="fa-solid fa-arrow-right"></i>
+        Question suivante →
       </button>
     </div>
   </div>
@@ -187,15 +191,15 @@
     <div class="results-stats">
       <div class="stat-box">
         <div id="stat-correct" class="stat-value correct-color">0</div>
-        <div class="stat-label">Bonnes réponses</div>
+        <div class="stat-label" data-i18n="results.correct">Bonnes réponses</div>
       </div>
       <div class="stat-box">
         <div id="stat-wrong" class="stat-value wrong-color">0</div>
-        <div class="stat-label">Mauvaises réponses</div>
+        <div class="stat-label" data-i18n="results.wrong">Mauvaises réponses</div>
       </div>
       <div class="stat-box">
         <div id="stat-time" class="stat-value time-color">0s</div>
-        <div class="stat-label">Temps utilisé</div>
+        <div class="stat-label" data-i18n="results.time">Temps utilisé</div>
       </div>
     </div>
 
@@ -203,16 +207,16 @@
     <div id="duel-result-box" class="duel-result-box hidden"></div>
 
     <div class="results-review">
-      <h3>Récapitulatif</h3>
+      <h3 data-i18n="results.summary">Récapitulatif</h3>
       <div id="review-list"></div>
     </div>
 
     <div class="results-actions">
-      <button class="btn btn-ghost" onclick="goHome()"><i class="fa-solid fa-house"></i> Accueil</button>
+      <button class="btn btn-ghost" onclick="goHome()"><i class="fa-solid fa-house"></i> <span data-i18n="btn.home">Accueil</span></button>
       <button id="revise-btn" class="btn btn-ghost" onclick="startRevision()" style="display:none">
-        <i class="fa-solid fa-rotate-left"></i> Réviser erreurs
+        <i class="fa-solid fa-rotate-left"></i> <span data-i18n="btn.revise">Réviser erreurs</span>
       </button>
-      <button class="btn btn-primary" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> Rejouer</button>
+      <button class="btn btn-primary" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> <span data-i18n="btn.replay">Rejouer</span></button>
     </div>
   </div>
 
@@ -220,7 +224,7 @@
   <div id="history-screen" class="screen">
     <div class="secondary-header">
       <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
-      <h2><i class="fa-solid fa-chart-line"></i> Historique</h2>
+      <h2><i class="fa-solid fa-chart-line"></i> <span data-i18n="history.title">Historique</span></h2>
       <button class="icon-btn-danger" onclick="clearHistory()"><i class="fa-solid fa-trash"></i></button>
     </div>
     <div id="history-summary" class="history-summary"></div>
@@ -231,7 +235,7 @@
   <div id="leaderboard-screen" class="screen">
     <div class="secondary-header">
       <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
-      <h2><i class="fa-solid fa-trophy"></i> Classement</h2>
+      <h2><i class="fa-solid fa-trophy"></i> <span data-i18n="lb.title">Classement</span></h2>
       <button class="icon-btn-danger" onclick="clearLeaderboard()"><i class="fa-solid fa-trash"></i></button>
     </div>
     <div id="leaderboard-list" class="leaderboard-list"></div>
@@ -241,47 +245,47 @@
   <div id="custom-screen" class="screen">
     <div class="secondary-header">
       <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
-      <h2><i class="fa-solid fa-pen-to-square"></i> Mes questions</h2>
+      <h2><i class="fa-solid fa-pen-to-square"></i> <span data-i18n="custom.title">Mes questions</span></h2>
     </div>
 
     <div class="card form-card">
-      <h3>Ajouter une question</h3>
+      <h3 data-i18n="custom.addtitle">Ajouter une question</h3>
       <div class="form-group">
-        <label>Question *</label>
-        <textarea id="cq-question" rows="3" placeholder="Énoncé de votre question..."></textarea>
+        <label data-i18n="custom.questionlabel">Question *</label>
+        <textarea id="cq-question" rows="3" data-i18n-placeholder="custom.questionplaceholder" placeholder="Énoncé de votre question..."></textarea>
       </div>
       <div class="form-group">
-        <label>Catégorie *</label>
-        <input type="text" id="cq-category" placeholder="Ex: Réseaux, Python, Bases de données..." />
+        <label data-i18n="custom.categorylabel">Catégorie *</label>
+        <input type="text" id="cq-category" data-i18n-placeholder="custom.categoryplaceholder" placeholder="Ex: Réseaux, Python, Bases de données..." />
       </div>
       <div class="form-group">
-        <label>Réponses — cliquez la lettre pour marquer la bonne réponse</label>
+        <label data-i18n="custom.answerlabel">Réponses — cliquez la lettre pour marquer la bonne réponse</label>
         <div id="cq-choices-container">
           <div class="cq-choice-row">
             <button class="cq-letter-btn" data-idx="0" onclick="setCorrectCustom(0)">A</button>
-            <input type="text" class="cq-choice-input" data-idx="0" placeholder="Choix A..." />
+            <input type="text" class="cq-choice-input" data-idx="0" data-i18n-placeholder="custom.choiceA" placeholder="Choix A..." />
           </div>
           <div class="cq-choice-row">
             <button class="cq-letter-btn" data-idx="1" onclick="setCorrectCustom(1)">B</button>
-            <input type="text" class="cq-choice-input" data-idx="1" placeholder="Choix B..." />
+            <input type="text" class="cq-choice-input" data-idx="1" data-i18n-placeholder="custom.choiceB" placeholder="Choix B..." />
           </div>
           <div class="cq-choice-row">
             <button class="cq-letter-btn" data-idx="2" onclick="setCorrectCustom(2)">C</button>
-            <input type="text" class="cq-choice-input" data-idx="2" placeholder="Choix C..." />
+            <input type="text" class="cq-choice-input" data-idx="2" data-i18n-placeholder="custom.choiceC" placeholder="Choix C..." />
           </div>
           <div class="cq-choice-row">
             <button class="cq-letter-btn" data-idx="3" onclick="setCorrectCustom(3)">D</button>
-            <input type="text" class="cq-choice-input" data-idx="3" placeholder="Choix D..." />
+            <input type="text" class="cq-choice-input" data-idx="3" data-i18n-placeholder="custom.choiceD" placeholder="Choix D..." />
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label>Explication (optionnel)</label>
-        <textarea id="cq-explanation" rows="2" placeholder="Pourquoi cette réponse est-elle correcte ?"></textarea>
+        <label data-i18n="custom.explainlabel">Explication (optionnel)</label>
+        <textarea id="cq-explanation" rows="2" data-i18n-placeholder="custom.explainplaceholder" placeholder="Pourquoi cette réponse est-elle correcte ?"></textarea>
       </div>
       <div id="cq-error" class="form-error hidden"></div>
       <button class="btn btn-primary" onclick="saveCustomQuestion()">
-        <i class="fa-solid fa-plus"></i> Ajouter la question
+        <i class="fa-solid fa-plus"></i> <span data-i18n="btn.addquestion">Ajouter la question</span>
       </button>
     </div>
 
@@ -300,56 +304,58 @@
         <input class="pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
         <input class="pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
       </div>
-      <div id="pin-error" class="pin-error hidden">Code incorrect, réessayez.</div>
+      <div id="pin-error" class="pin-error hidden" data-i18n="pin.error">Code incorrect, réessayez.</div>
       <div class="pin-modal-actions">
-        <button class="btn btn-ghost" onclick="closePinModal()">Annuler</button>
-        <button class="btn btn-primary" onclick="confirmPin()">Confirmer</button>
+        <button class="btn btn-ghost" onclick="closePinModal()" data-i18n="btn.cancel">Annuler</button>
+        <button class="btn btn-primary" onclick="confirmPin()" data-i18n="btn.confirm">Confirmer</button>
       </div>
 
       <!-- Lien pour changer le PIN -->
       <div class="pin-change-link">
         <button class="link-btn" onclick="toggleChangePinForm()">
-          <i class="fa-solid fa-key"></i> Changer le code PIN
+          <i class="fa-solid fa-key"></i> <span data-i18n="pin.changelink">Changer le code PIN</span>
         </button>
       </div>
 
       <!-- Étape 1 : vérifier le PIN actuel -->
       <div id="change-pin-form" class="change-pin-form hidden">
         <div id="verify-current-pin-step">
-          <p>PIN actuel (vérification d'identité)</p>
+          <p data-i18n="pin.currentlabel">PIN actuel (vérification d'identité)</p>
           <div class="pin-inputs" id="current-pin-inputs">
             <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
             <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
             <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
             <input class="pin-digit current-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
           </div>
-          <div id="current-pin-error" class="pin-error hidden">PIN actuel incorrect.</div>
+          <div id="current-pin-error" class="pin-error hidden" data-i18n="pin.currenterror">PIN actuel incorrect.</div>
           <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="verifyCurrentPin()">
-            <i class="fa-solid fa-check"></i> Vérifier
+            <i class="fa-solid fa-check"></i> <span data-i18n="btn.verify">Vérifier</span>
           </button>
         </div>
 
         <!-- Étape 2 : saisir le nouveau PIN (masqué jusqu'à vérification) -->
         <div id="new-pin-step" class="hidden">
-          <p>Nouveau PIN (4 chiffres)</p>
+          <p data-i18n="pin.newlabel">Nouveau PIN (4 chiffres)</p>
           <div class="pin-inputs" id="new-pin-inputs">
             <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
             <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
             <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
             <input class="pin-digit new-pin-digit" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" />
           </div>
-          <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="savePinChange()">
+          <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="savePinChange()" data-i18n="btn.savepin">
             Enregistrer le nouveau PIN
           </button>
           <div id="pin-change-success" class="pin-change-success hidden">
-            <i class="fa-solid fa-circle-check"></i> PIN mis à jour !
+            <i class="fa-solid fa-circle-check"></i> <span data-i18n="pin.success">PIN mis à jour !</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="questions.js"></script>
+  <script src="questions_en.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -83,7 +83,37 @@ function formatClock(s) {
 
 function formatDate(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  const locale = getLang() === 'fr' ? 'fr-FR' : 'en-US';
+  return d.toLocaleDateString(locale, { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+}
+
+// ═══════════════════════════════════════════
+//  LANGUAGE
+// ═══════════════════════════════════════════
+function getSubjects() {
+  return getLang() === 'en' ? SUBJECTS_EN : SUBJECTS;
+}
+
+function updateLangBtn() {
+  const btn = $('lang-btn');
+  if (btn) btn.textContent = getLang() === 'fr' ? 'EN' : 'FR';
+}
+
+function switchLang() {
+  const prevCatVal = $('category-select').value;
+  setLang(getLang() === 'fr' ? 'en' : 'fr');
+  updateLangBtn();
+  initHome();
+  // Restore selected subject card and settings
+  if (state.subject) {
+    const card = document.querySelector(`.subject-card[data-key="${state.subject}"]`);
+    if (card) {
+      card.classList.add('selected');
+      $('start-btn').disabled = false;
+    }
+    populateCategorySelect(state.subject);
+    $('category-select').value = prevCatVal;
+  }
 }
 
 // ═══════════════════════════════════════════
@@ -124,8 +154,8 @@ function initHome() {
   grid.innerHTML = '';
 
   // Real subjects
-  Object.keys(SUBJECTS).forEach(key => {
-    const sub = SUBJECTS[key];
+  Object.keys(getSubjects()).forEach(key => {
+    const sub = getSubjects()[key];
     const totalQ = sub.categories.reduce((s, c) => s + c.questions.length, 0);
     const card = document.createElement('div');
     card.className = 'subject-card';
@@ -135,7 +165,7 @@ function initHome() {
         <i class="${sub.icon}" style="color:${sub.color}"></i>
       </div>
       <div class="subject-name">${sub.label}</div>
-      <div class="subject-count">${sub.categories.length} catégories · ${totalQ} questions</div>
+      <div class="subject-count">${sub.categories.length} ${t('subject.categories')} · ${totalQ} ${t('subject.questions')}</div>
     `;
     card.addEventListener('click', () => selectSubject(key, card));
     grid.appendChild(card);
@@ -151,27 +181,30 @@ function initHome() {
       <div class="subject-icon" style="background:#06b6d422;box-shadow:0 0 0 1px #06b6d444">
         <i class="fa-solid fa-star" style="color:#06b6d4"></i>
       </div>
-      <div class="subject-name">Mes questions</div>
-      <div class="subject-count">1 catégorie · ${custom.length} questions</div>
+      <div class="subject-name">${t('subject.myquestions')}</div>
+      <div class="subject-count">${t('subject.mycategory')} · ${custom.length} ${t('subject.questions')}</div>
     `;
     card.addEventListener('click', () => selectSubject('__custom__', card));
     grid.appendChild(card);
   }
 
   // Coming soon placeholders
-  [{ name:'Physique', icon:'fa-solid fa-atom' }, { name:'Histoire', icon:'fa-solid fa-landmark' }, { name:'Chimie', icon:'fa-solid fa-flask' }]
-    .forEach(s => {
-      const card = document.createElement('div');
-      card.className = 'subject-card';
-      card.style.cssText = 'opacity:.4;cursor:not-allowed';
-      card.innerHTML = `
-        <div class="badge-new">Bientôt</div>
+  [
+    { nameKey: 'subject.physics',   icon: 'fa-solid fa-atom' },
+    { nameKey: 'subject.history2',  icon: 'fa-solid fa-landmark' },
+    { nameKey: 'subject.chemistry', icon: 'fa-solid fa-flask' },
+  ].forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.style.cssText = 'opacity:.4;cursor:not-allowed';
+    card.innerHTML = `
+        <div class="badge-new">${t('subject.soon')}</div>
         <div class="subject-icon" style="background:#ffffff11"><i class="${s.icon}" style="color:#94a3b8"></i></div>
-        <div class="subject-name">${s.name}</div>
-        <div class="subject-count">À venir...</div>
+        <div class="subject-name">${t(s.nameKey)}</div>
+        <div class="subject-count">${t('subject.comingsoon')}</div>
       `;
-      grid.appendChild(card);
-    });
+    grid.appendChild(card);
+  });
 
   populateCategorySelect(null);
 }
@@ -186,10 +219,10 @@ function selectSubject(key, card) {
 
 function populateCategorySelect(key) {
   const sel = $('category-select');
-  sel.innerHTML = '<option value="all">Toutes les catégories</option>';
+  sel.innerHTML = `<option value="all">${t('settings.allcategories')}</option>`;
   if (!key) return;
   if (key === '__custom__') return;
-  SUBJECTS[key].categories.forEach((cat, i) => {
+  getSubjects()[key].categories.forEach((cat, i) => {
     const opt = document.createElement('option');
     opt.value = i;
     opt.textContent = `${cat.name} (${cat.questions.length} q.)`;
@@ -249,10 +282,10 @@ function startQuiz() {
 
   } else if (state.subject === '__custom__') {
     const custom = lsGet(LS.custom);
-    pool = custom.map(q => ({ ...q, _cat: q._cat || 'Mes questions' }));
+    pool = custom.map(q => ({ ...q, _cat: q._cat || t('quiz.myquestions') }));
 
   } else {
-    const sub = SUBJECTS[state.subject];
+    const sub = getSubjects()[state.subject];
     const catVal = $('category-select').value;
     if (catVal === 'all') {
       sub.categories.forEach(cat => cat.questions.forEach(q => pool.push({ ...q, _cat: cat.name })));
@@ -270,8 +303,8 @@ function startQuiz() {
   state.totalTimeUsed = 0;
 
   // Duel init
-  const p1 = $('player-name').value.trim() || 'Joueur 1';
-  const p2 = $('player2-name').value.trim() || 'Joueur 2';
+  const p1 = $('player-name').value.trim() || t('player.default1');
+  const p2 = $('player2-name').value.trim() || t('player.default2');
   state.duel = { p1Name: p1, p2Name: p2, p1Score: 0, p2Score: 0, p1Answered: false, p2Answered: false, p1Choice: -1, p2Choice: -1 };
 
   // Save settings for restart
@@ -320,11 +353,11 @@ function startQuiz() {
 
   // Subject badge color
   if (state.subject && state.subject !== '__custom__') {
-    const sub = SUBJECTS[state.subject];
+    const sub = getSubjects()[state.subject];
     $('quiz-subject-badge').textContent = sub.label;
     $('quiz-subject-badge').style.cssText = `background:${sub.color}22;color:${sub.color};border-color:${sub.color}55`;
   } else {
-    $('quiz-subject-badge').textContent = state.mode === 'revision' ? 'Révision' : 'Mes questions';
+    $('quiz-subject-badge').textContent = state.mode === 'revision' ? t('quiz.revision') : t('quiz.myquestions');
     $('quiz-subject-badge').style.cssText = '';
   }
 
@@ -353,10 +386,10 @@ function renderQuestion() {
   const total = state.questions.length;
 
   $('quiz-category').textContent = q._cat || '';
-  $('quiz-score').innerHTML = `Score : <span>${state.score}</span>`;
-  $('progress-text').textContent = `Question ${state.currentIndex + 1} / ${total}`;
+  $('quiz-score').innerHTML = `${t('quiz.score')} <span>${state.score}</span>`;
+  $('progress-text').textContent = `${t('quiz.question')} ${state.currentIndex + 1} / ${total}`;
   $('progress-fill').style.width = `${(state.currentIndex / total) * 100}%`;
-  $('question-number').textContent = `Question ${state.currentIndex + 1}`;
+  $('question-number').textContent = `${t('quiz.question')} ${state.currentIndex + 1}`;
   $('question-text').textContent = q.question;
 
   // Shuffle choices
@@ -497,12 +530,12 @@ function forceEndQuiz() {
   // Record current question as unanswered if not yet answered
   if (!state.answered && state.currentIndex < state.questions.length) {
     const q = state.questions[state.currentIndex];
-    state.answers.push({ question: q.question, correct: state._correctText, chosen: 'Non répondu', isCorrect: false });
+    state.answers.push({ question: q.question, correct: state._correctText, chosen: t('quiz.unanswered'), isCorrect: false });
   }
   // Fill remaining as unanswered
   for (let i = state.currentIndex + 1; i < state.questions.length; i++) {
     const q = state.questions[i];
-    state.answers.push({ question: q.question, correct: q.choices[q.correct], chosen: 'Non répondu', isCorrect: false });
+    state.answers.push({ question: q.question, correct: q.choices[q.correct], chosen: t('quiz.unanswered'), isCorrect: false });
   }
   showResults();
 }
@@ -533,7 +566,7 @@ function handleAnswer(chosenIndex) {
     });
 
     const exp = $('explanation');
-    const label = isCorrect ? '✓ Bonne réponse !' : chosenIndex === -1 ? '⏱ Temps écoulé !' : '✗ Mauvaise réponse.';
+    const label = isCorrect ? t('quiz.correct') : chosenIndex === -1 ? t('quiz.timeout') : t('quiz.wrong');
     exp.innerHTML = `<strong>${label}</strong> ${q.explanation || ''}`;
     exp.classList.add('visible');
   } else {
@@ -544,7 +577,7 @@ function handleAnswer(chosenIndex) {
   state.answers.push({
     question: q.question,
     correct: state._correctText,
-    chosen: chosenIndex >= 0 ? state._choices[chosenIndex] : 'Aucune réponse',
+    chosen: chosenIndex >= 0 ? state._choices[chosenIndex] : t('quiz.noanswer'),
     isCorrect,
   });
 
@@ -562,9 +595,9 @@ function handleAnswer(chosenIndex) {
     lsSet(LS.wrong, wrongs);
   }
 
-  $('quiz-score').innerHTML = `Score : <span>${state.score}</span>`;
+  $('quiz-score').innerHTML = `${t('quiz.score')} <span>${state.score}</span>`;
   $('next-btn').style.display = 'inline-flex';
-  $('next-btn').textContent = state.currentIndex + 1 < state.questions.length ? 'Question suivante →' : 'Voir les résultats →';
+  $('next-btn').textContent = state.currentIndex + 1 < state.questions.length ? t('btn.next') : t('btn.results');
 }
 
 // ═══════════════════════════════════════════
@@ -630,23 +663,23 @@ function resolveDuel() {
   const q = state.questions[state.currentIndex];
   const exp = $('explanation');
   const lines = [];
-  if (state.duel.p1Choice === -1) lines.push(`${state.duel.p1Name} : temps écoulé`);
-  else lines.push(`${state.duel.p1Name} : ${p1ok ? '✓ Bonne réponse' : '✗ Mauvaise réponse'}`);
-  if (state.duel.p2Choice === -1) lines.push(`${state.duel.p2Name} : temps écoulé`);
-  else lines.push(`${state.duel.p2Name} : ${p2ok ? '✓ Bonne réponse' : '✗ Mauvaise réponse'}`);
+  if (state.duel.p1Choice === -1) lines.push(`${state.duel.p1Name} : ${t('duel.timeout')}`);
+  else lines.push(`${state.duel.p1Name} : ${p1ok ? t('duel.correct') : t('duel.wrong')}`);
+  if (state.duel.p2Choice === -1) lines.push(`${state.duel.p2Name} : ${t('duel.timeout')}`);
+  else lines.push(`${state.duel.p2Name} : ${p2ok ? t('duel.correct') : t('duel.wrong')}`);
   exp.innerHTML = `<strong>${lines.join(' — ')}</strong> ${q.explanation || ''}`;
   exp.classList.add('visible');
 
   state.answers.push({
     question: q.question,
     correct: state._correctText,
-    chosen: state.duel.p1Choice >= 0 ? state._choices[state.duel.p1Choice] : 'Aucune',
+    chosen: state.duel.p1Choice >= 0 ? state._choices[state.duel.p1Choice] : t('duel.noanswer'),
     isCorrect: p1ok,
     duel: { p1ok, p2ok },
   });
 
   $('next-btn').style.display = 'inline-flex';
-  $('next-btn').textContent = state.currentIndex + 1 < state.questions.length ? 'Question suivante →' : 'Voir les résultats →';
+  $('next-btn').textContent = state.currentIndex + 1 < state.questions.length ? t('btn.next') : t('btn.results');
 }
 
 // ═══════════════════════════════════════════
@@ -672,17 +705,20 @@ function showResults() {
 
   // Icon & title
   let icon, title;
-  if (pct >= 80) { icon = '🏆'; title = 'Excellent travail !'; }
-  else if (pct >= 60) { icon = '👍'; title = 'Pas mal !'; }
-  else if (pct >= 40) { icon = '📚'; title = 'Continuez à réviser !'; }
-  else { icon = '💪'; title = 'Il faut s\'entraîner !'; }
+  if (pct >= 80) { icon = '🏆'; title = t('results.excellent'); }
+  else if (pct >= 60) { icon = '👍'; title = t('results.good'); }
+  else if (pct >= 40) { icon = '📚'; title = t('results.average'); }
+  else { icon = '💪'; title = t('results.bad'); }
 
   $('results-icon').textContent = icon;
   $('results-title').textContent = title;
 
-  const modLabel = { normal:'Mode Normal', exam:'Examen blanc', revision:'Révision', duel:'Mode Duel' }[state.mode];
-  const subLabel = state.subject && state.subject !== '__custom__' && SUBJECTS[state.subject]
-    ? SUBJECTS[state.subject].label : 'Questions perso';
+  const modLabel = {
+    normal: t('results.mode.normal'), exam: t('results.mode.exam'),
+    revision: t('results.mode.revision'), duel: t('results.mode.duel'),
+  }[state.mode];
+  const subLabel = state.subject && state.subject !== '__custom__' && getSubjects()[state.subject]
+    ? getSubjects()[state.subject].label : t('subject.custom.label');
   $('results-subtitle').textContent = `${subLabel} · ${modLabel}`;
 
   // Score circle
@@ -701,22 +737,22 @@ function showResults() {
     duelBox.classList.remove('hidden');
     const p1 = state.duel.p1Score, p2 = state.duel.p2Score;
     let winnerHtml = '';
-    if (p1 > p2)       winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🏆 <strong>${state.duel.p1Name}</strong> remporte le duel !</div>`;
-    else if (p2 > p1)  winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🏆 <strong>${state.duel.p2Name}</strong> remporte le duel !</div>`;
-    else               winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🤝 Égalité parfaite !</div>`;
+    if (p1 > p2)       winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🏆 <strong>${state.duel.p1Name}</strong></div>`;
+    else if (p2 > p1)  winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🏆 <strong>${state.duel.p2Name}</strong></div>`;
+    else               winnerHtml = `<div style="margin-top:12px;font-size:.95rem">${t('duel.tie')}</div>`;
     duelBox.innerHTML = `
-      <h3>Résultat du duel</h3>
+      <h3>${t('duel.result')}</h3>
       <div class="duel-final-scores">
         <div class="duel-final-player">
           <span class="player-name">${state.duel.p1Name}</span>
           <span class="player-pts" style="color:var(--primary-light)">${p1}</span>
-          ${p1 > p2 ? '<span class="duel-winner-label">Vainqueur 🏆</span>' : ''}
+          ${p1 > p2 ? `<span class="duel-winner-label">${t('duel.winner')}</span>` : ''}
         </div>
         <div style="display:flex;align-items:center;font-weight:800;color:var(--text-muted)">VS</div>
         <div class="duel-final-player">
           <span class="player-name">${state.duel.p2Name}</span>
           <span class="player-pts" style="color:var(--success)">${p2}</span>
-          ${p2 > p1 ? '<span class="duel-winner-label">Vainqueur 🏆</span>' : ''}
+          ${p2 > p1 ? `<span class="duel-winner-label">${t('duel.winner')}</span>` : ''}
         </div>
       </div>
       ${winnerHtml}
@@ -735,7 +771,7 @@ function showResults() {
       <span class="review-icon">${a.isCorrect ? '✅' : '❌'}</span>
       <div class="review-q">
         ${a.question}
-        ${!a.isCorrect ? `<br><em>Votre réponse : ${a.chosen} · Bonne réponse : ${a.correct}</em>` : ''}
+        ${!a.isCorrect ? `<br><em>${t('results.youranswer')} ${a.chosen} · ${t('results.correctanswer')} ${a.correct}</em>` : ''}
       </div>
     `;
     list.appendChild(div);
@@ -751,9 +787,10 @@ function showResults() {
 }
 
 function saveSession(pct, score, total) {
-  const playerName = $('player-name').value.trim() || 'Anonyme';
-  const subLabel = state.subject && state.subject !== '__custom__' && SUBJECTS[state.subject]
-    ? SUBJECTS[state.subject].label : 'Questions perso';
+  const playerNameRaw = $('player-name').value.trim();
+  const playerName = playerNameRaw || t('player.anonymous');
+  const subLabel = state.subject && state.subject !== '__custom__' && getSubjects()[state.subject]
+    ? getSubjects()[state.subject].label : t('subject.custom.label');
 
   const entry = {
     id: Date.now(),
@@ -772,7 +809,7 @@ function saveSession(pct, score, total) {
   lsSet(LS.history, history.slice(0, 100)); // keep last 100
 
   // Leaderboard (only with a real name)
-  if (playerName !== 'Anonyme' && playerName !== '') {
+  if (playerNameRaw) {
     const lb = lsGet(LS.leaderboard);
     lb.push({ name: playerName, pct, score, total, subject: subLabel, date: new Date().toISOString() });
     lb.sort((a, b) => b.pct - a.pct || b.score - a.score);
@@ -799,7 +836,7 @@ function renderHistory() {
 
   if (history.length === 0) {
     sumEl.innerHTML = '';
-    listEl.innerHTML = `<div class="empty-state"><i class="fa-solid fa-chart-line"></i><p>Aucune session jouée pour l'instant.</p></div>`;
+    listEl.innerHTML = `<div class="empty-state"><i class="fa-solid fa-chart-line"></i><p>${t('history.empty')}</p></div>`;
     return;
   }
 
@@ -808,16 +845,19 @@ function renderHistory() {
   const totalQ  = history.reduce((s, h) => s + h.total, 0);
 
   sumEl.innerHTML = `
-    <div class="hsummary-box"><div class="hsummary-val">${history.length}</div><div class="hsummary-lbl">Parties jouées</div></div>
-    <div class="hsummary-box"><div class="hsummary-val">${avgPct}%</div><div class="hsummary-lbl">Moyenne</div></div>
-    <div class="hsummary-box"><div class="hsummary-val">${bestPct}%</div><div class="hsummary-lbl">Meilleur score</div></div>
-    <div class="hsummary-box"><div class="hsummary-val">${totalQ}</div><div class="hsummary-lbl">Questions répondues</div></div>
+    <div class="hsummary-box"><div class="hsummary-val">${history.length}</div><div class="hsummary-lbl">${t('history.played')}</div></div>
+    <div class="hsummary-box"><div class="hsummary-val">${avgPct}%</div><div class="hsummary-lbl">${t('history.average')}</div></div>
+    <div class="hsummary-box"><div class="hsummary-val">${bestPct}%</div><div class="hsummary-lbl">${t('history.best')}</div></div>
+    <div class="hsummary-box"><div class="hsummary-val">${totalQ}</div><div class="hsummary-lbl">${t('history.answered')}</div></div>
   `;
 
   listEl.innerHTML = '';
   history.forEach(h => {
     const cls = h.pct >= 70 ? 'excellent' : h.pct >= 45 ? 'good' : 'bad';
-    const modeLabel = { normal:'Normal', exam:'Examen', revision:'Révision', duel:'Duel' }[h.mode] || h.mode;
+    const modeLabel = {
+      normal: t('history.mode.normal'), exam: t('history.mode.exam'),
+      revision: t('history.mode.revision'), duel: t('history.mode.duel'),
+    }[h.mode] || h.mode;
     const div = document.createElement('div');
     div.className = 'history-item';
     div.innerHTML = `
@@ -833,7 +873,7 @@ function renderHistory() {
 }
 
 function clearHistory() {
-  requirePin('Effacer l\'historique', 'Cette action supprimera définitivement toutes les sessions enregistrées.', () => {
+  requirePin(t('history.clear'), t('history.cleardesc'), () => {
     lsSet(LS.history, []);
     renderHistory();
   });
@@ -847,7 +887,7 @@ function renderLeaderboard() {
   const listEl = $('leaderboard-list');
 
   if (lb.length === 0) {
-    listEl.innerHTML = `<div class="empty-state"><i class="fa-solid fa-trophy"></i><p>Aucun score enregistré.<br>Entrez votre prénom avant de jouer !</p></div>`;
+    listEl.innerHTML = `<div class="empty-state"><i class="fa-solid fa-trophy"></i><p>${t('lb.empty').replace('\n', '<br>')}</p></div>`;
     return;
   }
 
@@ -873,7 +913,7 @@ function renderLeaderboard() {
 }
 
 function clearLeaderboard() {
-  requirePin('Effacer le classement', 'Cette action supprimera définitivement tous les scores enregistrés.', () => {
+  requirePin(t('lb.clear'), t('lb.cleardesc'), () => {
     lsSet(LS.leaderboard, []);
     renderLeaderboard();
   });
@@ -900,10 +940,10 @@ function saveCustomQuestion() {
   const errEl    = $('cq-error');
 
   // Validate
-  if (!question) { showFormError('Veuillez entrer une question.'); return; }
-  if (!category) { showFormError('Veuillez entrer une catégorie.'); return; }
-  if (choices.some(c => !c)) { showFormError('Veuillez remplir les 4 choix de réponse.'); return; }
-  if (_customCorrectIdx < 0) { showFormError('Veuillez sélectionner la bonne réponse en cliquant sur A, B, C ou D.'); return; }
+  if (!question) { showFormError(t('error.question')); return; }
+  if (!category) { showFormError(t('error.category')); return; }
+  if (choices.some(c => !c)) { showFormError(t('error.choices')); return; }
+  if (_customCorrectIdx < 0) { showFormError(t('error.correct')); return; }
 
   errEl.classList.add('hidden');
 
@@ -935,7 +975,7 @@ function renderCustomList() {
   const listEl = $('custom-list');
 
   if (custom.length === 0) {
-    listEl.innerHTML = `<div class="empty-state"><i class="fa-solid fa-pen-to-square"></i><p>Aucune question personnalisée pour l'instant.</p></div>`;
+    listEl.innerHTML = `<div class="empty-state"><i class="fa-solid fa-pen-to-square"></i><p>${t('custom.empty')}</p></div>`;
     return;
   }
 
@@ -946,7 +986,7 @@ function renderCustomList() {
     div.innerHTML = `
       <div class="custom-item-body">
         <div class="custom-item-q">${q.question}</div>
-        <div class="custom-item-cat"><i class="fa-solid fa-tag"></i> ${q._cat} · Bonne réponse : ${LETTERS[q.correct]}) ${q.choices[q.correct]}</div>
+        <div class="custom-item-cat"><i class="fa-solid fa-tag"></i> ${q._cat} · ${t('custom.correctanswer')} ${LETTERS[q.correct]}) ${q.choices[q.correct]}</div>
       </div>
       <button class="custom-delete-btn" onclick="deleteCustomQuestion(${q.id})">
         <i class="fa-solid fa-trash"></i>
@@ -957,7 +997,7 @@ function renderCustomList() {
 }
 
 function deleteCustomQuestion(id) {
-  requirePin('Supprimer la question', 'Cette action supprimera définitivement cette question personnalisée.', () => {
+  requirePin(t('custom.delete'), t('custom.deletedesc'), () => {
     lsSet(LS.custom, lsGet(LS.custom).filter(q => q.id !== id));
     renderCustomList();
     initHome();
@@ -1090,4 +1130,6 @@ function savePinChange() {
 window.addEventListener('DOMContentLoaded', () => {
   initHome();
   showScreen('home-screen');
+  _applyStaticTranslations();
+  updateLangBtn();
 });
