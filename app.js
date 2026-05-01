@@ -258,8 +258,8 @@ function setMode(mode, btn) {
     const wrong = lsGet(LS.wrong);
     const infoEl = $('revision-info-msg');
     infoEl.textContent = wrong.length > 0
-      ? `${wrong.length} question(s) à réviser depuis votre dernière session`
-      : "Aucune erreur à réviser — jouez d'abord une partie !";
+      ? `${wrong.length} ${t('revision.haserrors')}`
+      : t('revision.empty');
     infoEl.className = 'revision-info ' + (wrong.length > 0 ? 'has-items' : 'empty');
     $('start-btn').disabled = wrong.length === 0;
   } else {
@@ -594,7 +594,7 @@ function handleAnswer(chosenIndex) {
     // Avoid duplicates
     const exists = wrongs.some(w => w.question === q.question);
     if (!exists) wrongs.push(qData);
-    lsSet(LS.wrong, wrongs);
+    lsSet(LS.wrong, wrongs.slice(0, 100));
   } else if (isCorrect && state.mode === 'revision') {
     // Remove from wrong pool once answered correctly
     const wrongs = lsGet(LS.wrong).filter(w => w.question !== q.question);
@@ -723,8 +723,14 @@ function showResults() {
     normal: t('results.mode.normal'), exam: t('results.mode.exam'),
     revision: t('results.mode.revision'), duel: t('results.mode.duel'),
   }[state.mode];
-  const subLabel = state.subject && state.subject !== '__custom__' && getSubjects()[state.subject]
-    ? getSubjects()[state.subject].label : t('subject.custom.label');
+  let subLabel;
+  if (state.mode === 'revision') {
+    subLabel = t('quiz.revision');
+  } else if (state.subject && state.subject !== '__custom__' && getSubjects()[state.subject]) {
+    subLabel = getSubjects()[state.subject].label;
+  } else {
+    subLabel = t('subject.custom.label');
+  }
   $('results-subtitle').textContent = `${subLabel} · ${modLabel}`;
 
   // Score circle

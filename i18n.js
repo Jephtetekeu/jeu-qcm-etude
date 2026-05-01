@@ -143,6 +143,9 @@ const TRANSLATIONS = {
     'pin.currenterror': 'PIN actuel incorrect.',
     'pin.newlabel': 'Nouveau PIN (4 chiffres)',
     'pin.success': 'PIN mis à jour !',
+
+    'revision.haserrors': 'question(s) à réviser depuis votre dernière session',
+    'revision.empty': "Aucune erreur à réviser — jouez d'abord une partie !",
   },
 
   en: {
@@ -285,6 +288,9 @@ const TRANSLATIONS = {
     'pin.currenterror': 'Incorrect current PIN.',
     'pin.newlabel': 'New PIN (4 digits)',
     'pin.success': 'PIN updated!',
+
+    'revision.haserrors': 'question(s) to review from your last session',
+    'revision.empty': 'No errors to review — play a game first!',
   },
 };
 
