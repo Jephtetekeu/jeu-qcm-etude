@@ -438,6 +438,9 @@ textarea { resize: vertical; }
 .form-group { margin-bottom: 14px; }
 .form-group label { display: block; font-size: .8rem; color: var(--text-muted); margin-bottom: 6px; }
 .form-error { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); border-radius: 8px; padding: 9px 13px; font-size: .84rem; margin-bottom: 12px; }
+.revision-info { border-radius: 8px; padding: 9px 13px; font-size: .84rem; }
+.revision-info.has-items { background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.3); color: var(--primary-light); }
+.revision-info.empty { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); }
 
 .cq-choice-row {
   display: flex; align-items: center; gap: 8px; margin-bottom: 8px;

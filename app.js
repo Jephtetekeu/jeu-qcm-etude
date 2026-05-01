@@ -214,7 +214,11 @@ function selectSubject(key, card) {
   card.classList.add('selected');
   state.subject = key;
   populateCategorySelect(key);
-  $('start-btn').disabled = false;
+  if (state.mode === 'revision') {
+    $('start-btn').disabled = lsGet(LS.wrong).length === 0;
+  } else {
+    $('start-btn').disabled = false;
+  }
 }
 
 function populateCategorySelect(key) {
@@ -248,14 +252,16 @@ function setMode(mode, btn) {
   $('grp-category').classList.toggle('hidden', isRevision);
   $('grp-count').classList.toggle('hidden', isRevision);
   $('grp-player2').classList.toggle('hidden', !isDuel);
+  $('grp-revision-info').classList.toggle('hidden', !isRevision);
 
   if (isRevision) {
     const wrong = lsGet(LS.wrong);
-    const info = wrong.length > 0
+    const infoEl = $('revision-info-msg');
+    infoEl.textContent = wrong.length > 0
       ? `${wrong.length} question(s) à réviser depuis votre dernière session`
-      : 'Aucune erreur à réviser — jouez d\'abord une partie !';
-    // Show inline info
-    $('start-btn').disabled = wrong.length === 0 || !state.subject;
+      : "Aucune erreur à réviser — jouez d'abord une partie !";
+    infoEl.className = 'revision-info ' + (wrong.length > 0 ? 'has-items' : 'empty');
+    $('start-btn').disabled = wrong.length === 0;
   } else {
     $('start-btn').disabled = !state.subject;
   }
@@ -265,7 +271,7 @@ function setMode(mode, btn) {
 //  START QUIZ
 // ═══════════════════════════════════════════
 function startQuiz() {
-  if (!state.subject) return;
+  if (!state.subject && state.mode !== 'revision') return;
 
   clearInterval(state.timer);
   clearInterval(state.examTimer);
