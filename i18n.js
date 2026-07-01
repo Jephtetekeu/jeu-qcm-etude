@@ -10,6 +10,7 @@ const TRANSLATIONS = {
     'nav.history': 'Historique',
     'nav.leaderboard': 'Classement',
     'nav.myquestions': 'Mes questions',
+    'nav.fx': 'Effets 3D',
 
     'mode.normal': 'Normal',
     'mode.exam': 'Examen blanc',
@@ -155,6 +156,7 @@ const TRANSLATIONS = {
     'nav.history': 'History',
     'nav.leaderboard': 'Leaderboard',
     'nav.myquestions': 'My questions',
+    'nav.fx': '3D effects',
 
     'mode.normal': 'Normal',
     'mode.exam': 'Mock Exam',

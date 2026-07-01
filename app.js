@@ -147,6 +147,19 @@ function openCustom() {
   showScreen('custom-screen');
 }
 
+function toggleFx() {
+  if (!window.ThreeFX) return;
+  const on = !ThreeFX.isEnabled();
+  ThreeFX.setEnabled(on);
+  syncFxToggleBtn();
+}
+
+function syncFxToggleBtn() {
+  const btn = document.getElementById('fx-toggle-btn');
+  if (!btn || !window.ThreeFX) return;
+  btn.classList.toggle('active', ThreeFX.isEnabled());
+}
+
 // ═══════════════════════════════════════════
 //  HOME — INIT
 // ═══════════════════════════════════════════
@@ -1147,4 +1160,5 @@ window.addEventListener('DOMContentLoaded', () => {
   showScreen('home-screen');
   _applyStaticTranslations();
   updateLangBtn();
+  syncFxToggleBtn();
 });
