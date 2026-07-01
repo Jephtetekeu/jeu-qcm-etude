@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const FX = {
   scene: null, camera: null, renderer: null, canvas: null,
@@ -42,6 +43,53 @@ function buildBackground() {
   FX.scene.add(FX.particles);
 }
 
+function buildCap() {
+  FX.cap = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color: 0x4f46e5, metalness: 0.3, roughness: 0.4 });
+
+  // Calotte (demi-sphère aplatie)
+  const crown = new THREE.Mesh(new THREE.SphereGeometry(0.55, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), mat);
+  crown.scale.y = 0.5;
+  crown.position.y = -0.05;
+  FX.cap.add(crown);
+
+  // Plaque carrée (mortarboard)
+  const board = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.06, 1.5), mat);
+  board.position.y = 0.25;
+  FX.cap.add(board);
+
+  // Bouton central
+  const knob = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16),
+    new THREE.MeshStandardMaterial({ color: 0x818cf8, metalness: 0.4, roughness: 0.3 }));
+  knob.position.y = 0.3;
+  FX.cap.add(knob);
+
+  // Pompon (fil + gland)
+  const tasselMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.2, roughness: 0.5 });
+  const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.7, 8), tasselMat);
+  cord.position.set(0.55, 0.05, 0.55);
+  FX.cap.add(cord);
+  const tassel = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.22, 12), tasselMat);
+  tassel.position.set(0.55, -0.35, 0.55);
+  FX.cap.add(tassel);
+
+  FX.cap.visible = false;
+  FX.scene.add(FX.cap);
+
+  FX.controls = new OrbitControls(FX.camera, FX.canvas);
+  FX.controls.enableDamping = true;
+  FX.controls.enablePan = false;
+  FX.controls.enableZoom = false;
+  FX.controls.enabled = false; // activé seulement sur l'accueil
+}
+
+function updateScreenVisibility() {
+  const onHome = FX._currentScreen === 'home-screen';
+  if (FX.cap) FX.cap.visible = onHome;
+  if (FX.controls) FX.controls.enabled = onHome;
+  if (FX.canvas) FX.canvas.classList.toggle('fx-interactive', onHome);
+}
+
 function onResize() {
   if (!FX.renderer) return;
   FX.camera.aspect = window.innerWidth / window.innerHeight;
@@ -56,7 +104,9 @@ function animate() {
     FX.particles.rotation.y += 0.0003;
     FX.particles.position.x += (FX._pointer.x * 1.5 - FX.particles.position.x) * 0.02;
     FX.particles.position.y += (-FX._pointer.y * 1.5 - FX.particles.position.y) * 0.02;
+    if (FX.cap && FX.cap.visible) FX.cap.rotation.y += 0.006;
   }
+  if (FX.controls && FX.controls.enabled) FX.controls.update();
   FX.renderer.render(FX.scene, FX.camera);
 }
 
@@ -85,6 +135,7 @@ function init() {
   FX.scene.add(key);
 
   buildBackground();
+  buildCap();
 
   window.addEventListener('resize', onResize);
   window.addEventListener('pointermove', (e) => {
@@ -93,6 +144,7 @@ function init() {
   });
 
   FX.canvas.classList.toggle('fx-hidden', !FX._enabled);
+  updateScreenVisibility();
   animate();
 }
 
@@ -104,7 +156,7 @@ window.ThreeFX = {
     localStorage.setItem('qcm_fx_enabled', FX._enabled ? 'true' : 'false');
     if (FX.canvas) FX.canvas.classList.toggle('fx-hidden', !FX._enabled);
   },
-  setScreen(screenId) { FX._currentScreen = screenId; },
+  setScreen(screenId) { FX._currentScreen = screenId; updateScreenVisibility(); },
   celebrate() { /* complété Task 4 */ },
   showTrophy(_percent) { /* complété Task 3 */ },
 };
