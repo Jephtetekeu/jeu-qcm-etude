@@ -30,6 +30,27 @@ controls.enablePan = false;
 controls.minDistance = 3;
 controls.maxDistance = 8;
 
+// Particules de fond
+const PARTICLE_COUNT = 900;
+const positions = new Float32Array(PARTICLE_COUNT * 3);
+for (let i = 0; i < PARTICLE_COUNT * 3; i++) {
+  positions[i] = (Math.random() - 0.5) * 24;
+}
+const particleGeo = new THREE.BufferGeometry();
+particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const particles = new THREE.Points(
+  particleGeo,
+  new THREE.PointsMaterial({ color: 0x8fa0ff, size: 0.05, transparent: true, opacity: 0.8 })
+);
+scene.add(particles);
+
+// Suivi du pointeur (parallaxe)
+const pointer = { x: 0, y: 0 };
+window.addEventListener('pointermove', (e) => {
+  pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+});
+
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
@@ -46,6 +67,12 @@ function animate() {
   if (document.hidden) return;
   if (!prefersReducedMotion()) {
     hero.rotation.y += 0.005;
+    particles.rotation.y += 0.0004;
+    particles.rotation.x += 0.0002;
+    // Parallaxe : on décale le champ de particules (pas la caméra, pour ne pas
+    // entrer en conflit avec OrbitControls qui pilote la caméra en section 1).
+    particles.position.x += (pointer.x * 1.2 - particles.position.x) * 0.03;
+    particles.position.y += (-pointer.y * 1.2 - particles.position.y) * 0.03;
   }
   controls.update();
   renderer.render(scene, camera);
