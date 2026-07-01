@@ -709,6 +709,7 @@ function showResults() {
   const total = state.questions.length;
   const score = state.mode === 'duel' ? state.duel.p1Score : state.score;
   const pct   = total > 0 ? Math.round((score / total) * 100) : 0;
+  if (window.ThreeFX) ThreeFX.showTrophy(pct);
 
   // Icon & title
   let icon, title;

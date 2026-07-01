@@ -83,10 +83,42 @@ function buildCap() {
   FX.controls.enabled = false; // activé seulement sur l'accueil
 }
 
+function buildTrophy() {
+  FX.trophy = new THREE.Group();
+  FX.trophyMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.8, roughness: 0.25 });
+
+  // Vasque (coupe)
+  const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.25, 0.6, 24, 1, true), FX.trophyMat);
+  cup.position.y = 0.5;
+  FX.trophy.add(cup);
+  // Fond de la coupe
+  const base = new THREE.Mesh(new THREE.SphereGeometry(0.25, 20, 12, 0, Math.PI * 2, 0, Math.PI / 2), FX.trophyMat);
+  base.rotation.x = Math.PI;
+  base.position.y = 0.2;
+  FX.trophy.add(base);
+  // Anses
+  const handleGeo = new THREE.TorusGeometry(0.18, 0.04, 12, 24);
+  const hL = new THREE.Mesh(handleGeo, FX.trophyMat); hL.position.set(-0.5, 0.55, 0); hL.rotation.y = Math.PI / 2; FX.trophy.add(hL);
+  const hR = new THREE.Mesh(handleGeo, FX.trophyMat); hR.position.set(0.5, 0.55, 0); hR.rotation.y = Math.PI / 2; FX.trophy.add(hR);
+  // Tige
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.35, 16), FX.trophyMat);
+  stem.position.y = -0.05;
+  FX.trophy.add(stem);
+  // Socle
+  const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.35, 0.2, 24), FX.trophyMat);
+  foot.position.y = -0.32;
+  FX.trophy.add(foot);
+
+  FX.trophy.visible = false;
+  FX.scene.add(FX.trophy);
+}
+
 function updateScreenVisibility() {
   const onHome = FX._currentScreen === 'home-screen';
+  const onResults = FX._currentScreen === 'results-screen';
   if (FX.cap) FX.cap.visible = onHome;
   if (FX.controls) FX.controls.enabled = onHome;
+  if (FX.trophy) FX.trophy.visible = onResults;
   if (FX.canvas) FX.canvas.classList.toggle('fx-interactive', onHome);
 }
 
@@ -105,6 +137,7 @@ function animate() {
     FX.particles.position.x += (FX._pointer.x * 1.5 - FX.particles.position.x) * 0.02;
     FX.particles.position.y += (-FX._pointer.y * 1.5 - FX.particles.position.y) * 0.02;
     if (FX.cap && FX.cap.visible) FX.cap.rotation.y += 0.006;
+    if (FX.trophy && FX.trophy.visible) FX.trophy.rotation.y += 0.01;
   }
   if (FX.controls && FX.controls.enabled) FX.controls.update();
   FX.renderer.render(FX.scene, FX.camera);
@@ -136,6 +169,7 @@ function init() {
 
   buildBackground();
   buildCap();
+  buildTrophy();
 
   window.addEventListener('resize', onResize);
   window.addEventListener('pointermove', (e) => {
@@ -158,7 +192,11 @@ window.ThreeFX = {
   },
   setScreen(screenId) { FX._currentScreen = screenId; updateScreenVisibility(); },
   celebrate() { /* complété Task 4 */ },
-  showTrophy(_percent) { /* complété Task 3 */ },
+  showTrophy(percent) {
+    if (!FX.trophyMat) return;
+    const color = percent >= 80 ? 0xffd700 : percent >= 50 ? 0xc0c0c0 : 0xcd7f32;
+    FX.trophyMat.color.setHex(color);
+  },
 };
 
 if (document.readyState === 'loading') {
