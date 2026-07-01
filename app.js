@@ -562,6 +562,7 @@ function handleAnswer(chosenIndex) {
   const correct = state._correctIndex;
   const isCorrect = chosenIndex === correct;
   if (isCorrect) state.score++;
+  if (isCorrect && window.ThreeFX) ThreeFX.celebrate();
 
   // Color buttons (not in exam mode — feedback only at end)
   const btns = $('choices-grid').querySelectorAll('.choice-btn');

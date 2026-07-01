@@ -113,6 +113,20 @@ function buildTrophy() {
   FX.scene.add(FX.trophy);
 }
 
+function buildBurst() {
+  const COUNT = 120;
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(COUNT * 3), 3));
+  FX._burstVel = new Float32Array(COUNT * 3);
+  FX._burst = new THREE.Points(
+    geo,
+    new THREE.PointsMaterial({ color: 0x10b981, size: 0.12, transparent: true, opacity: 0 })
+  );
+  FX._burst.frustumCulled = false;
+  FX._burstLife = 0; // 0 = inactif
+  FX.scene.add(FX._burst);
+}
+
 function updateScreenVisibility() {
   const onHome = FX._currentScreen === 'home-screen';
   const onResults = FX._currentScreen === 'results-screen';
@@ -138,6 +152,19 @@ function animate() {
     FX.particles.position.y += (-FX._pointer.y * 1.5 - FX.particles.position.y) * 0.02;
     if (FX.cap && FX.cap.visible) FX.cap.rotation.y += 0.006;
     if (FX.trophy && FX.trophy.visible) FX.trophy.rotation.y += 0.01;
+    if (FX._burstLife > 0) {
+      const pos = FX._burst.geometry.attributes.position.array;
+      for (let i = 0; i < pos.length; i += 3) {
+        pos[i]     += FX._burstVel[i];
+        pos[i + 1] += FX._burstVel[i + 1];
+        pos[i + 2] += FX._burstVel[i + 2];
+        FX._burstVel[i + 1] -= 0.006; // gravité
+      }
+      FX._burst.geometry.attributes.position.needsUpdate = true;
+      FX._burstLife -= 0.02;
+      FX._burst.material.opacity = Math.max(0, FX._burstLife);
+      if (FX._burstLife <= 0) FX._burst.material.opacity = 0;
+    }
   }
   if (FX.controls && FX.controls.enabled) FX.controls.update();
   FX.renderer.render(FX.scene, FX.camera);
@@ -170,6 +197,7 @@ function init() {
   buildBackground();
   buildCap();
   buildTrophy();
+  buildBurst();
 
   window.addEventListener('resize', onResize);
   window.addEventListener('pointermove', (e) => {
@@ -191,7 +219,21 @@ window.ThreeFX = {
     if (FX.canvas) FX.canvas.classList.toggle('fx-hidden', !FX._enabled);
   },
   setScreen(screenId) { FX._currentScreen = screenId; updateScreenVisibility(); },
-  celebrate() { /* complété Task 4 */ },
+  celebrate() {
+    if (!FX._enabled || !FX._burst) return;
+    const pos = FX._burst.geometry.attributes.position.array;
+    // Origine : devant la caméra
+    const ox = FX.camera.position.x, oy = FX.camera.position.y, oz = FX.camera.position.z - 4;
+    for (let i = 0; i < pos.length; i += 3) {
+      pos[i] = ox; pos[i + 1] = oy; pos[i + 2] = oz;
+      FX._burstVel[i]     = (Math.random() - 0.5) * 0.25;
+      FX._burstVel[i + 1] = (Math.random() - 0.5) * 0.25 + 0.12;
+      FX._burstVel[i + 2] = (Math.random() - 0.5) * 0.25;
+    }
+    FX._burst.geometry.attributes.position.needsUpdate = true;
+    FX._burstLife = 1; // plein
+    FX._burst.material.opacity = 0.95;
+  },
   showTrophy(percent) {
     if (!FX.trophyMat) return;
     const color = percent >= 80 ? 0xffd700 : percent >= 50 ? 0xc0c0c0 : 0xcd7f32;
