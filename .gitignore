@@ -1,0 +1,10 @@
+# Config locale d'outils (Claude Code, éditeurs)
+.claude/
+
+# Dépendances
+node_modules/
+
+# Logs / temporaires
+*.log
+.DS_Store
+Thumbs.db
