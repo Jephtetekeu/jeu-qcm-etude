@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://unpkg.com; base-uri 'none'; object-src 'none'" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Démo 3D — Three.js</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <main>
+    <section id="s1" class="panel">
+      <div class="content">
+        <h1>Objet 3D</h1>
+        <p>Glisse pour faire pivoter. Molette pour zoomer.</p>
+      </div>
+    </section>
+    <section id="s2" class="panel">
+      <div class="content">
+        <h2>Fond d'ambiance</h2>
+        <p>Des particules qui réagissent à la souris.</p>
+        <button type="button" id="cta">Un bouton classique</button>
+      </div>
+    </section>
+    <section id="s3" class="panel">
+      <div class="content">
+        <h2>Scène immersive</h2>
+        <p>La caméra avance au fil du scroll.</p>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
