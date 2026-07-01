@@ -123,6 +123,7 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   $(id).classList.add('active');
   window.scrollTo(0, 0);
+  if (window.ThreeFX) ThreeFX.setScreen(id);
 }
 
 function goHome() {

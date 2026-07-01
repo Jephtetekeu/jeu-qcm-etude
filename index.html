@@ -10,6 +10,8 @@
 </head>
 <body>
 
+  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
   <!-- ═══════════ HOME ═══════════ -->
   <div id="home-screen" class="screen">
 
@@ -357,5 +359,15 @@
   <script src="questions.js"></script>
   <script src="questions_en.js"></script>
   <script src="app.js"></script>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="three-fx.js"></script>
 </body>
 </html>

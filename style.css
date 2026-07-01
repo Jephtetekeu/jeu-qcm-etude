@@ -541,3 +541,18 @@ textarea { resize: vertical; }
 }
 .footer-gh-link:hover { color: var(--primary-light); }
 .footer-gh-link i { margin-right: 4px; }
+
+/* ── Couche 3D (three-fx.js) ── */
+#fx-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;          /* derrière toute l'UI */
+  pointer-events: none;  /* n'intercepte pas les clics de l'app... */
+  display: block;
+}
+#fx-canvas.fx-interactive {
+  pointer-events: auto;  /* ...sauf quand un objet manipulable est actif (accueil) */
+}
+#fx-canvas.fx-hidden { display: none; }
