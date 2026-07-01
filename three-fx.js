@@ -114,17 +114,40 @@ function buildTrophy() {
 }
 
 function buildBurst() {
-  const COUNT = 120;
+  const COUNT = 140;
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(COUNT * 3), 3));
   FX._burstVel = new Float32Array(COUNT * 3);
   FX._burst = new THREE.Points(
     geo,
-    new THREE.PointsMaterial({ color: 0x10b981, size: 0.12, transparent: true, opacity: 0 })
+    new THREE.PointsMaterial({ color: 0x10b981, size: 0.14, transparent: true, opacity: 0 })
   );
   FX._burst.frustumCulled = false;
-  FX._burstLife = 0; // 0 = inactif
+  FX._burstLife = 0;     // 0 = inactif
+  FX._burstGravity = 0.0022;
   FX.scene.add(FX._burst);
+}
+
+// Émet une salve. upward=true : célébration verte qui monte (bonne réponse).
+// upward=false : salve rouge qui retombe (mauvaise réponse).
+function emitBurst(hex, upward) {
+  if (!FX._enabled || !FX._burst) return;
+  FX._burst.material.color.setHex(hex);
+  const pos = FX._burst.geometry.attributes.position.array;
+  // Origine : devant la caméra
+  const ox = FX.camera.position.x, oy = FX.camera.position.y, oz = FX.camera.position.z - 4;
+  for (let i = 0; i < pos.length; i += 3) {
+    pos[i] = ox; pos[i + 1] = oy; pos[i + 2] = oz;
+    FX._burstVel[i]     = (Math.random() - 0.5) * 0.10;
+    FX._burstVel[i + 2] = (Math.random() - 0.5) * 0.10;
+    FX._burstVel[i + 1] = upward
+      ? (Math.random() - 0.5) * 0.08 + 0.06   // monte
+      : (Math.random() - 0.5) * 0.05 - 0.04;  // retombe
+  }
+  FX._burst.geometry.attributes.position.needsUpdate = true;
+  FX._burstGravity = upward ? 0.0022 : 0.0035;
+  FX._burstLife = 1;
+  FX._burst.material.opacity = 0.95;
 }
 
 function updateScreenVisibility() {
@@ -158,10 +181,10 @@ function animate() {
         pos[i]     += FX._burstVel[i];
         pos[i + 1] += FX._burstVel[i + 1];
         pos[i + 2] += FX._burstVel[i + 2];
-        FX._burstVel[i + 1] -= 0.006; // gravité
+        FX._burstVel[i + 1] -= FX._burstGravity; // gravité
       }
       FX._burst.geometry.attributes.position.needsUpdate = true;
-      FX._burstLife -= 0.02;
+      FX._burstLife -= 0.008; // plus lent : la salve dure ~2 s, bien visible
       FX._burst.material.opacity = Math.max(0, FX._burstLife);
       if (FX._burstLife <= 0) FX._burst.material.opacity = 0;
     }
@@ -219,21 +242,8 @@ window.ThreeFX = {
     if (FX.canvas) FX.canvas.classList.toggle('fx-hidden', !FX._enabled);
   },
   setScreen(screenId) { FX._currentScreen = screenId; updateScreenVisibility(); },
-  celebrate() {
-    if (!FX._enabled || !FX._burst) return;
-    const pos = FX._burst.geometry.attributes.position.array;
-    // Origine : devant la caméra
-    const ox = FX.camera.position.x, oy = FX.camera.position.y, oz = FX.camera.position.z - 4;
-    for (let i = 0; i < pos.length; i += 3) {
-      pos[i] = ox; pos[i + 1] = oy; pos[i + 2] = oz;
-      FX._burstVel[i]     = (Math.random() - 0.5) * 0.25;
-      FX._burstVel[i + 1] = (Math.random() - 0.5) * 0.25 + 0.12;
-      FX._burstVel[i + 2] = (Math.random() - 0.5) * 0.25;
-    }
-    FX._burst.geometry.attributes.position.needsUpdate = true;
-    FX._burstLife = 1; // plein
-    FX._burst.material.opacity = 0.95;
-  },
+  celebrate() { emitBurst(0x10b981, true); },   // bonne réponse : vert, monte
+  fizzle() { emitBurst(0xef4444, false); },      // mauvaise réponse : rouge, retombe
   showTrophy(percent) {
     if (!FX.trophyMat) return;
     const color = percent >= 80 ? 0xffd700 : percent >= 50 ? 0xc0c0c0 : 0xcd7f32;

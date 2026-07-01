@@ -575,7 +575,11 @@ function handleAnswer(chosenIndex) {
   const correct = state._correctIndex;
   const isCorrect = chosenIndex === correct;
   if (isCorrect) state.score++;
-  if (isCorrect && window.ThreeFX) ThreeFX.celebrate();
+  // Effet 3D — pas en mode examen (le feedback y est caché : ne pas révéler la réponse)
+  if (window.ThreeFX && state.mode !== 'exam') {
+    if (isCorrect) ThreeFX.celebrate();
+    else ThreeFX.fizzle();
+  }
 
   // Color buttons (not in exam mode — feedback only at end)
   const btns = $('choices-grid').querySelectorAll('.choice-btn');
@@ -727,12 +731,12 @@ function showResults() {
 
   // Icon & title
   let icon, title;
-  if (pct >= 80) { icon = '🏆'; title = t('results.excellent'); }
-  else if (pct >= 60) { icon = '👍'; title = t('results.good'); }
-  else if (pct >= 40) { icon = '📚'; title = t('results.average'); }
-  else { icon = '💪'; title = t('results.bad'); }
+  if (pct >= 80) { icon = 'fa-trophy'; title = t('results.excellent'); }
+  else if (pct >= 60) { icon = 'fa-thumbs-up'; title = t('results.good'); }
+  else if (pct >= 40) { icon = 'fa-book'; title = t('results.average'); }
+  else { icon = 'fa-dumbbell'; title = t('results.bad'); }
 
-  $('results-icon').textContent = icon;
+  $('results-icon').innerHTML = `<i class="fa-solid ${icon}"></i>`;
   $('results-title').textContent = title;
 
   const modLabel = {
@@ -765,8 +769,8 @@ function showResults() {
     duelBox.classList.remove('hidden');
     const p1 = state.duel.p1Score, p2 = state.duel.p2Score;
     let winnerHtml = '';
-    if (p1 > p2)       winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🏆 <strong>${state.duel.p1Name}</strong></div>`;
-    else if (p2 > p1)  winnerHtml = `<div style="margin-top:12px;font-size:.95rem">🏆 <strong>${state.duel.p2Name}</strong></div>`;
+    if (p1 > p2)       winnerHtml = `<div style="margin-top:12px;font-size:.95rem"><i class="fa-solid fa-trophy"></i> <strong>${state.duel.p1Name}</strong></div>`;
+    else if (p2 > p1)  winnerHtml = `<div style="margin-top:12px;font-size:.95rem"><i class="fa-solid fa-trophy"></i> <strong>${state.duel.p2Name}</strong></div>`;
     else               winnerHtml = `<div style="margin-top:12px;font-size:.95rem">${t('duel.tie')}</div>`;
     duelBox.innerHTML = `
       <h3>${t('duel.result')}</h3>
@@ -796,7 +800,7 @@ function showResults() {
     const div = document.createElement('div');
     div.className = 'review-item';
     div.innerHTML = `
-      <span class="review-icon">${a.isCorrect ? '✅' : '❌'}</span>
+      <span class="review-icon">${a.isCorrect ? '<i class="fa-solid fa-circle-check" style="color:var(--success)"></i>' : '<i class="fa-solid fa-circle-xmark" style="color:var(--danger)"></i>'}</span>
       <div class="review-q">
         ${a.question}
         ${!a.isCorrect ? `<br><em>${t('results.youranswer')} ${a.chosen} · ${t('results.correctanswer')} ${a.correct}</em>` : ''}
@@ -919,7 +923,7 @@ function renderLeaderboard() {
     return;
   }
 
-  const rankIcons = ['🥇', '🥈', '🥉'];
+  const rankIcons = ['<i class="fa-solid fa-medal"></i>', '<i class="fa-solid fa-medal"></i>', '<i class="fa-solid fa-medal"></i>'];
   const rankClass = ['gold', 'silver', 'bronze'];
 
   listEl.innerHTML = '';
